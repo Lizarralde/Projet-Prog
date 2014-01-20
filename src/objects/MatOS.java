@@ -13,6 +13,7 @@ public class MatOS extends Material {
 
         super(name, description);
         this.typeOS = typeOS;
+        super.damage=5;
     }
 
     public TypeOS getTypeOS() {

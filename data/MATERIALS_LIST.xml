@@ -1,0 +1,40 @@
+<list>
+  <objects.MaterialQuantity>
+    <quantity>5</quantity>
+    <mat class="objects.Phone">
+      <name>HTC One</name>
+      <description>Description of the HTC One</description>
+      <empruntTimeMax>200</empruntTimeMax>
+      <empruntTime>7</empruntTime>
+      <typeOS>ANDROID</typeOS>
+    </mat>
+  </objects.MaterialQuantity>
+  <objects.MaterialQuantity>
+    <quantity>24</quantity>
+    <mat class="objects.Casque">
+      <name>Dr Dre</name>
+      <description>Description of the Dr Dre</description>
+      <empruntTimeMax>3</empruntTimeMax>
+      <empruntTime>1</empruntTime>
+    </mat>
+  </objects.MaterialQuantity>
+  <objects.MaterialQuantity>
+    <quantity>2</quantity>
+    <mat class="objects.Camera">
+      <name>Nokia 850</name>
+      <description>Description of the Nokia 850</description>
+      <empruntTimeMax>2</empruntTimeMax>
+      <empruntTime>1</empruntTime>
+    </mat>
+  </objects.MaterialQuantity>
+  <objects.MaterialQuantity>
+    <quantity>5</quantity>
+    <mat class="objects.Tablet">
+      <name>iPad</name>
+      <description>Description of the HTC One</description>
+      <empruntTimeMax>200</empruntTimeMax>
+      <empruntTime>7</empruntTime>
+      <typeOS>IOS</typeOS>
+    </mat>
+  </objects.MaterialQuantity>
+</list>

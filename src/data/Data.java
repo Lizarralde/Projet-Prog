@@ -29,20 +29,20 @@ import users.User;
 public class Data {
 
     /**
-     * Load the users list located in the location parameter.
+     * Load the object located in the location parameter.
      * 
-     * @author Dorian LIZARRALDE
+     * @author Dorian Lizarralde
      * @param location
      *            The location of the xml file.
      * @return
      */
-    public static List<User> loadUsersList(String location) {
+    public static Object load(String location) {
 
         // Create a default Xstream.
         XStream xstream = new XStream(new DomDriver());
 
         // Create an empty list which will hold the users list.
-        List<User> users = null;
+        Object o = null;
 
         try {
 
@@ -50,7 +50,7 @@ public class Data {
             FileInputStream in = new FileInputStream(location);
 
             // Load the users list.
-            users = (ArrayList<User>) xstream.fromXML(in);
+            o = xstream.fromXML(in);
 
             // Close the buffer.
             in.close();
@@ -62,7 +62,39 @@ public class Data {
             e.printStackTrace();
         }
 
-        return users;
+        return o;
+    }
+
+    /**
+     * Store the object in the location parameter.
+     * 
+     * @author Dorian Lizarralde
+     * @param o
+     * @param location
+     *            The location of the xml file.
+     */
+    public static void store(Object o, String location) {
+
+        // Create a default Xstream.
+        XStream xstream = new XStream(new DomDriver());
+
+        try {
+
+            // Open a buffer.
+            FileOutputStream out = new FileOutputStream(location);
+
+            // Store the users list.
+            xstream.toXML(o, out);
+
+            // Close the buffer.
+            out.close();
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -86,63 +118,7 @@ public class Data {
         users.add(new Teacher("THUAIRE", "Alain", "Java"));
         users.add(new Teacher("SARMIENTO", "Sergio", "Communication"));
 
-        // Create a default Xstream.
-        XStream xstream = new XStream(new DomDriver());
-
-        try {
-
-            // Open a buffer.
-            FileOutputStream out = new FileOutputStream(location);
-
-            // Store the users list.
-            xstream.toXML(users, out);
-
-            // Close the buffer.
-            out.close();
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Load the materials list located in the location parameter.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param location
-     *            The location of the xml file.
-     * @return
-     */
-    public static List<MaterialQuantity> loadMaterialsList(String location) {
-
-        // Create a default Xstream.
-        XStream xstream = new XStream(new DomDriver());
-
-        // Create an empty list which will hold the materials list.
-        List<MaterialQuantity> materials = null;
-
-        try {
-
-            // Open a buffer.
-            FileInputStream in = new FileInputStream(location);
-
-            // Load the materials list.
-            materials = (ArrayList<MaterialQuantity>) xstream.fromXML(in);
-
-            // Close the buffer.
-            in.close();
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        return materials;
+        store(users, location);
     }
 
     /**
@@ -167,26 +143,7 @@ public class Data {
         materials.add(new MaterialQuantity(new Tablet("iPad",
                 "Description of the HTC One", TypeOS.IOS), 5));
 
-        // Create a default Xstream.
-        XStream xstream = new XStream(new DomDriver());
-
-        try {
-
-            // Open the buffer.
-            FileOutputStream out = new FileOutputStream(location);
-
-            // Store the materials list.
-            xstream.toXML(materials, out);
-
-            // Close the buffer
-            out.close();
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
+        store(materials, location);
     }
 
     /**

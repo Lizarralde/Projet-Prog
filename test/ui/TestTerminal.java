@@ -13,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import users.User;
-
 import data.Data;
 
 /**
@@ -44,15 +43,16 @@ public class TestTerminal {
     /**
      * @author Dorian LIZARRALDE
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void theTest() {
 
         System.out.close();
 
-        List<User> users = Data.loadUsersList("./data/TEST_USERS_LIST.xml");
+        List<User> users = (List<User>) Data.load("./data/TEST_USERS_LIST.xml");
 
-        List<MaterialQuantity> materials = Data
-                .loadMaterialsList("./data/TEST_MATERIALS_LIST.xml");
+        List<MaterialQuantity> materials = (List<MaterialQuantity>) Data
+                .load("./data/TEST_MATERIALS_LIST.xml");
 
         terminal.start(users, materials);
 

@@ -3,9 +3,9 @@ package users;
 import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import management.Stock;
-
 import objects.Material;
 import objects.MaterialQuantity;
 import objects.Tablet;
@@ -23,11 +23,13 @@ import data.Data;
  */
 public class TestManager {
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testDoReserve() {
 
         Manager manager = new Manager(new Stock(
-                Data.loadMaterialsList("./data/TEST_MATERIALS_LIST.xml")));
+                (List<MaterialQuantity>) Data
+                        .load("./data/TEST_MATERIALS_LIST.xml")));
 
         User user = new Student("LIZARRALDE", "Dorian", "SI3 - 2013");
         Material material = new Tablet("iPad", "Description of the iPad",

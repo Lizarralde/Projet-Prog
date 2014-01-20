@@ -21,10 +21,11 @@ public class TestData {
     /**
      * @author Dorian LIZARRALDE
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testLoadUsersList() {
 
-        List<User> users = Data.loadUsersList("./data/TEST_USERS_LIST.xml");
+        List<User> users = (List<User>) Data.load("./data/TEST_USERS_LIST.xml");
 
         // Not a null object.
         assertNotNull(users);
@@ -40,11 +41,12 @@ public class TestData {
     /**
      * @author Dorian LIZARRALDE
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testLoadMaterialList() {
 
-        List<MaterialQuantity> materials = Data
-                .loadMaterialsList("./data/TEST_MATERIALS_LIST.xml");
+        List<MaterialQuantity> materials = (List<MaterialQuantity>) Data
+                .load("./data/TEST_MATERIALS_LIST.xml");
 
         // Not a null object.
         assertNotNull(materials);

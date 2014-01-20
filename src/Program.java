@@ -1,4 +1,8 @@
+import java.util.List;
+
+import objects.MaterialQuantity;
 import ui.Terminal;
+import users.User;
 import data.Data;
 
 /**
@@ -13,9 +17,12 @@ public class Program {
      * @author Dorian LIZARRALDE
      * @param args
      */
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
 
-        new Terminal().start(Data.loadUsersList("./data/USERS_LIST.xml"),
-                Data.loadMaterialsList("./data/MATERIALS_LIST.xml"));
+        new Terminal()
+                .start((List<User>) Data.load("./data/USERS_LIST.xml"),
+                        (List<MaterialQuantity>) Data
+                                .load("./data/MATERIALS_LIST.xml"));
     }
 }

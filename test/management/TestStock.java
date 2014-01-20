@@ -2,6 +2,10 @@ package management;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
+import objects.MaterialQuantity;
+
 import org.junit.Test;
 
 import data.Data;
@@ -17,11 +21,13 @@ public class TestStock {
     /**
      * @author Dorian LIZARRALDE
      */
+    @SuppressWarnings("unchecked")
     @Test
     public void testToString() {
 
         Stock stock = new Stock(
-                Data.loadMaterialsList("./data/TEST_MATERIALS_LIST.xml"));
+                (List<MaterialQuantity>) Data
+                        .load("./data/TEST_MATERIALS_LIST.xml"));
 
         assertEquals(
                 "0. HTC One (Description of the HTC One) - 5"

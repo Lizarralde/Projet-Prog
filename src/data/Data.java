@@ -21,7 +21,7 @@ import users.Teacher;
 import users.User;
 
 /**
- * Store and load the users and materials list on xml files.
+ * Store and load objects on xml files.
  * 
  * @author Dorian LIZARRALDE
  * 

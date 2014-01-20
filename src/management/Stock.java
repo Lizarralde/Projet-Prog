@@ -46,9 +46,6 @@ public class Stock {
         this.materialStock = materialStock;
     }
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @Override
     public String toString() {
 

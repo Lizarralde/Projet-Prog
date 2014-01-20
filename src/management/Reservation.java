@@ -83,9 +83,6 @@ public class Reservation {
         return formater.format(calendar.getTime());
     }
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @Override
     public String toString() {
 

@@ -2,7 +2,6 @@ package ui;
 
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import management.Reservation;
 import management.Stock;
 import objects.MaterialQuantity;
@@ -10,7 +9,7 @@ import users.Manager;
 import users.User;
 
 /**
- * Headquarter of the application. Identifie the user. Retrieve his reservation.
+ * Headquarters of the application. Identify the user. Retrieve his reservation.
  * Make it happened or not depend on the manager verification.
  * 
  * @author Dorian LIZARRALDE
@@ -55,14 +54,14 @@ public class Terminal {
     }
 
     /**
-     * Start the application. The user has to identifie himself to make a
+     * Start the application. The user has to identify himself to make a
      * reservation.
      * 
      * @author Dorian LIZARRALDE
      */
     public void start(List<User> users, List<MaterialQuantity> mat) {
 
-        // Keep the default stock for futur use.
+        // Keep the default stock for future use.
         stock = new Stock(mat);
 
         // Create a manager who will certificate the reservations.
@@ -71,7 +70,7 @@ public class Terminal {
         // Welcome
         welcome();
 
-        // Wait for the user to identifie himself.
+        // Wait for the user to identify himself.
         while (!getID(users)) {
 
             System.out.println("Sorry, we were unable to find you.");
@@ -101,7 +100,7 @@ public class Terminal {
     }
 
     /**
-     * Display a welcome text and ask for the user to identifie himself.
+     * Display a welcome text and ask for the user to identify himself.
      * 
      * @author Dorian LIZARRALDE
      */
@@ -110,7 +109,7 @@ public class Terminal {
         System.out.println("Welcome to our reservation application.");
 
         System.out
-                .println("What is your ID ? Type your name followed by your forname.");
+                .println("What is your ID ? Type your name followed by your forename.");
     }
 
     /**

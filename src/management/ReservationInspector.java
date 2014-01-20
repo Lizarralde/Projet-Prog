@@ -6,6 +6,11 @@ import java.util.GregorianCalendar;
 import material.MaterialQuantity;
 import user.User;
 
+/**
+ * 
+ * @author Dorian LIZARRALDE
+ * 
+ */
 public class ReservationInspector {
 
     private Stock stock;

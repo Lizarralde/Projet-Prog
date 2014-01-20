@@ -18,12 +18,6 @@ public class Stock {
 
     private List<MaterialQuantity> materialStock;
 
-    public Stock(List<MaterialQuantity> materialStock) {
-
-        this.reservList = new ArrayList<Reservation>();
-        this.materialStock = materialStock;
-    }
-
     public List<Reservation> getReservList() {
 
         return reservList;
@@ -41,6 +35,12 @@ public class Stock {
 
     public void setMaterialStock(List<MaterialQuantity> materialStock) {
 
+        this.materialStock = materialStock;
+    }
+
+    public Stock(List<MaterialQuantity> materialStock) {
+
+        this.reservList = new ArrayList<Reservation>();
         this.materialStock = materialStock;
     }
 

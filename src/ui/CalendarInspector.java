@@ -1,5 +1,6 @@
 package ui;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class CalendarInspector {
@@ -30,5 +31,20 @@ public class CalendarInspector {
         }
 
         return true;
+    }
+
+    /**
+     * Return a String which represents the calendar on the format dd/MM/yyyy.
+     * 
+     * @author Dorian LIZARRALDE
+     * @param calendar
+     *            A gregorian calendar.
+     * @return
+     */
+    public static String calendarToString(GregorianCalendar calendar) {
+
+        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+
+        return formater.format(calendar.getTime());
     }
 }

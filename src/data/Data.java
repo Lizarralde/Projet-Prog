@@ -70,6 +70,7 @@ public class Data {
      * 
      * @author Dorian Lizarralde
      * @param o
+     *            The object to store.
      * @param location
      *            The location of the xml file.
      */

@@ -1,4 +1,4 @@
-package objects;
+package material;
 
 /**
  * 
@@ -13,7 +13,7 @@ public class MatOS extends Material {
 
         super(name, description);
         this.typeOS = typeOS;
-        super.damage=5;
+        super.damage = 5;
     }
 
     public TypeOS getTypeOS() {

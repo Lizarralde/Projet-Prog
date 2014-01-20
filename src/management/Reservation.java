@@ -3,8 +3,8 @@ package management;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-import objects.MaterialQuantity;
-import users.User;
+import material.MaterialQuantity;
+import user.User;
 
 /**
  * 

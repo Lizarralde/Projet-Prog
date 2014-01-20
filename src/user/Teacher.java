@@ -1,9 +1,9 @@
-package users;
+package user;
 
 import java.util.GregorianCalendar;
 
 import management.Reservation;
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 
 /**
  * @author Dorian LIZARRALDE

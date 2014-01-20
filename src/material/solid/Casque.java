@@ -1,4 +1,6 @@
-package objects;
+package material.solid;
+
+import material.Material;
 
 /**
  * 
@@ -10,6 +12,6 @@ public class Casque extends Material {
     public Casque(String nom, String descriptif) {
 
         super(nom, descriptif);
-        super.damage=1;
+        super.damage = 1;
     }
 }

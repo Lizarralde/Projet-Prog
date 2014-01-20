@@ -1,0 +1,37 @@
+<list>
+  <user.Student>
+    <name>LIZARRALDE</name>
+    <forname>Dorian</forname>
+    <year>SI3 - 2013</year>
+  </user.Student>
+  <user.Student>
+    <name>PINEL</name>
+    <forname>Fabien</forname>
+    <year>SI3 - 2013</year>
+  </user.Student>
+  <user.Student>
+    <name>SIMOND</name>
+    <forname>Hugo</forname>
+    <year>SI3 - 2013</year>
+  </user.Student>
+  <user.Student>
+    <name>BENNI</name>
+    <forname>Benjamin</forname>
+    <year>SI3 - 2013</year>
+  </user.Student>
+  <user.Student>
+    <name>SALMERON</name>
+    <forname>Quentin</forname>
+    <year>SI3 - 2013</year>
+  </user.Student>
+  <user.Teacher>
+    <name>THUAIRE</name>
+    <forname>Alain</forname>
+    <field>Java</field>
+  </user.Teacher>
+  <user.Teacher>
+    <name>SARMIENTO</name>
+    <forname>Sergio</forname>
+    <field>Communication</field>
+  </user.Teacher>
+</list>

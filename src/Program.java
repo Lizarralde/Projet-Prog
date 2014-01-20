@@ -1,8 +1,8 @@
 import java.util.List;
 
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 import ui.Terminal;
-import users.User;
+import user.User;
 import data.Data;
 
 /**

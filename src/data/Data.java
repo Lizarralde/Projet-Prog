@@ -7,18 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import material.MaterialQuantity;
+import material.TypeOS;
+import material.solid.Camera;
+import material.solid.Casque;
+import material.solid.Phone;
+import material.solid.Tablet;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import objects.Camera;
-import objects.Casque;
-import objects.MaterialQuantity;
-import objects.Phone;
-import objects.Tablet;
-import objects.TypeOS;
-import users.Student;
-import users.Teacher;
-import users.User;
+import user.Student;
+import user.Teacher;
+import user.User;
 
 /**
  * Store and load objects on xml files.

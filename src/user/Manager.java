@@ -1,4 +1,4 @@
-package users;
+package user;
 
 /**
  * @author Dorian LIZARRALDE
@@ -7,7 +7,7 @@ package users;
 public class Manager extends User {
 
     public Manager(String name, String forname) {
-        
+
         super(name, forname);
     }
 }

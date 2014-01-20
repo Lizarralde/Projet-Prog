@@ -3,7 +3,7 @@ package management;
 import java.util.ArrayList;
 import java.util.List;
 
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 
 /**
  * The class Stock contains the list of all the reservation and the initial

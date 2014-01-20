@@ -3,14 +3,14 @@ package management;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import objects.MaterialQuantity;
-import users.User;
+import material.MaterialQuantity;
+import user.User;
 
-public class Inspector {
+public class ReservationInspector {
 
     private Stock stock;
 
-    public Inspector(Stock stock) {
+    public ReservationInspector(Stock stock) {
 
         this.stock = stock;
     }

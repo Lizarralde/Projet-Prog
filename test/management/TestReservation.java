@@ -4,14 +4,14 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
-import objects.MaterialQuantity;
-import objects.Phone;
-import objects.TypeOS;
+import material.MaterialQuantity;
+import material.TypeOS;
+import material.solid.Phone;
 
 import org.junit.Test;
 
-import users.Student;
-import users.User;
+import user.Student;
+import user.User;
 
 /**
  * Test the Reservation class.

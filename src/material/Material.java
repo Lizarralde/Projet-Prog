@@ -1,4 +1,4 @@
-package objects;
+package material;
 
 /**
  * 
@@ -9,15 +9,14 @@ public class Material {
 
     private String name, description;
     private int quality;
-    protected int damage; 
-    
-    
+    protected int damage;
+
     public Material(String name, String description) {
 
         this.name = name;
         this.description = description;
         this.setQuality(100);
-        this.damage=2;
+        this.damage = 2;
     }
 
     public String getName() {
@@ -40,7 +39,6 @@ public class Material {
         this.description = description;
     }
 
-    
     public boolean equals(Material mat) {
 
         return (mat.getName().equals(this.getName()));
@@ -54,10 +52,11 @@ public class Material {
     }
 
     /**
-     * @param quality the quality to set
+     * @param quality
+     *            the quality to set
      */
     public void setQuality(int quality) {
-        if (quality<=100)
+        if (quality <= 100)
             this.quality = quality;
     }
 }

@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
+import user.User;
+
 /**
  * This parser reads user input and make a list or a gregorian calendar of it.
  * 
@@ -70,6 +72,37 @@ public class Parser {
         tokenizer.close();
 
         return words;
+    }
+
+    /**
+     * Get the ID of the user and try to find him on the users list. If the ID
+     * is on this list, the user is now identified.
+     * 
+     * @author Dorian LIZARRALDE
+     * @param users
+     * @return
+     */
+    public User getID(List<User> users) {
+
+        // Get the ID of the user.
+        List<String> words = getInput();
+
+        // The user has to give his name and forname.
+        if (words.size() > 1) {
+
+            // Try to find him on the users list.
+            for (User user : users) {
+
+                if (user.getName().equalsIgnoreCase(words.get(0))
+                        && user.getForname().equalsIgnoreCase(words.get(1))) {
+
+                    return user;
+                }
+            }
+        }
+
+        // The user has not been found.
+        return null;
     }
 
     /**

@@ -1,4 +1,4 @@
-package objects;
+package material;
 
 /**
  * @author Dorian LIZARRALDE

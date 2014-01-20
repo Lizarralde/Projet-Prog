@@ -8,7 +8,7 @@ import users.User;
 
 /**
  * 
- * @author fabien pinel
+ * @author Dorian LIZARRALDE
  * 
  */
 public class Reservation {
@@ -84,7 +84,7 @@ public class Reservation {
     }
 
     /**
-     * @author Fabien Pinel
+     * @author Dorian LIZARRALDE
      */
     @Override
     public String toString() {

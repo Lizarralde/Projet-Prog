@@ -10,12 +10,6 @@ public enum TypeOS {
 
     private String name;
 
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param s
-     */
     TypeOS(String name) {
 
         this.name = name;

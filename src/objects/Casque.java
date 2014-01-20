@@ -2,13 +2,13 @@ package objects;
 
 /**
  * 
- * @author Fabien PINEL
+ * @author Dorian LIZARRALDE
  * 
  */
 public class Casque extends Material {
 
-    public Casque(String nom, String descriptif, int dureeUsuelle, int dureeMax) {
+    public Casque(String nom, String descriptif) {
 
-        super(nom, descriptif, dureeUsuelle, dureeMax);
+        super(nom, descriptif);
     }
 }

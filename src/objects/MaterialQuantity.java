@@ -1,5 +1,10 @@
 package objects;
 
+/**
+ * 
+ * @author Dorian LIZARRALDE
+ * 
+ */
 public class MaterialQuantity {
 
     private int quantity;

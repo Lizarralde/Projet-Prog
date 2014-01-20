@@ -137,9 +137,9 @@ public class Data {
         materials.add(new MaterialQuantity(new Phone("HTC One",
                 "Description of the HTC One", TypeOS.ANDROID), 5));
         materials.add(new MaterialQuantity(new Casque("Dr Dre",
-                "Description of the Dr Dre", 1, 3), 24));
+                "Description of the Dr Dre"), 24));
         materials.add(new MaterialQuantity(new Camera("Nokia 850",
-                "Description of the Nokia 850", 1, 2), 2));
+                "Description of the Nokia 850"), 2));
         materials.add(new MaterialQuantity(new Tablet("iPad",
                 "Description of the HTC One", TypeOS.IOS), 5));
 

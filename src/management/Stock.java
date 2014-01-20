@@ -15,7 +15,7 @@ public class Stock {
      * The class Stock contains the list of all the reservation and the initial
      * stock
      * 
-     * @author Fabien Pinel
+     * @author Dorian LIZARRALDE
      * @param materialStock
      *            is a list of material quantity (material associated with its
      *            quantity
@@ -47,7 +47,7 @@ public class Stock {
     }
 
     /**
-     * @author fabien Pinel
+     * @author Dorian LIZARRALDE
      */
     @Override
     public String toString() {

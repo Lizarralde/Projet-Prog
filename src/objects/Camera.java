@@ -2,14 +2,13 @@ package objects;
 
 /**
  * 
- * @author Fabien PINEL
+ * @author Dorian LIZARRALDE
  * 
  */
 public class Camera extends Material {
 
-    public Camera(String name, String description, int empruntTime,
-            int empruntTimeMax) {
+    public Camera(String name, String description) {
 
-        super(name, description, empruntTime, empruntTimeMax);
+        super(name, description);
     }
 }

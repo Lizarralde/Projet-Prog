@@ -2,7 +2,7 @@ package objects;
 
 /**
  * 
- * @author Fabien PINEL
+ * @author Dorian LIZARRALDE
  * 
  */
 public class Phone extends MatOS {

@@ -5,21 +5,19 @@ import java.util.List;
 
 import objects.MaterialQuantity;
 
+/**
+ * The class Stock contains the list of all the reservation and the initial
+ * stock.
+ * 
+ * @author Dorian LIZARRALDE
+ * 
+ */
 public class Stock {
 
     private List<Reservation> reservList;
 
     private List<MaterialQuantity> materialStock;
 
-    /**
-     * The class Stock contains the list of all the reservation and the initial
-     * stock
-     * 
-     * @author Dorian LIZARRALDE
-     * @param materialStock
-     *            is a list of material quantity (material associated with its
-     *            quantity
-     */
     public Stock(List<MaterialQuantity> materialStock) {
 
         this.reservList = new ArrayList<Reservation>();

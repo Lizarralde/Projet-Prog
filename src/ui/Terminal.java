@@ -1,8 +1,11 @@
 package ui;
 
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import ldapbeans.util.scanner.PackageHelper;
+import management.Inspector;
 import management.Reservation;
 import management.Stock;
 import objects.MaterialQuantity;
@@ -24,7 +27,7 @@ public class Terminal {
 
     private Stock stock;
 
-    private Manager manager;
+    private Inspector inspector;
 
     /**
      * Default constructor.
@@ -66,7 +69,7 @@ public class Terminal {
         stock = new Stock(mat);
 
         // Create a manager who will certificate the reservations.
-        manager = new Manager(stock);
+        inspector = new Inspector(stock);
 
         // Welcome
         welcome();
@@ -167,6 +170,15 @@ public class Terminal {
             case "reserve":
                 reserve();
                 break;
+                
+            case "add":
+                if (user instanceof Manager) {
+                    
+                    Collection<Class<?>> classes = null;
+
+                    // Find all classes in the package "some.package" but not in its sub-package.
+                    classes = PackageHelper.getInstance().getClasses("some.package", false, null);
+                }
 
             // The user want to display the help.
             case "help":
@@ -193,7 +205,7 @@ public class Terminal {
         System.out
                 .println("You can use our application to reserve a material.");
 
-        System.out.println("Your command words are : reserve, help, quit");
+        System.out.println("Your command words are : reserve, add, display, help, quit");
     }
 
     /**
@@ -337,7 +349,8 @@ public class Terminal {
             dateOk = this.checkTheDates(startDate, endDate);
         }
 
-        if (manager.isAvailable(mat.get(reponse), quantity, startDate, endDate)) {
+        if (inspector.isAvailable(mat.get(reponse), quantity, startDate,
+                endDate)) {
 
             System.out
                     .println("The manager said that there are enough materials avaible for your reservation.");
@@ -345,7 +358,7 @@ public class Terminal {
             MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
                     reponse).getMat(), quantity);
 
-            Reservation res = manager.doReserve(user, monObjetAReserver,
+            Reservation res = inspector.doReserve(user, monObjetAReserver,
                     startDate, endDate);
 
             if (res != null) {

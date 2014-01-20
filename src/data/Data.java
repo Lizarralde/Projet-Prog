@@ -31,7 +31,7 @@ public class Data {
     /**
      * Load the object located in the location parameter.
      * 
-     * @author Dorian Lizarralde
+     * @author Dorian LIZARRALDE
      * @param location
      *            The location of the xml file.
      * @return
@@ -41,7 +41,6 @@ public class Data {
         // Create a default Xstream.
         XStream xstream = new XStream(new DomDriver());
 
-        // Create an empty list which will hold the users list.
         Object o = null;
 
         try {
@@ -49,7 +48,7 @@ public class Data {
             // Open a buffer.
             FileInputStream in = new FileInputStream(location);
 
-            // Load the users list.
+            // Load.
             o = xstream.fromXML(in);
 
             // Close the buffer.
@@ -83,7 +82,7 @@ public class Data {
             // Open a buffer.
             FileOutputStream out = new FileOutputStream(location);
 
-            // Store the users list.
+            // Store.
             xstream.toXML(o, out);
 
             // Close the buffer.

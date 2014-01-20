@@ -7,18 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import material.MaterialQuantity;
+import material.TypeOS;
+import material.solid.Camera;
+import material.solid.Casque;
+import material.solid.Phone;
+import material.solid.Tablet;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import objects.Camera;
-import objects.Casque;
-import objects.MaterialQuantity;
-import objects.Phone;
-import objects.Tablet;
-import objects.TypeOS;
-import users.Student;
-import users.Teacher;
-import users.User;
+import user.Student;
+import user.Teacher;
+import user.User;
 
 /**
  * Store and load objects on xml files.
@@ -31,7 +32,7 @@ public class Data {
     /**
      * Load the object located in the location parameter.
      * 
-     * @author Dorian Lizarralde
+     * @author Dorian LIZARRALDE
      * @param location
      *            The location of the xml file.
      * @return
@@ -41,7 +42,6 @@ public class Data {
         // Create a default Xstream.
         XStream xstream = new XStream(new DomDriver());
 
-        // Create an empty list which will hold the users list.
         Object o = null;
 
         try {
@@ -49,7 +49,7 @@ public class Data {
             // Open a buffer.
             FileInputStream in = new FileInputStream(location);
 
-            // Load the users list.
+            // Load.
             o = xstream.fromXML(in);
 
             // Close the buffer.
@@ -70,6 +70,7 @@ public class Data {
      * 
      * @author Dorian Lizarralde
      * @param o
+     *            The object to store.
      * @param location
      *            The location of the xml file.
      */
@@ -83,7 +84,7 @@ public class Data {
             // Open a buffer.
             FileOutputStream out = new FileOutputStream(location);
 
-            // Store the users list.
+            // Store.
             xstream.toXML(o, out);
 
             // Close the buffer.

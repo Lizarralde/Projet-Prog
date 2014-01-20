@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 
 import org.junit.Test;
 

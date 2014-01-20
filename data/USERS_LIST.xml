@@ -1,37 +1,37 @@
 <list>
-  <users.Student>
+  <user.Student>
     <name>LIZARRALDE</name>
     <forname>Dorian</forname>
     <year>SI3 - 2013</year>
-  </users.Student>
-  <users.Student>
+  </user.Student>
+  <user.Student>
     <name>PINEL</name>
     <forname>Fabien</forname>
     <year>SI3 - 2013</year>
-  </users.Student>
-  <users.Student>
+  </user.Student>
+  <user.Student>
     <name>SIMOND</name>
     <forname>Hugo</forname>
     <year>SI3 - 2013</year>
-  </users.Student>
-  <users.Student>
+  </user.Student>
+  <user.Student>
     <name>BENNI</name>
     <forname>Benjamin</forname>
     <year>SI3 - 2013</year>
-  </users.Student>
-  <users.Student>
+  </user.Student>
+  <user.Student>
     <name>SALMERON</name>
     <forname>Quentin</forname>
     <year>SI3 - 2013</year>
-  </users.Student>
-  <users.Teacher>
+  </user.Student>
+  <user.Teacher>
     <name>THUAIRE</name>
     <forname>Alain</forname>
     <field>Java</field>
-  </users.Teacher>
-  <users.Teacher>
+  </user.Teacher>
+  <user.Teacher>
     <name>SARMIENTO</name>
     <forname>Sergio</forname>
     <field>Communication</field>
-  </users.Teacher>
+  </user.Teacher>
 </list>

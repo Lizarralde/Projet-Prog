@@ -5,14 +5,18 @@ import static org.junit.Assert.*;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import management.ReservationInspector;
 import management.Stock;
-import objects.Material;
-import objects.MaterialQuantity;
-import objects.Tablet;
-import objects.TypeOS;
+import material.Material;
+import material.MaterialQuantity;
+import material.TypeOS;
+import material.solid.Tablet;
 
 import org.junit.Test;
 
+import user.Student;
+import user.Teacher;
+import user.User;
 import data.Data;
 
 /**
@@ -27,7 +31,7 @@ public class TestManager {
     @Test
     public void testDoReserve() {
 
-        Manager manager = new Manager(new Stock(
+        ReservationInspector inspector = new ReservationInspector(new Stock(
                 (List<MaterialQuantity>) Data
                         .load("./data/TEST_MATERIALS_LIST.xml")));
 
@@ -39,12 +43,13 @@ public class TestManager {
         GregorianCalendar endDate = new GregorianCalendar(2042, 11, 6);
 
         // A student can't make a reservation of more than 7 days.
-        assertNull(manager.doReserve(user, materialQuantity, today, endDate));
-        assertNotNull(manager.doReserve(user, materialQuantity, today, today));
+        assertNull(inspector.doReserve(user, materialQuantity, today, endDate));
+        assertNotNull(inspector.doReserve(user, materialQuantity, today, today));
 
         user = new Teacher("SARMIENTO", "SERGIO", "Communication");
 
         // A teacher can.
-        assertNotNull(manager.doReserve(user, materialQuantity, today, endDate));
+        assertNotNull(inspector.doReserve(user, materialQuantity, today,
+                endDate));
     }
 }

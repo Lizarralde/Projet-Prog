@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 
 import org.junit.Test;
 
-import users.User;
+import user.User;
 
 /**
  * Test the Data Class.

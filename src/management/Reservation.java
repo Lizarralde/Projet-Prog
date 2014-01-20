@@ -1,10 +1,10 @@
 package management;
 
-import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-import objects.MaterialQuantity;
-import users.User;
+import material.MaterialQuantity;
+import ui.CalendarInspector;
+import user.User;
 
 /**
  * 
@@ -18,15 +18,6 @@ public class Reservation {
     private MaterialQuantity materialQuant;
 
     private GregorianCalendar startDate, endDate;
-
-    public Reservation(User user, MaterialQuantity materialQuant,
-            GregorianCalendar start, GregorianCalendar end) {
-
-        this.setUser(user);
-        this.setMaterialQuantity(materialQuant);
-        this.setStartDate(start);
-        this.setEndDate(end);
-    }
 
     public User getUser() {
 
@@ -68,19 +59,13 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    /**
-     * Return a String which represents the calendar on the format dd/MM/yyyy.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param calendar
-     *            A gregorian calendar.
-     * @return
-     */
-    private String calendarToString(GregorianCalendar calendar) {
+    public Reservation(User user, MaterialQuantity materialQuant,
+            GregorianCalendar start, GregorianCalendar end) {
 
-        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-
-        return formater.format(calendar.getTime());
+        this.setUser(user);
+        this.setMaterialQuantity(materialQuant);
+        this.setStartDate(start);
+        this.setEndDate(end);
     }
 
     @Override
@@ -89,8 +74,9 @@ public class Reservation {
         return "User: " + user.toString() + "\tObject: "
                 + materialQuant.getMat().getName() + "\tQuantity: "
                 + materialQuant.getQuantity() + "\tDate d'emprunt: "
-                + calendarToString(startDate) + "\tDate de retour: "
-                + calendarToString(endDate) + ".";
+                + CalendarInspector.calendarToString(startDate)
+                + "\tDate de retour: "
+                + CalendarInspector.calendarToString(endDate) + ".";
     }
 
 }

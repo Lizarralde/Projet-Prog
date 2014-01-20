@@ -1,12 +1,19 @@
 package ui;
 
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+import ldapbeans.util.scanner.PackageHelper;
+import management.ReservationInspector;
+>>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68
 import management.Reservation;
 import management.Stock;
-import objects.MaterialQuantity;
-import users.Manager;
-import users.User;
+import material.MaterialQuantity;
+import user.Manager;
+import user.User;
 
 /**
  * Headquarters of the application. Identify the user. Retrieve his reservation.
@@ -23,7 +30,7 @@ public class Terminal {
 
     private Stock stock;
 
-    private Manager manager;
+    private ReservationInspector inspector;
 
     /**
      * Default constructor.
@@ -65,13 +72,18 @@ public class Terminal {
         stock = new Stock(mat);
 
         // Create a manager who will certificate the reservations.
-        manager = new Manager(stock);
+        inspector = new ReservationInspector(stock);
 
         // Welcome
         welcome();
 
+<<<<<<< HEAD
         // Wait for the user to identify himself.
         while (!getID(users)) {
+=======
+        // Wait for the user to identifie himself.
+        while ((user = parser.getID(users)) == null) {
+>>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68
 
             System.out.println("Sorry, we were unable to find you.");
         }
@@ -113,40 +125,6 @@ public class Terminal {
     }
 
     /**
-     * Get the ID of the user and try to find him on the users list. If the ID
-     * is on this list, the user is now identified.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param users
-     * @return
-     */
-    public boolean getID(List<User> users) {
-
-        // Get the ID of the user.
-        List<String> words = parser.getInput();
-
-        // The user has to give his name and forname.
-        if (words.size() > 1) {
-
-            // Try to find him on the users list.
-            for (User user : users) {
-
-                if (user.getName().equalsIgnoreCase(words.get(0))
-                        && user.getForname().equalsIgnoreCase(words.get(1))) {
-
-                    // The user has been found.
-                    this.user = user;
-
-                    return true;
-                }
-            }
-        }
-
-        // The user has not been found.
-        return false;
-    }
-
-    /**
      * Execute the command associate the user input.
      * 
      * @author Dorian LIZARRALDE
@@ -165,6 +143,29 @@ public class Terminal {
             // The user want to reserve something.
             case "reserve":
                 reserve();
+                break;
+
+            case "add":
+                if (user instanceof Manager) {
+
+                    Collection<Class<?>> classes = null;
+
+                    // Find all classes in the package "objects.test" but not in
+                    // its sub-package.
+                    try {
+
+                        classes = PackageHelper.getInstance().getClasses(
+                                "objects.test", false, null);
+
+                        for (Class<?> c : classes) {
+
+                            System.out.println(c.getName());
+                        }
+                    } catch (ClassNotFoundException e) {
+
+                        e.printStackTrace();
+                    }
+                }
                 break;
 
             // The user want to display the help.
@@ -192,7 +193,8 @@ public class Terminal {
         System.out
                 .println("You can use our application to reserve a material.");
 
-        System.out.println("Your command words are : reserve, help, quit");
+        System.out
+                .println("Your command words are : reserve, add, display, help, quit");
     }
 
     /**
@@ -210,17 +212,19 @@ public class Terminal {
 
         System.out.println(stock.toString());
 
-        List<String> words;
+        List<String> words = parser.getInput();
 
-        do {
+        if (!words.isEmpty()) {
 
-            words = parser.getInput();
+            i = Integer.parseInt(words.get(0));
+        }
 
-            if (!words.isEmpty()) {
+        if (i < 0 || i > stock.getMaterialStock().size() - 1) {
 
-                i = Integer.parseInt(words.get(0));
-            }
-        } while (i < 0 || i > stock.getMaterialStock().size() - 1);
+            System.out.println("Incorrect. Please enter a correct number.");
+
+            return chooseAnObject();
+        }
 
         return i;
     }
@@ -256,54 +260,6 @@ public class Terminal {
     }
 
     /**
-     * Ask for a date.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @return the date entered by the user
-     */
-    public GregorianCalendar askADate(String whichOne) {
-
-        GregorianCalendar calendar;
-
-        do {
-
-            System.out.println(whichOne);
-
-            calendar = parser.getADate();
-        } while (calendar == null);
-
-        return calendar;
-    }
-
-    /**
-     * Check if the dates given are okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public boolean checkTheDates(GregorianCalendar startDate,
-            GregorianCalendar endDate) {
-
-        GregorianCalendar today = new GregorianCalendar();
-        today.set(GregorianCalendar.HOUR_OF_DAY, 0);
-        today.set(GregorianCalendar.MINUTE, 0);
-        today.set(GregorianCalendar.SECOND, 0);
-        today.set(GregorianCalendar.MILLISECOND, 0);
-
-        if (startDate.compareTo(today) < 0 || endDate.compareTo(today) < 0
-                || startDate.compareTo(endDate) > 0) {
-
-            System.out.println("One or both of your parameters is/are invalid");
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Propose to the user to do a reservation.
      * 
      * @author fabien Pinel & Dorian LIZARRALDE
@@ -329,14 +285,21 @@ public class Terminal {
 
         while (!dateOk) {
 
-            startDate = askADate("Enter your start date. The format is dd/MM/yyyy.");
+            System.out
+                    .println("Enter your start date. The format is dd/MM/yyyy.");
 
-            endDate = askADate("Enter your end date. The format is dd/MM/yyyy.");
+            startDate = parser.getADate();
 
-            dateOk = this.checkTheDates(startDate, endDate);
+            System.out
+                    .println("Enter your end date. The format is dd/MM/yyyy.");
+
+            endDate = parser.getADate();
+
+            dateOk = CalendarInspector.checkTheDates(startDate, endDate);
         }
 
-        if (manager.isAvailable(mat.get(reponse), quantity, startDate, endDate)) {
+        if (inspector.isAvailable(mat.get(reponse), quantity, startDate,
+                endDate)) {
 
             System.out
                     .println("The manager said that there are enough materials avaible for your reservation.");
@@ -344,7 +307,7 @@ public class Terminal {
             MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
                     reponse).getMat(), quantity);
 
-            Reservation res = manager.doReserve(user, monObjetAReserver,
+            Reservation res = inspector.doReserve(user, monObjetAReserver,
                     startDate, endDate);
 
             if (res != null) {

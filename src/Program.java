@@ -1,8 +1,8 @@
 import java.util.List;
 
-import objects.MaterialQuantity;
+import material.MaterialQuantity;
 import ui.Terminal;
-import users.User;
+import user.User;
 import data.Data;
 
 /**
@@ -13,10 +13,6 @@ import data.Data;
  */
 public class Program {
 
-    /**
-     * @author Dorian LIZARRALDE
-     * @param args
-     */
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
 

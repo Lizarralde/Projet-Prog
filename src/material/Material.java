@@ -1,40 +1,25 @@
-<<<<<<< HEAD:src/objects/Material.java
-package objects;
-import gestion_stock.Etat;
-=======
 package material;
+import gestion_stock.Etat;
 
->>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68:src/material/Material.java
 /**
  * 
- * @author Dorian LIZARRALDE - Falou SECK
+ * @author Dorian LIZARRALDE
  * 
  */
 public class Material {
 
     private String name, description;
     private int quality;
-<<<<<<< HEAD:src/objects/Material.java
-    private Etat state;
-    protected int damage; 
-    
-    
-    
-=======
     protected int damage;
+    private Etat state;
 
->>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68:src/material/Material.java
     public Material(String name, String description) {
 
         this.name = name;
         this.description = description;
         this.setQuality(100);
-<<<<<<< HEAD:src/objects/Material.java
-        this.damage=2;
-        this.setState(Etat.Disponible);
-=======
         this.damage = 2;
->>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68:src/material/Material.java
+        this.setState(Etat.Disponible);
     }
 
     public String getName() {
@@ -90,9 +75,5 @@ public class Material {
      */
     public void setState(Etat state) {
         this.state = state;
-    }
-    
-    public void qualityCommit(){
-        this.quality-=this.damage;
     }
 }

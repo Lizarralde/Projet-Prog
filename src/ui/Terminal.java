@@ -1,14 +1,12 @@
 package ui;
 
+import gestion_stock.Etat;
+
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
-<<<<<<< HEAD
-=======
-
 import ldapbeans.util.scanner.PackageHelper;
 import management.ReservationInspector;
->>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68
 import management.Reservation;
 import management.Stock;
 import material.MaterialQuantity;
@@ -77,13 +75,15 @@ public class Terminal {
         // Welcome
         welcome();
 
-<<<<<<< HEAD
         // Wait for the user to identify himself.
         while (!getID(users)) {
-=======
+
         // Wait for the user to identifie himself.
         while ((user = parser.getID(users)) == null) {
->>>>>>> c5fef310894ad4ddbfd678208f3ebe5d5702ec68
+
+        // Wait for the user to identifie himself.
+        while ((user = parser.getID(users)) == null) {
+
 
             System.out.println("Sorry, we were unable to find you.");
         }
@@ -93,8 +93,34 @@ public class Terminal {
 
         // The user can make a reservation.
         theApplication();
-    }
+        }
+  }
+ }
+ public boolean getID(List<User> users) {
 
+            // Get the ID of the user.
+            List<String> words = parser.getInput();
+
+            // The user has to give his name and forname.
+            if (words.size() > 1) {
+
+                // Try to find him on the users list.
+                for (User user : users) {
+
+                    if (user.getName().equalsIgnoreCase(words.get(0))
+                            && user.getForname().equalsIgnoreCase(words.get(1))) {
+
+                        // The user has been found.
+                        this.user = user;
+
+                        return true;
+                    }
+                }
+            }
+
+            // The user has not been found.
+            return false;
+        }        
     /**
      * 
      * @author fabien Pinel
@@ -122,6 +148,9 @@ public class Terminal {
 
         System.out
                 .println("What is your ID ? Type your name followed by your forename.");
+        System.out
+                .println("What is your ID ? Type your name followed by your forname.");
+
     }
 
     /**
@@ -278,7 +307,6 @@ public class Terminal {
 
         // Load the materials from the stock
         List<MaterialQuantity> mat = stock.getMaterialStock();
-
         reponse = this.chooseAnObject();
 
         quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
@@ -320,7 +348,7 @@ public class Terminal {
                                 + "Affichage de la reservation :"
                                 + System.getProperty("line.separator")
                                 + res.toString());
-
+                monObjetAReserver.getMat().setState(Etat.Emprunte);
                 return true;
             } else {
 

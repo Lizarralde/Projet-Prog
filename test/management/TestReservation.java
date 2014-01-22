@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import equipment.MaterialQuantity;
+import equipment.EquipmentSet;
 import equipment.OS;
 import equipment.solid.Phone;
 import user.Student;
@@ -27,7 +27,7 @@ public class TestReservation {
     public void testToString() {
 
         User user = new Student("LIZARRALDE", "Dorian", "SI3 - 2013");
-        MaterialQuantity material = new MaterialQuantity(new Phone("iPad",
+        EquipmentSet material = new EquipmentSet(new Phone("iPad",
                 "Description of the iPad", OS.IOS), 3);
         GregorianCalendar start = new GregorianCalendar(2013, 11, 1);
         GregorianCalendar end = new GregorianCalendar(2013, 11, 5);

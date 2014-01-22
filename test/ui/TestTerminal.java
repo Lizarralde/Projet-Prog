@@ -7,14 +7,14 @@ import java.io.FileNotFoundException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import management.DateInspector;
+import management.CalendarController;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import user.User;
 import data.Data;
-import equipment.MaterialQuantity;
+import equipment.EquipmentSet;
 
 /**
  * Test the Terminal Class
@@ -52,7 +52,7 @@ public class TestTerminal {
 
         List<User> users = (List<User>) Data.load("./data/TEST_USERS_LIST.xml");
 
-        List<MaterialQuantity> materials = (List<MaterialQuantity>) Data
+        List<EquipmentSet> materials = (List<EquipmentSet>) Data
                 .load("./data/TEST_MATERIALS_LIST.xml");
 
         terminal.start(users, materials);
@@ -66,10 +66,10 @@ public class TestTerminal {
 
         GregorianCalendar calendar = new GregorianCalendar();
 
-        assertFalse(DateInspector.checkTheDates(new GregorianCalendar(1992,
+        assertFalse(CalendarController.checkTheDates(new GregorianCalendar(1992,
                 8, 20), calendar));
-        assertFalse(DateInspector.checkTheDates(calendar,
+        assertFalse(CalendarController.checkTheDates(calendar,
                 new GregorianCalendar(1992, 8, 20)));
-        assertTrue(DateInspector.checkTheDates(calendar, calendar));
+        assertTrue(CalendarController.checkTheDates(calendar, calendar));
     }
 }

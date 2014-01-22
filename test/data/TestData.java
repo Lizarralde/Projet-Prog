@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import equipment.MaterialQuantity;
+import equipment.EquipmentSet;
 import user.User;
 
 /**
@@ -44,7 +44,7 @@ public class TestData {
     @Test
     public void testLoadMaterialList() {
 
-        List<MaterialQuantity> materials = (List<MaterialQuantity>) Data
+        List<EquipmentSet> materials = (List<EquipmentSet>) Data
                 .load("./data/TEST_MATERIALS_LIST.xml");
 
         // Not a null object.

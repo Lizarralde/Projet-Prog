@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import data.Data;
-import equipment.MaterialQuantity;
+import equipment.EquipmentSet;
 
 /**
  * Test the Stock class.
@@ -25,7 +25,7 @@ public class TestStock {
     public void testToString() {
 
         Stock stock = new Stock(
-                (List<MaterialQuantity>) Data
+                (List<EquipmentSet>) Data
                         .load("./data/TEST_MATERIALS_LIST.xml"));
 
         assertEquals(

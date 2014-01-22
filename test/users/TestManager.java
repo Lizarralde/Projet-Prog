@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import management.StockInspector;
+import management.StockController;
 import management.Stock;
 
 import org.junit.Test;
@@ -15,7 +15,7 @@ import user.Teacher;
 import user.User;
 import data.Data;
 import equipment.Equipment;
-import equipment.MaterialQuantity;
+import equipment.EquipmentSet;
 import equipment.OS;
 import equipment.solid.Tablet;
 
@@ -31,14 +31,14 @@ public class TestManager {
     @Test
     public void testDoReserve() {
 
-        StockInspector inspector = new StockInspector(new Stock(
-                (List<MaterialQuantity>) Data
+        StockController inspector = new StockController(new Stock(
+                (List<EquipmentSet>) Data
                         .load("./data/TEST_MATERIALS_LIST.xml")));
 
         User user = new Student("LIZARRALDE", "Dorian", "SI3 - 2013");
         Equipment material = new Tablet("iPad", "Description of the iPad",
                 OS.IOS);
-        MaterialQuantity materialQuantity = new MaterialQuantity(material, 2);
+        EquipmentSet materialQuantity = new EquipmentSet(material, 2);
         GregorianCalendar today = new GregorianCalendar();
         GregorianCalendar endDate = new GregorianCalendar(2042, 11, 6);
 

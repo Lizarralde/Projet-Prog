@@ -57,6 +57,9 @@ public class Student extends User {
     public Reservation doReserve(MaterialQuantity mat,
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
+    	if(mat.getQuantity()>1){
+    		return null;
+    	}
         GregorianCalendar today = new GregorianCalendar();
 
         // A student can't make a reservation 7 days ahead.

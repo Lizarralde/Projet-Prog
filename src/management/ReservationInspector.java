@@ -214,9 +214,6 @@ public class ReservationInspector {
 	 * @return
 	 */
 	public boolean studentLoanIsAvailable(Student student,MaterialQuantity mat, int quantity){
-		if( quantity > 1){
-			return false;
-		}	
 		int quantityAvailable = mat.getQuantity();
 		for (Reservation reserv : stock.getReservList()) {
 			if (reserv.getMaterialQuantity().getMat().equals(mat.getMat())) {

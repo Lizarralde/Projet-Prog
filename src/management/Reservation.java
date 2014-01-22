@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 
 import material.MaterialQuantity;
 import ui.CalendarInspector;
+import user.Student;
 import user.User;
 
 /**
@@ -61,7 +62,6 @@ public class Reservation {
 
     public Reservation(User user, MaterialQuantity materialQuant,
             GregorianCalendar start, GregorianCalendar end) {
-
         this.setUser(user);
         this.setMaterialQuantity(materialQuant);
         this.setStartDate(start);

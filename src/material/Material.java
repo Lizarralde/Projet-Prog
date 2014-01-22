@@ -10,6 +10,7 @@ public class Material {
     private String name, description;
     private int quality;
     protected int damage;
+    protected int objectValue;
 
     public Material(String name, String description) {
 
@@ -17,6 +18,7 @@ public class Material {
         this.description = description;
         this.setQuality(100);
         this.damage = 2;
+        this.objectValue = 2;
     }
 
     public String getName() {
@@ -59,4 +61,16 @@ public class Material {
         if (quality <= 100)
             this.quality = quality;
     }
+
+    /**
+     * 
+     * @return 
+     */
+	public int getObjectValue() {
+		return objectValue;
+	}
+
+	public void setObjectValue(int objectValue) {
+		this.objectValue = objectValue;
+	}
 }

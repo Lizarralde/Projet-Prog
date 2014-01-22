@@ -4,11 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import material.MaterialQuantity;
-
 import org.junit.Test;
 
 import data.Data;
+import equipment.MaterialQuantity;
 
 /**
  * Test the Stock class.

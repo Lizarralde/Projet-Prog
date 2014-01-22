@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import equipment.MaterialQuantity;
 import ldapbeans.util.scanner.PackageHelper;
-import management.ReservationInspector;
-import management.Reservation;
+import management.DateInspector;
+import management.StockInspector;
+import management.Loan;
 import management.Stock;
-import material.MaterialQuantity;
-import user.Manager;
+import user.Administrator;
 import user.User;
 
 /**
@@ -27,17 +28,7 @@ public class Terminal {
 
     private Stock stock;
 
-    private ReservationInspector inspector;
-
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public Terminal() {
-
-        parser = new Parser();
-    }
+    private StockInspector inspector;
 
     /**
      * @author Dorian LIZARRALDE
@@ -48,6 +39,11 @@ public class Terminal {
         return parser;
     }
 
+    public void setParser(Parser parser) {
+
+        this.parser = parser;
+    }
+
     /**
      * @author Dorian LIZARRALDE
      * @return
@@ -55,6 +51,41 @@ public class Terminal {
     public User getUser() {
 
         return user;
+    }
+
+    public void setUser(User user) {
+
+        this.user = user;
+    }
+
+    public Stock getStock() {
+
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+
+        this.stock = stock;
+    }
+
+    public StockInspector getInspector() {
+
+        return inspector;
+    }
+
+    public void setInpector(StockInspector inspector) {
+
+        this.inspector = inspector;
+    }
+
+    /**
+     * Default constructor.
+     * 
+     * @author Dorian LIZARRALDE
+     */
+    public Terminal() {
+
+        this.setParser(new Parser());
     }
 
     /**
@@ -69,7 +100,7 @@ public class Terminal {
         stock = new Stock(mat);
 
         // Create a manager who will certificate the reservations.
-        inspector = new ReservationInspector(stock);
+        inspector = new StockInspector(stock);
 
         // Welcome
         welcome();
@@ -138,7 +169,7 @@ public class Terminal {
                 break;
 
             case "add":
-                if (user instanceof Manager) {
+                if (user instanceof Administrator) {
 
                     Collection<Class<?>> classes = null;
 
@@ -287,7 +318,7 @@ public class Terminal {
 
             endDate = parser.getADate();
 
-            dateOk = CalendarInspector.checkTheDates(startDate, endDate);
+            dateOk = DateInspector.checkTheDates(startDate, endDate);
         }
 
         if (inspector.isAvailable(mat.get(reponse), quantity, startDate,
@@ -299,8 +330,8 @@ public class Terminal {
             MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
                     reponse).getMat(), quantity);
 
-            Reservation res = inspector.doReserve(user, monObjetAReserver,
-                    startDate, endDate);
+            Loan res = inspector.doReserve(user, monObjetAReserver, startDate,
+                    endDate);
 
             if (res != null) {
 

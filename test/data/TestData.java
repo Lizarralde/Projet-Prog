@@ -4,10 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import material.MaterialQuantity;
-
 import org.junit.Test;
 
+import equipment.MaterialQuantity;
 import user.User;
 
 /**

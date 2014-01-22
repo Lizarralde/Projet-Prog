@@ -3,7 +3,7 @@ package management;
 import java.util.ArrayList;
 import java.util.List;
 
-import material.MaterialQuantity;
+import equipment.MaterialQuantity;
 
 /**
  * The class Stock contains the list of all the reservation and the initial
@@ -14,16 +14,16 @@ import material.MaterialQuantity;
  */
 public class Stock {
 
-    private List<Reservation> reservList;
+    private List<Loan> reservList;
 
     private List<MaterialQuantity> materialStock;
 
-    public List<Reservation> getReservList() {
+    public List<Loan> getReservList() {
 
         return reservList;
     }
 
-    public void setReservList(List<Reservation> reservList) {
+    public void setReservList(List<Loan> reservList) {
 
         this.reservList = reservList;
     }
@@ -40,8 +40,8 @@ public class Stock {
 
     public Stock(List<MaterialQuantity> materialStock) {
 
-        this.reservList = new ArrayList<Reservation>();
-        this.materialStock = materialStock;
+        this.setReservList(new ArrayList<Loan>());
+        this.setMaterialStock(materialStock);
     }
 
     @Override

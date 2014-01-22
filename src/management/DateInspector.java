@@ -1,9 +1,9 @@
-package ui;
+package management;
 
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class CalendarInspector {
+public class DateInspector {
 
     /**
      * Check if the dates given are okay.

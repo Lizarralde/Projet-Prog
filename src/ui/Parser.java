@@ -19,14 +19,9 @@ public class Parser {
     // Source of command input
     private Scanner reader;
 
-    /**
-     * Create a parser to read from the terminal window.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public Parser() {
+    public Scanner getReader() {
 
-        reader = new Scanner(System.in);
+        return reader;
     }
 
     /**
@@ -39,6 +34,16 @@ public class Parser {
     public void setReader(InputStream inputStream) {
 
         reader = new Scanner(inputStream);
+    }
+
+    /**
+     * Create a parser to read from the terminal window.
+     * 
+     * @author Dorian LIZARRALDE
+     */
+    public Parser() {
+
+        reader = new Scanner(System.in);
     }
 
     /**

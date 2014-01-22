@@ -7,13 +7,14 @@ import java.io.FileNotFoundException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import material.MaterialQuantity;
+import management.DateInspector;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import user.User;
 import data.Data;
+import equipment.MaterialQuantity;
 
 /**
  * Test the Terminal Class
@@ -65,10 +66,10 @@ public class TestTerminal {
 
         GregorianCalendar calendar = new GregorianCalendar();
 
-        assertFalse(CalendarInspector.checkTheDates(new GregorianCalendar(1992,
+        assertFalse(DateInspector.checkTheDates(new GregorianCalendar(1992,
                 8, 20), calendar));
-        assertFalse(CalendarInspector.checkTheDates(calendar,
+        assertFalse(DateInspector.checkTheDates(calendar,
                 new GregorianCalendar(1992, 8, 20)));
-        assertTrue(CalendarInspector.checkTheDates(calendar, calendar));
+        assertTrue(DateInspector.checkTheDates(calendar, calendar));
     }
 }

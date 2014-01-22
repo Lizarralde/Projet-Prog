@@ -1,13 +1,13 @@
-package material.solid;
+package equipment.solid;
 
-import material.Material;
+import equipment.Equipment;
 
 /**
  * 
  * @author Dorian LIZARRALDE
  * 
  */
-public class Camera extends Material {
+public class Camera extends Equipment {
 
     public Camera(String name, String description) {
 

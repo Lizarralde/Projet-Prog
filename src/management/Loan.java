@@ -2,8 +2,7 @@ package management;
 
 import java.util.GregorianCalendar;
 
-import material.MaterialQuantity;
-import ui.CalendarInspector;
+import equipment.MaterialQuantity;
 import user.User;
 
 /**
@@ -11,7 +10,7 @@ import user.User;
  * @author Dorian LIZARRALDE
  * 
  */
-public class Reservation {
+public class Loan {
 
     private User user;
 
@@ -59,7 +58,7 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    public Reservation(User user, MaterialQuantity materialQuant,
+    public Loan(User user, MaterialQuantity materialQuant,
             GregorianCalendar start, GregorianCalendar end) {
 
         this.setUser(user);
@@ -74,9 +73,9 @@ public class Reservation {
         return "User: " + user.toString() + "\tObject: "
                 + materialQuant.getMat().getName() + "\tQuantity: "
                 + materialQuant.getQuantity() + "\tDate d'emprunt: "
-                + CalendarInspector.calendarToString(startDate)
+                + DateInspector.calendarToString(startDate)
                 + "\tDate de retour: "
-                + CalendarInspector.calendarToString(endDate) + ".";
+                + DateInspector.calendarToString(endDate) + ".";
     }
 
 }

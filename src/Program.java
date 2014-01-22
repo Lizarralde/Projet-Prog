@@ -1,9 +1,9 @@
 import java.util.List;
 
-import material.MaterialQuantity;
 import ui.Terminal;
 import user.User;
 import data.Data;
+import equipment.MaterialQuantity;
 
 /**
  * Entry point of the program.

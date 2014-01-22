@@ -2,8 +2,8 @@ package user;
 
 import java.util.GregorianCalendar;
 
-import management.Reservation;
-import material.MaterialQuantity;
+import equipment.MaterialQuantity;
+import management.Loan;
 
 /**
  * @author Dorian LIZARRALDE
@@ -91,8 +91,8 @@ public class User {
      * @param endDate
      * @return
      */
-    public Reservation doReserve(MaterialQuantity mat,
-            GregorianCalendar startDate, GregorianCalendar endDate) {
+    public Loan doReserve(MaterialQuantity mat, GregorianCalendar startDate,
+            GregorianCalendar endDate) {
 
         return null;
     }

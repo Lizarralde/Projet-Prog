@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import material.MaterialQuantity;
-import material.TypeOS;
-import material.solid.Camera;
-import material.solid.Casque;
-import material.solid.Phone;
-import material.solid.Tablet;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import equipment.MaterialQuantity;
+import equipment.OS;
+import equipment.solid.Camera;
+import equipment.solid.Headphones;
+import equipment.solid.Phone;
+import equipment.solid.Tablet;
 import user.Student;
 import user.Teacher;
 import user.User;
@@ -136,13 +135,13 @@ public class Data {
 
         // Add the materials.
         materials.add(new MaterialQuantity(new Phone("HTC One",
-                "Description of the HTC One", TypeOS.ANDROID), 5));
-        materials.add(new MaterialQuantity(new Casque("Dr Dre",
+                "Description of the HTC One", OS.ANDROID), 5));
+        materials.add(new MaterialQuantity(new Headphones("Dr Dre",
                 "Description of the Dr Dre"), 24));
         materials.add(new MaterialQuantity(new Camera("Nokia 850",
                 "Description of the Nokia 850"), 2));
         materials.add(new MaterialQuantity(new Tablet("iPad",
-                "Description of the HTC One", TypeOS.IOS), 5));
+                "Description of the HTC One", OS.IOS), 5));
 
         store(materials, location);
     }

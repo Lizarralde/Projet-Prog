@@ -3,7 +3,7 @@ package management;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import material.MaterialQuantity;
+import equipment.MaterialQuantity;
 import user.User;
 
 /**
@@ -11,13 +11,23 @@ import user.User;
  * @author Dorian LIZARRALDE
  * 
  */
-public class ReservationInspector {
+public class StockInspector {
 
     private Stock stock;
 
-    public ReservationInspector(Stock stock) {
+    public Stock getStock() {
+
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
 
         this.stock = stock;
+    }
+
+    public StockInspector(Stock stock) {
+
+        this.setStock(stock);
     }
 
     /**
@@ -30,7 +40,7 @@ public class ReservationInspector {
      * @param endDate
      * @return
      */
-    public Reservation doReserve(User user, MaterialQuantity mat,
+    public Loan doReserve(User user, MaterialQuantity mat,
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
         return user.doReserve(mat, startDate, endDate);
@@ -80,7 +90,7 @@ public class ReservationInspector {
             GregorianCalendar day) {
 
         int quantityAvailable = mat.getQuantity();
-        for (Reservation reserv : stock.getReservList()) {
+        for (Loan reserv : stock.getReservList()) {
             if (reserv.getMaterialQuantity().getMat().equals(mat.getMat())) {
                 if (day.compareTo(reserv.getStartDate()) >= 0
                         && day.compareTo(reserv.getEndDate()) <= 0) {

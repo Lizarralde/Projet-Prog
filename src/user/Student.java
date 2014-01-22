@@ -2,8 +2,8 @@ package user;
 
 import java.util.GregorianCalendar;
 
-import management.Reservation;
-import material.MaterialQuantity;
+import equipment.MaterialQuantity;
+import management.Loan;
 
 /**
  * @author Dorian LIZARRALDE
@@ -54,8 +54,8 @@ public class Student extends User {
     }
 
     @Override
-    public Reservation doReserve(MaterialQuantity mat,
-            GregorianCalendar startDate, GregorianCalendar endDate) {
+    public Loan doReserve(MaterialQuantity mat, GregorianCalendar startDate,
+            GregorianCalendar endDate) {
 
         GregorianCalendar today = new GregorianCalendar();
 
@@ -65,7 +65,7 @@ public class Student extends User {
             // A student can't make a reservation of more than 7 days.
             if (((endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
 
-                return new Reservation(this, mat, startDate, endDate);
+                return new Loan(this, mat, startDate, endDate);
             }
         }
 

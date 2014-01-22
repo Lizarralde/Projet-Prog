@@ -1,8 +1,9 @@
 package management;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 import user.User;
 
 /**
@@ -12,30 +13,20 @@ import user.User;
  */
 public class Loan {
 
+    private GregorianCalendar endDate, startDate;
+
+    private List<Equipment> materialQuant;
+
     private User user;
 
-    private MaterialQuantity materialQuant;
+    public GregorianCalendar getEndDate() {
 
-    private GregorianCalendar startDate, endDate;
-
-    public User getUser() {
-
-        return user;
+        return endDate;
     }
 
-    public void setUser(User user) {
+    public void setEndDate(GregorianCalendar endDate) {
 
-        this.user = user;
-    }
-
-    public MaterialQuantity getMaterialQuantity() {
-
-        return materialQuant;
-    }
-
-    public void setMaterialQuantity(MaterialQuantity materialQuant) {
-
-        this.materialQuant = materialQuant;
+        this.endDate = endDate;
     }
 
     public GregorianCalendar getStartDate() {
@@ -48,34 +39,43 @@ public class Loan {
         this.startDate = startDate;
     }
 
-    public GregorianCalendar getEndDate() {
+    public List<Equipment> getMaterialQuantity() {
 
-        return endDate;
+        return materialQuant;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
+    public void setMaterialQuantity(List<Equipment> materialQuant) {
 
-        this.endDate = endDate;
+        this.materialQuant = materialQuant;
     }
 
-    public Loan(User user, MaterialQuantity materialQuant,
+    public User getUser() {
+
+        return user;
+    }
+
+    public void setUser(User user) {
+
+        this.user = user;
+    }
+
+    public Loan(User user, List<Equipment> materialQuant,
             GregorianCalendar start, GregorianCalendar end) {
 
-        this.setUser(user);
-        this.setMaterialQuantity(materialQuant);
-        this.setStartDate(start);
         this.setEndDate(end);
+        this.setStartDate(start);
+        this.setMaterialQuantity(materialQuant);
+        this.setUser(user);
     }
 
-    @Override
-    public String toString() {
-
-        return "User: " + user.toString() + "\tObject: "
-                + materialQuant.getMat().getName() + "\tQuantity: "
-                + materialQuant.getQuantity() + "\tDate d'emprunt: "
-                + DateInspector.calendarToString(startDate)
-                + "\tDate de retour: "
-                + DateInspector.calendarToString(endDate) + ".";
-    }
+    /*
+     * @Override public String toString() {
+     * 
+     * return "User: " + user.toString() + "\tObject: " +
+     * materialQuant.getMat().getName() + "\tQuantity: " +
+     * materialQuant.getQuantity() + "\tDate d'emprunt: " +
+     * CalendarController.calendarToString(startDate) + "\tDate de retour: " +
+     * CalendarController.calendarToString(endDate) + "."; }
+     */
 
 }

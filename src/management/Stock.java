@@ -3,7 +3,7 @@ package management;
 import java.util.ArrayList;
 import java.util.List;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 
 /**
  * The class Stock contains the list of all the reservation and the initial
@@ -16,7 +16,7 @@ public class Stock {
 
     private List<Loan> reservList;
 
-    private List<MaterialQuantity> materialStock;
+    private List<Equipment> materialStock;
 
     public List<Loan> getReservList() {
 
@@ -28,35 +28,33 @@ public class Stock {
         this.reservList = reservList;
     }
 
-    public List<MaterialQuantity> getMaterialStock() {
+    public List<Equipment> getMaterialStock() {
 
         return materialStock;
     }
 
-    public void setMaterialStock(List<MaterialQuantity> materialStock) {
+    public void setMaterialStock(List<Equipment> materialStock) {
 
         this.materialStock = materialStock;
     }
 
-    public Stock(List<MaterialQuantity> materialStock) {
+    public Stock(List<Equipment> materialStock) {
 
         this.setReservList(new ArrayList<Loan>());
         this.setMaterialStock(materialStock);
     }
 
-    @Override
-    public String toString() {
-
-        String stock = new String();
-
-        for (int i = 0; i < this.materialStock.size(); i++) {
-            stock += i + ". " + this.materialStock.get(i).getMat().getName()
-                    + " ("
-                    + this.materialStock.get(i).getMat().getDescription()
-                    + ") - " + this.materialStock.get(i).getQuantity()
-                    + System.getProperty("line.separator");
-        }
-
-        return stock;
-    }
+    /*
+     * @Override public String toString() {
+     * 
+     * String stock = new String();
+     * 
+     * for (int i = 0; i < this.materialStock.size(); i++) { stock += i + ". " +
+     * this.materialStock.get(i).getMat().getName() + " (" +
+     * this.materialStock.get(i).getMat().getDescription() + ") - " +
+     * this.materialStock.get(i).getQuantity() +
+     * System.getProperty("line.separator"); }
+     * 
+     * return stock; }
+     */
 }

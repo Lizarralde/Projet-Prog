@@ -10,12 +10,13 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 import equipment.OS;
 import equipment.solid.Camera;
 import equipment.solid.Headphones;
 import equipment.solid.Phone;
 import equipment.solid.Tablet;
+import user.Administrator;
 import user.Student;
 import user.Teacher;
 import user.User;
@@ -98,7 +99,7 @@ public class Data {
     }
 
     /**
-     * Store the users list in the location parameter.
+     * Store the list of users in the location parameter.
      * 
      * @author Dorian LIZARRALDE
      * @param location
@@ -109,13 +110,9 @@ public class Data {
         // Create an empty list of users.
         List<User> users = new ArrayList<User>();
 
-        // Add the users.
+        // Add users.
+        users.add(new Administrator("KHA", "Jean-Philippe"));
         users.add(new Student("LIZARRALDE", "Dorian", "SI3 - 2013"));
-        users.add(new Student("PINEL", "Fabien", "SI3 - 2013"));
-        users.add(new Student("SIMOND", "Hugo", "SI3 - 2013"));
-        users.add(new Student("BENNI", "Benjamin", "SI3 - 2013"));
-        users.add(new Student("SALMERON", "Quentin", "SI3 - 2013"));
-        users.add(new Teacher("THUAIRE", "Alain", "Java"));
         users.add(new Teacher("SARMIENTO", "Sergio", "Communication"));
 
         store(users, location);
@@ -131,17 +128,14 @@ public class Data {
     public static void storeMaterialsList(String location) {
 
         // Create an empty list of materials.
-        List<MaterialQuantity> materials = new ArrayList<MaterialQuantity>();
+        List<Equipment> materials = new ArrayList<Equipment>();
 
         // Add the materials.
-        materials.add(new MaterialQuantity(new Phone("HTC One",
-                "Description of the HTC One", OS.ANDROID), 5));
-        materials.add(new MaterialQuantity(new Headphones("Dr Dre",
-                "Description of the Dr Dre"), 24));
-        materials.add(new MaterialQuantity(new Camera("Nokia 850",
-                "Description of the Nokia 850"), 2));
-        materials.add(new MaterialQuantity(new Tablet("iPad",
-                "Description of the HTC One", OS.IOS), 5));
+        materials.add(new Camera("Nokia 850", "Description of the Nokia 850"));
+        materials.add(new Headphones("Dr Dre", "Description of the Dr Dre"));
+        materials.add(new Phone("HTC One", "Description of the HTC One",
+                OS.ANDROID));
+        materials.add(new Tablet("iPad", "Description of the HTC One", OS.IOS));
 
         store(materials, location);
     }

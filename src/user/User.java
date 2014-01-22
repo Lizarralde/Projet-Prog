@@ -1,8 +1,9 @@
 package user;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 import management.Loan;
 
 /**
@@ -91,7 +92,7 @@ public class User {
      * @param endDate
      * @return
      */
-    public Loan doReserve(MaterialQuantity mat, GregorianCalendar startDate,
+    public Loan doReserve(List<Equipment> mat, GregorianCalendar startDate,
             GregorianCalendar endDate) {
 
         return null;

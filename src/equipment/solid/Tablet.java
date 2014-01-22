@@ -1,6 +1,6 @@
 package equipment.solid;
 
-import equipment.MatOS;
+import equipment.ComputingDevice;
 import equipment.OS;
 
 /**
@@ -8,7 +8,7 @@ import equipment.OS;
  * @author Dorian LIZARRALDE
  * 
  */
-public class Tablet extends MatOS {
+public class Tablet extends ComputingDevice {
 
     public Tablet(String name, String description, OS typeOS) {
 

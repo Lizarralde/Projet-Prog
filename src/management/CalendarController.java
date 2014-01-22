@@ -3,7 +3,7 @@ package management;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class DateInspector {
+public class CalendarController {
 
     /**
      * Check if the dates given are okay.

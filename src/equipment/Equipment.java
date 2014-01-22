@@ -7,11 +7,21 @@ package equipment;
  */
 public class Equipment {
 
-    private String name, description;
+    private String description, name;
+
+    private int damage;
 
     private int quality;
 
-    private int damage;
+    public String getDescription() {
+
+        return description;
+    }
+
+    public void setDescription(String description) {
+
+        this.description = description;
+    }
 
     public String getName() {
 
@@ -23,14 +33,14 @@ public class Equipment {
         this.name = name;
     }
 
-    public String getDescription() {
+    public int getDamage() {
 
-        return description;
+        return damage;
     }
 
-    public void setDescription(String description) {
+    public void setDamage(int damage) {
 
-        this.description = description;
+        this.damage = damage;
     }
 
     public int getQuality() {
@@ -46,22 +56,12 @@ public class Equipment {
         }
     }
 
-    public int getDamage() {
-
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-
-        this.damage = damage;
-    }
-
     public Equipment(String name, String description) {
 
-        this.setName(name);
         this.setDescription(description);
-        this.setQuality(100);
+        this.setName(name);
         this.setDamage(damage);
+        this.setQuality(100);
     }
 
     @Override

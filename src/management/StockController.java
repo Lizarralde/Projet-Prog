@@ -2,8 +2,9 @@ package management;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 import user.User;
 
 /**
@@ -11,7 +12,7 @@ import user.User;
  * @author Dorian LIZARRALDE
  * 
  */
-public class StockInspector {
+public class StockController {
 
     private Stock stock;
 
@@ -25,7 +26,7 @@ public class StockInspector {
         this.stock = stock;
     }
 
-    public StockInspector(Stock stock) {
+    public StockController(Stock stock) {
 
         this.setStock(stock);
     }
@@ -40,7 +41,7 @@ public class StockInspector {
      * @param endDate
      * @return
      */
-    public Loan doReserve(User user, MaterialQuantity mat,
+    public Loan doReserve(User user, List<Equipment> mat,
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
         return user.doReserve(mat, startDate, endDate);
@@ -60,12 +61,12 @@ public class StockInspector {
      * @return true if the material is available during this period false in
      *         other cases
      */
-    public boolean isAvailable(MaterialQuantity mat, int quantity,
+    public boolean isAvailable(List<Equipment> mat,
             GregorianCalendar startDate, GregorianCalendar endDate) {
         GregorianCalendar day = new GregorianCalendar();
         day.setTimeInMillis(startDate.getTimeInMillis());
         while (day.compareTo(endDate) <= 0) {
-            if (!isAvailableForThisDay(mat, quantity, day)) {
+            if (!isAvailableForThisDay(mat, day)) {
                 return false;
             }
             day.add(Calendar.DAY_OF_YEAR, 1);
@@ -86,20 +87,19 @@ public class StockInspector {
      *            the end of the emprunt period
      * @return
      */
-    private boolean isAvailableForThisDay(MaterialQuantity mat, int quantity,
+    private boolean isAvailableForThisDay(List<Equipment> mat,
             GregorianCalendar day) {
 
-        int quantityAvailable = mat.getQuantity();
+        int quantityAvailable = mat.size();
         for (Loan reserv : stock.getReservList()) {
-            if (reserv.getMaterialQuantity().getMat().equals(mat.getMat())) {
+            if (reserv.getMaterialQuantity().get(1).equals(mat.get(1))) {
                 if (day.compareTo(reserv.getStartDate()) >= 0
                         && day.compareTo(reserv.getEndDate()) <= 0) {
                     // day is in the emprunt time
-                    quantityAvailable -= reserv.getMaterialQuantity()
-                            .getQuantity();
+                    quantityAvailable -= reserv.getMaterialQuantity().size();
                 }
             }
         }
-        return (quantityAvailable >= quantity);
+        return (quantityAvailable >= mat.size());
     }
 }

@@ -47,36 +47,36 @@ public class Parser {
     }
 
     /**
-     * Read user input and make a list of it.
+     * Read user input and make a gregorian calendar of it. The format of the
+     * user input is dd/MM/yyyy.
      * 
-     * @author Dorian LIZARRALDE
-     * @return A list of the user input.
+     * @author Dorian LIZARRALDE & Fabien PINEL
+     * @return A gregorian calendar based on the user input.
      */
-    public List<String> getInput() {
-
-        // Create an empty list which will hold the user input.
-        List<String> words = new ArrayList<String>();
-
-        // Create an empty String which will hold the user input.
-        String inputLine;
-
-        // Display a prompt.
-        System.out.print("> ");
+    public GregorianCalendar getADate() {
 
         // Get the user input.
-        inputLine = reader.nextLine();
+        List<String> words = getInput();
 
-        Scanner tokenizer = new Scanner(inputLine);
+        if (!words.isEmpty()) {
 
-        // Each word of the user input is placed in the list.
-        while (tokenizer.hasNext()) {
+            // Get the day, month and year of the user input.
+            String str[] = words.get(0).split("/");
 
-            words.add(tokenizer.next());
+            // String -> Integer
+            if (str.length >= 3) {
+
+                int year = Integer.parseInt(str[2]);
+
+                int month = Integer.parseInt(str[1]);
+
+                int day = Integer.parseInt(str[0]);
+
+                // Creation of the calendar.
+                return new GregorianCalendar(year, month - 1, day);
+            }
         }
-
-        tokenizer.close();
-
-        return words;
+        return null;
     }
 
     /**
@@ -111,35 +111,35 @@ public class Parser {
     }
 
     /**
-     * Read user input and make a gregorian calendar of it. The format of the
-     * user input is dd/MM/yyyy.
+     * Read user input and make a list of it.
      * 
-     * @author Dorian LIZARRALDE & Fabien PINEL
-     * @return A gregorian calendar based on the user input.
+     * @author Dorian LIZARRALDE
+     * @return A list of the user input.
      */
-    public GregorianCalendar getADate() {
+    public List<String> getInput() {
+
+        // Create an empty list which will hold the user input.
+        List<String> words = new ArrayList<String>();
+
+        // Create an empty String which will hold the user input.
+        String inputLine;
+
+        // Display a prompt.
+        System.out.print("> ");
 
         // Get the user input.
-        List<String> words = getInput();
+        inputLine = reader.nextLine();
 
-        if (!words.isEmpty()) {
+        Scanner tokenizer = new Scanner(inputLine);
 
-            // Get the day, month and year of the user input.
-            String str[] = words.get(0).split("/");
+        // Each word of the user input is placed in the list.
+        while (tokenizer.hasNext()) {
 
-            // String -> Integer
-            if (str.length >= 3) {
-
-                int year = Integer.parseInt(str[2]);
-
-                int month = Integer.parseInt(str[1]);
-
-                int day = Integer.parseInt(str[0]);
-
-                // Creation of the calendar.
-                return new GregorianCalendar(year, month - 1, day);
-            }
+            words.add(tokenizer.next());
         }
-        return null;
+
+        tokenizer.close();
+
+        return words;
     }
 }

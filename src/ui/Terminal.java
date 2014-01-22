@@ -1,13 +1,14 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import equipment.MaterialQuantity;
+import equipment.Equipment;
 import ldapbeans.util.scanner.PackageHelper;
-import management.DateInspector;
-import management.StockInspector;
+import management.CalendarController;
+import management.StockController;
 import management.Loan;
 import management.Stock;
 import user.Administrator;
@@ -28,7 +29,7 @@ public class Terminal {
 
     private Stock stock;
 
-    private StockInspector inspector;
+    private StockController inspector;
 
     /**
      * @author Dorian LIZARRALDE
@@ -68,12 +69,12 @@ public class Terminal {
         this.stock = stock;
     }
 
-    public StockInspector getInspector() {
+    public StockController getInspector() {
 
         return inspector;
     }
 
-    public void setInpector(StockInspector inspector) {
+    public void setInpector(StockController inspector) {
 
         this.inspector = inspector;
     }
@@ -94,13 +95,14 @@ public class Terminal {
      * 
      * @author Dorian LIZARRALDE
      */
-    public void start(List<User> users, List<MaterialQuantity> mat) {
+    public void start(List<Equipment> equipment, List<Loan> loan,
+            List<User> user) {
 
         // Keep the default stock for futur use.
         stock = new Stock(mat);
 
         // Create a manager who will certificate the reservations.
-        inspector = new StockInspector(stock);
+        inspector = new StockController(stock);
 
         // Welcome
         welcome();
@@ -300,59 +302,57 @@ public class Terminal {
         boolean dateOk = false;
 
         // Load the materials from the stock
-        List<MaterialQuantity> mat = stock.getMaterialStock();
+        List<Equipment> mat = stock.getMaterialStock();
 
         reponse = this.chooseAnObject();
 
-        quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
-
-        while (!dateOk) {
-
-            System.out
-                    .println("Enter your start date. The format is dd/MM/yyyy.");
-
-            startDate = parser.getADate();
-
-            System.out
-                    .println("Enter your end date. The format is dd/MM/yyyy.");
-
-            endDate = parser.getADate();
-
-            dateOk = DateInspector.checkTheDates(startDate, endDate);
-        }
-
-        if (inspector.isAvailable(mat.get(reponse), quantity, startDate,
-                endDate)) {
-
-            System.out
-                    .println("The manager said that there are enough materials avaible for your reservation.");
-
-            MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
-                    reponse).getMat(), quantity);
-
-            Loan res = inspector.doReserve(user, monObjetAReserver, startDate,
-                    endDate);
-
-            if (res != null) {
-
-                stock.getReservList().add(res);
-
-                System.out
-                        .println("Reservation effectuée."
-                                + System.getProperty("line.separator")
-                                + "Affichage de la reservation :"
-                                + System.getProperty("line.separator")
-                                + res.toString());
-
-                return true;
-            } else {
-
-                System.out
-                        .println("The manager said you are not able to do this reservation.");
-
-                return false;
-            }
-        }
+        /*
+         * quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
+         * 
+         * while (!dateOk) {
+         * 
+         * System.out
+         * .println("Enter your start date. The format is dd/MM/yyyy.");
+         * 
+         * startDate = parser.getADate();
+         * 
+         * System.out
+         * .println("Enter your end date. The format is dd/MM/yyyy.");
+         * 
+         * endDate = parser.getADate();
+         * 
+         * dateOk = CalendarController.checkTheDates(startDate, endDate); }
+         * 
+         * if (inspector.isAvailable(mat.get(reponse), startDate, endDate)) {
+         * 
+         * System.out .println(
+         * "The manager said that there are enough materials avaible for your reservation."
+         * );
+         * 
+         * List<Equipment> monObjetAReserver = new ArrayList<Equipment>();
+         * 
+         * //
+         * 
+         * Loan res = inspector.doReserve(user, monObjetAReserver, startDate,
+         * endDate);
+         * 
+         * if (res != null) {
+         * 
+         * stock.getReservList().add(res);
+         * 
+         * System.out .println("Reservation effectuée." +
+         * System.getProperty("line.separator") +
+         * "Affichage de la reservation :" +
+         * System.getProperty("line.separator") + res.toString());
+         * 
+         * return true; } else {
+         * 
+         * System.out
+         * .println("The manager said you are not able to do this reservation."
+         * );
+         * 
+         * return false; } }
+         */
 
         System.out
                 .println("The manager didn't find enough materials avaible for your reservation.");

@@ -5,7 +5,7 @@ package equipment;
  * @author Dorian LIZARRALDE
  * 
  */
-public class MatOS extends Equipment {
+public class ComputingDevice extends Equipment {
 
     private OS typeOS;
 
@@ -19,10 +19,10 @@ public class MatOS extends Equipment {
         this.typeOS = typeOS;
     }
 
-    public MatOS(String name, String description, OS typeOS) {
+    public ComputingDevice(String name, String description, OS typeOS) {
 
         super(name, description);
-        this.setDamage(5);
         this.setTypeOS(typeOS);
+        this.setDamage(5);
     }
 }

@@ -3,6 +3,7 @@ package user;
 import java.util.GregorianCalendar;
 
 import management.Reservation;
+import management.ReservationInspector;
 import material.MaterialQuantity;
 
 /**
@@ -12,6 +13,7 @@ import material.MaterialQuantity;
 public class Student extends User {
 
     private String year;
+    private ReservationInspector inspector;
 
     /**
      * Default constructor.
@@ -58,10 +60,14 @@ public class Student extends User {
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
     	if(mat.getQuantity()>1){
+    		System.out.println("You are a student, you can't loan more than 1 material");
     		return null;
     	}
+    	
         GregorianCalendar today = new GregorianCalendar();
-
+        if(inspector.alreadyHaveThisMaterial(this, mat)){
+        	return null;
+        }
         // A student can't make a reservation 7 days ahead.
         if (((startDate.getTimeInMillis() - today.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
 

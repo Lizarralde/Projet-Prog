@@ -47,4 +47,9 @@ public class CalendarInspector {
 
         return formater.format(calendar.getTime());
     }
+    
+    public static int differenceDate(GregorianCalendar startDate, GregorianCalendar endDate){
+    	long difference = endDate.getTimeInMillis() - startDate.getTimeInMillis();
+    	return (int)(difference/( 24*60*60*1000));
+    }
 }

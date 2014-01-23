@@ -134,7 +134,7 @@ public class ReservationInspector {
 			day.setTimeInMillis(startDate.getTimeInMillis());
 			while (day.compareTo(endDate) <= 0) {
 				if (isAvailableForThisDay(mat, quantity, day)) {
-					day.add(Calendar.DAY_OF_YEAR, -1);
+					//day.add(Calendar.DAY_OF_YEAR, -1);
 					return day;
 				}
 				day.add(Calendar.DAY_OF_YEAR, 1);
@@ -154,15 +154,16 @@ public class ReservationInspector {
 	 */
 	public int numberOfMaterialAvailable( MaterialQuantity mat, int quantity,
 		GregorianCalendar startDate, GregorianCalendar endDate){
+		int minQuantity = -1;
 		GregorianCalendar day = new GregorianCalendar();
 		day.setTimeInMillis(startDate.getTimeInMillis());
 		while (day.compareTo(endDate) <= 0) {
 			if (theNumberOfMaterialIsAvailableForThisDay(mat,day)< quantity) {
-				return theNumberOfMaterialIsAvailableForThisDay(mat,day);
+				minQuantity = theNumberOfMaterialIsAvailableForThisDay(mat,day);
 			}
 			day.add(Calendar.DAY_OF_YEAR, 1);
 		}
-		return -1;	
+		return minQuantity;	
 	}
 
 /**
@@ -205,6 +206,7 @@ public class ReservationInspector {
 		//la fonction sera appele si la quantite est inferieur a la quantite de materiel disponible
 		return quantity*value;
 	}
+	
 	/**
 	 * This method looks if the student respect rules
 	 * @author Jean-Philippe Kha
@@ -213,16 +215,15 @@ public class ReservationInspector {
 	 * @param quantity
 	 * @return
 	 */
-	public boolean studentLoanIsAvailable(Student student,MaterialQuantity mat, int quantity){
-		int quantityAvailable = mat.getQuantity();
+	public boolean alreadyHaveThisMaterial(Student student,MaterialQuantity mat){
 		for (Reservation reserv : stock.getReservList()) {
 			if (reserv.getMaterialQuantity().getMat().equals(mat.getMat())) {
 				if(reserv.getUser().equals(student)){
-					return false;
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 }
 

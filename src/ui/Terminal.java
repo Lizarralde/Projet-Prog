@@ -21,311 +21,345 @@ import user.User;
  */
 public class Terminal {
 
-    private Parser parser;
+	private Parser parser;
 
-    private User user;
+	private User user;
 
-    private Stock stock;
+	private Stock stock;
 
-    private ReservationInspector inspector;
+	private ReservationInspector inspector;
 
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public Terminal() {
+	/**
+	 * Default constructor.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 */
+	public Terminal() {
 
-        parser = new Parser();
-    }
+		parser = new Parser();
+	}
 
-    /**
-     * @author Dorian LIZARRALDE
-     * @return
-     */
-    public Parser getParser() {
+	/**
+	 * @author Dorian LIZARRALDE
+	 * @return
+	 */
+	public Parser getParser() {
 
-        return parser;
-    }
+		return parser;
+	}
 
-    /**
-     * @author Dorian LIZARRALDE
-     * @return
-     */
-    public User getUser() {
+	/**
+	 * @author Dorian LIZARRALDE
+	 * @return
+	 */
+	public User getUser() {
 
-        return user;
-    }
+		return user;
+	}
 
-    /**
-     * Start the application. The user has to identifie himself to make a
-     * reservation.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void start(List<User> users, List<MaterialQuantity> mat) {
+	/**
+	 * Start the application. The user has to identifie himself to make a
+	 * reservation.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 */
+	public void start(List<User> users, List<MaterialQuantity> mat) {
 
-        // Keep the default stock for futur use.
-        stock = new Stock(mat);
+		// Keep the default stock for futur use.
+		stock = new Stock(mat);
 
-        // Create a manager who will certificate the reservations.
-        inspector = new ReservationInspector(stock);
+		// Create a manager who will certificate the reservations.
+		inspector = new ReservationInspector(stock);
 
-        // Welcome
-        welcome();
+		// Welcome
+		welcome();
 
-        // Wait for the user to identifie himself.
-        while ((user = parser.getID(users)) == null) {
+		// Wait for the user to identifie himself.
+		while ((user = parser.getID(users)) == null) {
 
-            System.out.println("Sorry, we were unable to find you.");
-        }
+			System.out.println("Sorry, we were unable to find you.");
+		}
 
-        // The user is now identified.
-        System.out.println("You are now identified as " + user.toString());
+		// The user is now identified.
+		System.out.println("You are now identified as " + user.toString());
 
-        // The user can make a reservation.
-        theApplication();
-    }
+		// The user can make a reservation.
+		theApplication();
+	}
 
-    /**
-     * 
-     * @author fabien Pinel
-     */
-    public void theApplication() {
+	/**
+	 * 
+	 * @author fabien Pinel
+	 */
+	public void theApplication() {
 
-        System.out
-                .println("Type your command. If you need help, you can use the command 'help'");
+		System.out
+		.println("Type your command. If you need help, you can use the command 'help'");
 
-        while (!processCommand(parser.getInput())) {
+		while (!processCommand(parser.getInput())) {
 
-        }
+		}
 
-        System.out.println("Thank you for using our application. Good bye.");
-    }
+		System.out.println("Thank you for using our application. Good bye.");
+	}
 
-    /**
-     * Display a welcome text and ask for the user to identifie himself.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void welcome() {
+	/**
+	 * Display a welcome text and ask for the user to identifie himself.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 */
+	public void welcome() {
 
-        System.out.println("Welcome to our reservation application.");
+		System.out.println("Welcome to our reservation application.");
 
-        System.out
-                .println("What is your ID ? Type your name followed by your forname.");
-    }
+		System.out
+		.println("What is your ID ? Type your name followed by your forname.");
+	}
 
-    /**
-     * Execute the command associate the user input.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param words
-     * @return
-     */
-    public boolean processCommand(List<String> words) {
+	/**
+	 * Execute the command associate the user input.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 * @param words
+	 * @return
+	 */
+	public boolean processCommand(List<String> words) {
 
-        boolean wantToQuit = false;
+		boolean wantToQuit = false;
 
-        // The user has actually typed something.
-        if (!words.isEmpty()) {
+		// The user has actually typed something.
+		if (!words.isEmpty()) {
 
-            switch (words.get(0)) {
+			switch (words.get(0)) {
 
-            // The user want to reserve something.
-            case "reserve":
-                reserve();
-                break;
+			// The user want to reserve something.
+			case "reserve":
+				reserve();
+				break;
 
-            case "add":
-                if (user instanceof Manager) {
+			case "add":
+				if (user instanceof Manager) {
 
-                    Collection<Class<?>> classes = null;
+					Collection<Class<?>> classes = null;
 
-                    // Find all classes in the package "objects.test" but not in
-                    // its sub-package.
-                    try {
+					// Find all classes in the package "objects.test" but not in
+					// its sub-package.
+					try {
 
-                        classes = PackageHelper.getInstance().getClasses(
-                                "objects.test", false, null);
+						classes = PackageHelper.getInstance().getClasses(
+								"objects.test", false, null);
 
-                        for (Class<?> c : classes) {
+						for (Class<?> c : classes) {
 
-                            System.out.println(c.getName());
-                        }
-                    } catch (ClassNotFoundException e) {
+							System.out.println(c.getName());
+						}
+					} catch (ClassNotFoundException e) {
 
-                        e.printStackTrace();
-                    }
-                }
-                break;
+						e.printStackTrace();
+					}
+				}
+				break;
 
-            // The user want to display the help.
-            case "help":
-                help();
-                break;
+				// The user want to display the help.
+			case "help":
+				help();
+				break;
 
-            // The user want to quit.
-            case "quit":
-                wantToQuit = true;
-                break;
-            }
-        }
+				// The user want to quit.
+			case "quit":
+				wantToQuit = true;
+				break;
+			}
+		}
 
-        return wantToQuit;
-    }
+		return wantToQuit;
+	}
 
-    /**
-     * Display an help text.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void help() {
+	/**
+	 * Display an help text.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 */
+	public void help() {
 
-        System.out
-                .println("You can use our application to reserve a material.");
+		System.out
+		.println("You can use our application to reserve a material.");
 
-        System.out
-                .println("Your command words are : reserve, add, display, help, quit");
-    }
+		System.out
+		.println("Your command words are : reserve, add, display, help, quit");
+	}
 
-    /**
-     * THis method asks the user to choose an object in the list and is played
-     * again and again until the choice is okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @return
-     */
-    public int chooseAnObject() {
+	/**
+	 * THis method asks the user to choose an object in the list and is played
+	 * again and again until the choice is okay.
+	 * 
+	 * @author Fabien Pinel & Dorian LIZARRALDE
+	 * @return
+	 */
+	public int chooseAnObject() {
 
-        int i = -1;
+		int i = -1;
 
-        System.out.println("Please write the number of the object you want: ");
+		System.out.println("Please write the number of the object you want: ");
 
-        System.out.println(stock.toString());
+		System.out.println(stock.toString());
 
-        List<String> words = parser.getInput();
+		List<String> words = parser.getInput();
 
-        if (!words.isEmpty()) {
+		if (!words.isEmpty()) {
 
-            i = Integer.parseInt(words.get(0));
-        }
+			i = Integer.parseInt(words.get(0));
+		}
 
-        if (i < 0 || i > stock.getMaterialStock().size() - 1) {
+		if (i < 0 || i > stock.getMaterialStock().size() - 1) {
 
-            System.out.println("Incorrect. Please enter a correct number.");
+			System.out.println("Incorrect. Please enter a correct number.");
 
-            return chooseAnObject();
-        }
+			return chooseAnObject();
+		}
 
-        return i;
-    }
+		return i;
+	}
 
-    /**
-     * Ask for a quantity and play the method until the quantity is okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @param quantityAvailable
-     * @return
-     */
-    public int enterAQuantity(int quantityAvailable) {
+	/**
+	 * Ask for a quantity and play the method until the quantity is okay.
+	 * 
+	 * @author Fabien Pinel & Dorian LIZARRALDE
+	 * @param quantityAvailable
+	 * @return
+	 */
+	public int enterAQuantity(int quantityAvailable) {
 
-        int quantity = -1;
+		int quantity = -1;
 
-        System.out.println("Enter the quantity you want :");
+		System.out.println("Enter the quantity you want :");
 
-        List<String> words = parser.getInput();
+		List<String> words = parser.getInput();
 
-        if (!words.isEmpty()) {
+		if (!words.isEmpty()) {
 
-            quantity = Integer.parseInt(words.get(0));
-        }
+			quantity = Integer.parseInt(words.get(0));
+		}
 
-        if (quantity <= 0 || quantity > quantityAvailable) {
+		if (quantity <= 0 || quantity > quantityAvailable) {
 
-            System.out.println("Incorrect. Please enter a correct number.");
+			System.out.println("Incorrect. Please enter a correct number.");
 
-            return enterAQuantity(quantityAvailable);
-        }
+			return enterAQuantity(quantityAvailable);
+		}
 
-        return quantity;
-    }
+		return quantity;
+	}
 
-    /**
-     * Propose to the user to do a reservation.
-     * 
-     * @author fabien Pinel & Dorian LIZARRALDE
-     */
-    public boolean reserve() {
+	/**
+	 * Propose to the user to do a reservation.
+	 * 
+	 * @author fabien Pinel & Dorian LIZARRALDE
+	 */
+	public boolean reserve() {
 
-        int reponse;
+		int reponse;
 
-        GregorianCalendar startDate = null;
+		GregorianCalendar startDate = null;
 
-        GregorianCalendar endDate = null;
+		GregorianCalendar endDate = null;
 
-        int quantity;
+		int quantity;
 
-        boolean dateOk = false;
+		boolean dateOk = false;
 
-        // Load the materials from the stock
-        List<MaterialQuantity> mat = stock.getMaterialStock();
+		boolean automatic = false;
 
-        reponse = this.chooseAnObject();
+		// Load the materials from the stock
+		List<MaterialQuantity> mat = stock.getMaterialStock();
 
-        quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
+		reponse = this.chooseAnObject();
 
-        while (!dateOk) {
+		quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
 
-            System.out
-                    .println("Enter your start date. The format is dd/MM/yyyy.");
+		while(!automatic){
+			while (!dateOk) {
 
-            startDate = parser.getADate();
+				System.out
+				.println("Enter your start date. The format is dd/MM/yyyy.");
 
-            System.out
-                    .println("Enter your end date. The format is dd/MM/yyyy.");
+				startDate = parser.getADate();
 
-            endDate = parser.getADate();
+				System.out
+				.println("Enter your end date. The format is dd/MM/yyyy.");
 
-            dateOk = CalendarInspector.checkTheDates(startDate, endDate);
-        }
+				endDate = parser.getADate();
+				dateOk = CalendarInspector.checkTheDates(startDate, endDate);
+			}
+			
+			if(inspector.isAvailable(mat.get(reponse),quantity, startDate, endDate)  
+					&& CalendarInspector.differenceDate(startDate, endDate)<
+					inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse), quantity)
+					){
 
-        if (inspector.isAvailable(mat.get(reponse), quantity, startDate,
-                endDate)) {
+				System.out
+				.println("The manager said that there are enough materials avaible for your reservation.");
+				MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
+						reponse).getMat(), quantity);
 
-            System.out
-                    .println("The manager said that there are enough materials avaible for your reservation.");
+				Reservation res = inspector.doReserve(user, monObjetAReserver,
+						startDate, endDate);
+				System.out.println(res);
+				if (res != null) {
 
-            MaterialQuantity monObjetAReserver = new MaterialQuantity(mat.get(
-                    reponse).getMat(), quantity);
+					stock.getReservList().add(res);
 
-            Reservation res = inspector.doReserve(user, monObjetAReserver,
-                    startDate, endDate);
+					System.out
+					.println("Reservation effectuée."
+							+ System.getProperty("line.separator")
+							+ "Affichage de la reservation :"
+							+ System.getProperty("line.separator")
+							+ res.toString());
 
-            if (res != null) {
+					return true;
+				}
+			}
+			//Dans le cas ou le delai d emprunt est trop long
+			else if(inspector.isAvailable(mat.get(reponse),quantity, startDate, endDate) && 
+					CalendarInspector.differenceDate(startDate, endDate)>
+					inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse), quantity)){
+				System.out
+				.println("The difference between the date is too long. You can loan "
+						+ inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse), quantity)
+						+ " days");
+			}
+			else{
 
-                stock.getReservList().add(res);
+				int numberOfMaterialAvailable =
+						inspector.numberOfMaterialAvailable(mat.get(reponse), quantity, startDate, endDate);
+				System.out
+				.println("Between your start date and end date, you can loan " + numberOfMaterialAvailable);
 
-                System.out
-                        .println("Reservation effectuée."
-                                + System.getProperty("line.separator")
-                                + "Affichage de la reservation :"
-                                + System.getProperty("line.separator")
-                                + res.toString());
+				int numberOfDay = inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse),numberOfMaterialAvailable);
+				System.out
+				.println(" during " + numberOfDay);
+				GregorianCalendar dayWhenMaterialIsAvailable = 
+						inspector.dayWhenMaterialIsAvailable(mat.get(reponse), quantity, startDate, endDate);
 
-                return true;
-            } else {
+				if(inspector.dayWhenMaterialIsAvailable(mat.get(reponse), quantity, startDate, endDate) != null){
 
-                System.out
-                        .println("The manager said you are not able to do this reservation.");
+					System.out
+					.println("The quantity is available on " + dayWhenMaterialIsAvailable);
 
-                return false;
-            }
-        }
+					GregorianCalendar dayMaxToLoan = inspector.dayWhenMaterialIsNotAvailable(
+							mat.get(reponse), quantity, dayWhenMaterialIsAvailable, endDate);
+					System.out
+					.print(" to " + dayMaxToLoan);
+				}
+				else{
+					System.out
+					.println("The quantity you request is not available between your date");
+					return false;
+				}
+			}
+			dateOk =false;
+		}
 
-        System.out
-                .println("The manager didn't find enough materials avaible for your reservation.");
-
-        return false;
-    }
+		return false;
+	}
 }

@@ -14,6 +14,6 @@ public class Phone extends MatOS {
 
         super(name, description, typeOS);
         super.damage = 4;
-        super.objectValue = 1;
+        super.setObjectValue(1);
     }
 }

@@ -67,7 +67,7 @@ public class Material {
      * @return 
      */
 	public int getObjectValue() {
-		return objectValue;
+		return this.objectValue;
 	}
 
 	public void setObjectValue(int objectValue) {

@@ -5,11 +5,15 @@ import gestion_stock.Etat;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import ldapbeans.util.scanner.PackageHelper;
+
 import management.ReservationInspector;
 import management.Reservation;
 import management.Stock;
+
 import material.MaterialQuantity;
+
 import user.Manager;
 import user.User;
 
@@ -75,8 +79,12 @@ public class Terminal {
         // Welcome
         welcome();
 
+
         // Wait for the user to identify himself.
         while (!getID(users)) {
+
+        // Wait for the user to identifie himself.
+        while ((user = parser.getID(users)) == null) {
 
         // Wait for the user to identifie himself.
         while ((user = parser.getID(users)) == null) {
@@ -95,6 +103,7 @@ public class Terminal {
         theApplication();
         }
   }
+        }
  }
  public boolean getID(List<User> users) {
 
@@ -252,11 +261,23 @@ public class Terminal {
 
             System.out.println("Incorrect. Please enter a correct number.");
 
+        if (!words.isEmpty()) {
+
+            i = Integer.parseInt(words.get(0));
+        }
+
+        if (i < 0 || i > stock.getMaterialStock().size() - 1) {
+
+            System.out.println("Incorrect. Please enter a correct number.");
+
             return chooseAnObject();
         }
 
+        }
         return i;
+        
     }
+        
 
     /**
      * Ask for a quantity and play the method until the quantity is okay.
@@ -323,6 +344,11 @@ public class Terminal {
 
             endDate = parser.getADate();
 
+            System.out
+                    .println("Enter your end date. The format is dd/MM/yyyy.");
+
+            endDate = parser.getADate();
+
             dateOk = CalendarInspector.checkTheDates(startDate, endDate);
         }
 
@@ -348,7 +374,13 @@ public class Terminal {
                                 + "Affichage de la reservation :"
                                 + System.getProperty("line.separator")
                                 + res.toString());
+                //The state of the device is modified after the reservation is confirmed.
                 monObjetAReserver.getMat().setState(Etat.Emprunte);
+                //Update the number of loan of the device
+                monObjetAReserver.getMat().setNombreEmprunt(monObjetAReserver.getMat().getNombreEmprunt()+1);
+                //Update the borrower's number of loans
+                user.setNumberOfLoan(user.getNumberOfLoan()+1);
+                
                 return true;
             } else {
 

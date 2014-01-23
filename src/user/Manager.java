@@ -25,8 +25,11 @@ public class Manager extends User {
     public void sendMaterialToRepair(List<MaterialQuantity> materials){
         
         for(MaterialQuantity mat: materials)
-            if (mat.getMat().getState().equals(Etat.Inutilisable))
+            if (mat.getMat().getState().equals(Etat.Inutilisable)){
                 mat.getMat().setState(Etat.EnReparation);
+                mat.getMat().setNumberOfRepair(mat.getMat().getNumberOfRepair()+1);
+            }
+                
         
     }
     
@@ -43,16 +46,57 @@ public class Manager extends User {
             }
     }
     
-    public Material mostLoanedMaterial(){
+    /**
+     * This method returns the device with the highest number of loans
+     * @param materials A list of different materials
+     * @return The most loaned material
+     */
+    public Material mostLoanedMaterial(List<Material> materials){
+        if (!materials.isEmpty()){
+            Material material = materials.get(0);
+            for (Material device: materials){
+                if(device.getNombreEmprunt()>material.getNombreEmprunt())
+                    material=device;
+            }
+            return material;
+        }
+        return null;
+    }
+   
+    /**
+     * This method returns the device with the highest number of repairs
+     * @param materials A list of different materials
+     * @return The most damaged material
+     */
+    public Material mostDamagedMaterial(List<Material> materials){
+        if (!materials.isEmpty()){
+            Material material = materials.get(0);
+            for (Material device: materials){
+                if(device.getNumberOfRepair()>material.getNumberOfRepair())
+                    material=device;
+            }
+            return material;
+        }
         return null;
     }
     
-    public Material greatestBorrower(){
+    /**
+     * This method returns the user with the highest number of loans 
+     * @param users A list of users (Borrowers)
+     * @return The user who has done the highest number of loans
+     */
+    public User greatestBorrower(List<User> users){
+        if (!users.isEmpty()){
+            User user = users.get(0);
+            for (User borrower: users){
+                if(borrower.getNumberOfLoan()>borrower.getNumberOfLoan() )
+                    user= borrower;
+            }
+            return user;
+        }
         return null;
     }
-    public Material mostDamagedMaterial(){
-        return null;
-    }
+   
     
 }
 

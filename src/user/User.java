@@ -3,6 +3,7 @@ package user;
 import java.util.GregorianCalendar;
 
 import management.Reservation;
+
 import material.MaterialQuantity;
 
 /**
@@ -14,6 +15,8 @@ public class User {
     private String name;
 
     private String forname;
+    
+    private int numberOfLoan;
 
     /**
      * Default constructor.
@@ -28,6 +31,7 @@ public class User {
 
         this.name = name;
         this.forname = forname;
+        this.numberOfLoan=0;
     }
 
     /**
@@ -95,5 +99,19 @@ public class User {
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
         return null;
+    }
+
+    /**
+     * @return the numberOfLoan
+     */
+    public int getNumberOfLoan() {
+        return numberOfLoan;
+    }
+
+    /**
+     * @param numberOfLoan the numberOfLoan to set
+     */
+    public void setNumberOfLoan(int numberOfLoan) {
+        this.numberOfLoan = numberOfLoan;
     }
 }

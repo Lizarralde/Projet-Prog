@@ -9,9 +9,11 @@ import gestion_stock.Etat;
 public class Material {
 
     private String name, description;
-    private int quality;
-    protected int damage;
-    private Etat state;
+    private int quality;// A value between 0 and 100 to define the quality of the device
+    protected int damage;// This property defines how the quality of the device is reduced after each loan
+    private Etat state; 
+    private int nombreEmprunt;
+    private int numberOfRepair;
 
     public Material(String name, String description) {
 
@@ -20,6 +22,8 @@ public class Material {
         this.setQuality(100);
         this.damage = 2;
         this.setState(Etat.Disponible);
+        this.nombreEmprunt=0;
+        this.numberOfRepair=0;
     }
 
     public String getName() {
@@ -75,5 +79,33 @@ public class Material {
      */
     public void setState(Etat state) {
         this.state = state;
+    }
+
+    /**
+     * @return the nombreEmprunt
+     */
+    public int getNombreEmprunt() {
+        return nombreEmprunt;
+    }
+
+    /**
+     * @param nombreEmprunt the nombreEmprunt to set
+     */
+    public void setNombreEmprunt(int nombreEmprunt) {
+        this.nombreEmprunt = nombreEmprunt;
+    }
+
+    /**
+     * @return the numberOfRepair
+     */
+    public int getNumberOfRepair() {
+        return numberOfRepair;
+    }
+
+    /**
+     * @param numberOfRepair the numberOfRepair to set
+     */
+    public void setNumberOfRepair(int numberOfRepair) {
+        this.numberOfRepair = numberOfRepair;
     }
 }

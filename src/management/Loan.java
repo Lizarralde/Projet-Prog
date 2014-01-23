@@ -13,40 +13,40 @@ import user.User;
  */
 public class Loan {
 
-    private GregorianCalendar endDate, startDate;
+    private GregorianCalendar end, start;
 
-    private List<Equipment> materialQuant;
+    private List<Equipment> equipment;
 
     private User user;
 
-    public GregorianCalendar getEndDate() {
+    public GregorianCalendar getEnd() {
 
-        return endDate;
+        return end;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
+    public void setEnd(GregorianCalendar end) {
 
-        this.endDate = endDate;
+        this.end = end;
     }
 
-    public GregorianCalendar getStartDate() {
+    public GregorianCalendar getStart() {
 
-        return startDate;
+        return start;
     }
 
-    public void setStartDate(GregorianCalendar startDate) {
+    public void setStart(GregorianCalendar start) {
 
-        this.startDate = startDate;
+        this.start = start;
     }
 
-    public List<Equipment> getMaterialQuantity() {
+    public List<Equipment> getEquipment() {
 
-        return materialQuant;
+        return equipment;
     }
 
-    public void setMaterialQuantity(List<Equipment> materialQuant) {
+    public void setEquipment(List<Equipment> equipment) {
 
-        this.materialQuant = materialQuant;
+        this.equipment = equipment;
     }
 
     public User getUser() {
@@ -59,23 +59,22 @@ public class Loan {
         this.user = user;
     }
 
-    public Loan(User user, List<Equipment> materialQuant,
-            GregorianCalendar start, GregorianCalendar end) {
+    public Loan(GregorianCalendar end, GregorianCalendar start,
+            List<Equipment> equipment, User user) {
 
-        this.setEndDate(end);
-        this.setStartDate(start);
-        this.setMaterialQuantity(materialQuant);
+        this.setEnd(end);
+        this.setStart(start);
+        this.setEquipment(equipment);
         this.setUser(user);
     }
 
-    /*
-     * @Override public String toString() {
-     * 
-     * return "User: " + user.toString() + "\tObject: " +
-     * materialQuant.getMat().getName() + "\tQuantity: " +
-     * materialQuant.getQuantity() + "\tDate d'emprunt: " +
-     * CalendarController.calendarToString(startDate) + "\tDate de retour: " +
-     * CalendarController.calendarToString(endDate) + "."; }
-     */
+    @Override
+    public String toString() {
 
+        return "User : " + user.toString() + "\tEquipment : "
+                + equipment.get(0).toString() + "\tQuantity : "
+                + equipment.size() + "\tStart : "
+                + CalendarController.calendarToString(start) + "\tEnd : "
+                + CalendarController.calendarToString(end);
+    }
 }

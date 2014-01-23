@@ -6,55 +6,86 @@ import java.util.List;
 import equipment.Equipment;
 
 /**
- * The class Stock contains the list of all the reservation and the initial
- * stock.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Stock {
 
-    private List<Loan> reservList;
+    private List<Equipment> equipment;
 
-    private List<Equipment> materialStock;
+    private List<Loan> loans;
 
-    public List<Loan> getReservList() {
+    public List<Equipment> getEquipment() {
 
-        return reservList;
+        return equipment;
     }
 
-    public void setReservList(List<Loan> reservList) {
+    public void setEquipment(List<Equipment> equipment) {
 
-        this.reservList = reservList;
+        this.equipment = equipment;
     }
 
-    public List<Equipment> getMaterialStock() {
+    public List<Loan> getLoans() {
 
-        return materialStock;
+        return loans;
     }
 
-    public void setMaterialStock(List<Equipment> materialStock) {
+    public void setLoans(List<Loan> loans) {
 
-        this.materialStock = materialStock;
+        this.loans = loans;
     }
 
-    public Stock(List<Equipment> materialStock) {
+    public Stock(List<Equipment> equipment, List<Loan> loans) {
 
-        this.setReservList(new ArrayList<Loan>());
-        this.setMaterialStock(materialStock);
+        this.setEquipment(equipment);
+        this.setLoans(loans);
     }
 
-    /*
-     * @Override public String toString() {
-     * 
-     * String stock = new String();
-     * 
-     * for (int i = 0; i < this.materialStock.size(); i++) { stock += i + ". " +
-     * this.materialStock.get(i).getMat().getName() + " (" +
-     * this.materialStock.get(i).getMat().getDescription() + ") - " +
-     * this.materialStock.get(i).getQuantity() +
-     * System.getProperty("line.separator"); }
-     * 
-     * return stock; }
-     */
+    public List<String> getNames() {
+
+        List<String> names = new ArrayList<String>();
+
+        for (Equipment e : equipment) {
+
+            if (!names.contains(e.getName())) {
+
+                names.add(e.getName());
+            }
+        }
+
+        return names;
+    }
+
+    public int getQuantity(String name) {
+
+        int counter = 0;
+
+        for (Equipment e : equipment) {
+
+            if (name.equals(e.getName())) {
+
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    @Override
+    public String toString() {
+
+        List<String> names = this.getNames();
+
+        String stock = new String();
+
+        for (int i = 0; i < names.size(); i++) {
+
+            stock += "Index : " + i + "\tName : " + names.get(i)
+                    + "\tQuantity : " + this.getQuantity(names.get(i))
+                    + System.getProperty("line.separator");
+        }
+
+        return stock;
+    }
 }

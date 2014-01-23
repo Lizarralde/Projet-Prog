@@ -9,10 +9,6 @@ public class Equipment {
 
     private String description, name;
 
-    private int damage;
-
-    private int quality;
-
     public String getDescription() {
 
         return description;
@@ -33,40 +29,15 @@ public class Equipment {
         this.name = name;
     }
 
-    public int getDamage() {
-
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-
-        this.damage = damage;
-    }
-
-    public int getQuality() {
-
-        return quality;
-    }
-
-    public void setQuality(int quality) {
-
-        if (quality <= 100) {
-
-            this.quality = quality;
-        }
-    }
-
-    public Equipment(String name, String description) {
+    public Equipment(String description, String name) {
 
         this.setDescription(description);
         this.setName(name);
-        this.setDamage(damage);
-        this.setQuality(100);
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public String toString() {
 
-        return (((Equipment) obj).getName().equals(name));
+        return this.getName() + " " + this.getDescription();
     }
 }

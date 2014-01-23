@@ -1,13 +1,20 @@
 package user;
 
 /**
+ * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Administrator extends User {
 
-    public Administrator(String name, String forname) {
+    public Administrator(String firstName, String lastName) {
 
-        super(name, forname);
+        super(firstName, lastName);
+    }
+
+    @Override
+    public boolean isAllowedToBorrow() {
+
+        return true;
     }
 }

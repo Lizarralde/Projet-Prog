@@ -1,22 +1,18 @@
 package ui;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
 
 import equipment.Equipment;
 import ldapbeans.util.scanner.PackageHelper;
-import management.CalendarController;
 import management.StockController;
 import management.Loan;
 import management.Stock;
-import user.Administrator;
 import user.User;
 
 /**
- * Headquarter of the application. Identifie the user. Retrieve his reservation.
- * Make it happened or not depend on the manager verification.
  * 
  * @author Dorian LIZARRALDE
  * 
@@ -25,16 +21,10 @@ public class Terminal {
 
     private Parser parser;
 
+    private StockController stockController;
+
     private User user;
 
-    private Stock stock;
-
-    private StockController inspector;
-
-    /**
-     * @author Dorian LIZARRALDE
-     * @return
-     */
     public Parser getParser() {
 
         return parser;
@@ -45,10 +35,16 @@ public class Terminal {
         this.parser = parser;
     }
 
-    /**
-     * @author Dorian LIZARRALDE
-     * @return
-     */
+    public StockController getStockController() {
+
+        return stockController;
+    }
+
+    public void setStockController(StockController stockController) {
+
+        this.stockController = stockController;
+    }
+
     public User getUser() {
 
         return user;
@@ -59,237 +55,118 @@ public class Terminal {
         this.user = user;
     }
 
-    public Stock getStock() {
+    public Terminal(List<Equipment> equipment, List<Loan> loans,
+            List<User> users) {
 
-        return stock;
+        this.setParser(new Parser(new Scanner(System.in)));
+        this.setStockController(new StockController(new Stock(equipment, loans)));
+
+        System.out.println("Connection. Format : 'First Name' 'Last Name'"
+                + System.getProperty("line.separator"));
+
+        this.setUser(connect(users));
     }
 
-    public void setStock(Stock stock) {
+    public User connect(List<User> users) {
 
-        this.stock = stock;
-    }
+        List<String> words = this.getParser().getInput();
 
-    public StockController getInspector() {
+        if (words.size() > 1) {
 
-        return inspector;
-    }
+            for (User u : users) {
 
-    public void setInpector(StockController inspector) {
+                if (u.getLastName().equalsIgnoreCase(words.get(0))
+                        && u.getFirstName().equalsIgnoreCase(words.get(1))) {
 
-        this.inspector = inspector;
-    }
-
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public Terminal() {
-
-        this.setParser(new Parser());
-    }
-
-    /**
-     * Start the application. The user has to identifie himself to make a
-     * reservation.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void start(List<Equipment> equipment, List<Loan> loan,
-            List<User> user) {
-
-        // Keep the default stock for futur use.
-        stock = new Stock(mat);
-
-        // Create a manager who will certificate the reservations.
-        inspector = new StockController(stock);
-
-        // Welcome
-        welcome();
-
-        // Wait for the user to identifie himself.
-        while ((user = parser.getID(users)) == null) {
-
-            System.out.println("Sorry, we were unable to find you.");
+                    return u;
+                }
+            }
         }
 
-        // The user is now identified.
-        System.out.println("You are now identified as " + user.toString());
-
-        // The user can make a reservation.
-        theApplication();
+        return null;
     }
 
-    /**
-     * 
-     * @author fabien Pinel
-     */
-    public void theApplication() {
+    public void start() {
 
-        System.out
-                .println("Type your command. If you need help, you can use the command 'help'");
+        if (user == null) {
 
-        while (!processCommand(parser.getInput())) {
+            System.out
+                    .println("Connection failed. We were unable to find you.");
+
+            return;
+        }
+
+        System.out.println("Welcome " + this.getUser().toString());
+
+        System.out.println("Type your command. If you need help, type 'help'");
+
+        while (!processCommand(this.getParser().getInput())) {
 
         }
 
         System.out.println("Thank you for using our application. Good bye.");
     }
 
-    /**
-     * Display a welcome text and ask for the user to identifie himself.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void welcome() {
-
-        System.out.println("Welcome to our reservation application.");
-
-        System.out
-                .println("What is your ID ? Type your name followed by your forname.");
-    }
-
-    /**
-     * Execute the command associate the user input.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param words
-     * @return
-     */
     public boolean processCommand(List<String> words) {
 
-        boolean wantToQuit = false;
+        boolean leave = false;
 
-        // The user has actually typed something.
         if (!words.isEmpty()) {
 
             switch (words.get(0)) {
 
-            // The user want to reserve something.
-            case "reserve":
-                reserve();
-                break;
-
             case "add":
-                if (user instanceof Administrator) {
-
-                    Collection<Class<?>> classes = null;
-
-                    // Find all classes in the package "objects.test" but not in
-                    // its sub-package.
-                    try {
-
-                        classes = PackageHelper.getInstance().getClasses(
-                                "objects.test", false, null);
-
-                        for (Class<?> c : classes) {
-
-                            System.out.println(c.getName());
-                        }
-                    } catch (ClassNotFoundException e) {
-
-                        e.printStackTrace();
-                    }
-                }
+                add();
                 break;
 
-            // The user want to display the help.
+            case "borrow":
+                borrow();
+                break;
+
+            case "display":
+                display();
+                break;
+
+            case "giveBack":
+                giveBack();
+                break;
+
             case "help":
                 help();
                 break;
 
-            // The user want to quit.
-            case "quit":
-                wantToQuit = true;
+            case "leave":
+                leave = true;
+                break;
+
+            case "remove":
+                remove();
+                break;
+
+            case "validate":
+                validate();
                 break;
             }
         }
 
-        return wantToQuit;
+        return leave;
     }
 
-    /**
-     * Display an help text.
-     * 
-     * @author Dorian LIZARRALDE
-     */
-    public void help() {
+    public void add() {
 
-        System.out
-                .println("You can use our application to reserve a material.");
+        Collection<Class<?>> classes;
 
-        System.out
-                .println("Your command words are : reserve, add, display, help, quit");
+        try {
+
+            classes = PackageHelper.getInstance().getClasses("equipment.solid",
+                    false, null);
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * THis method asks the user to choose an object in the list and is played
-     * again and again until the choice is okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @return
-     */
-    public int chooseAnObject() {
-
-        int i = -1;
-
-        System.out.println("Please write the number of the object you want: ");
-
-        System.out.println(stock.toString());
-
-        List<String> words = parser.getInput();
-
-        if (!words.isEmpty()) {
-
-            i = Integer.parseInt(words.get(0));
-        }
-
-        if (i < 0 || i > stock.getMaterialStock().size() - 1) {
-
-            System.out.println("Incorrect. Please enter a correct number.");
-
-            return chooseAnObject();
-        }
-
-        return i;
-    }
-
-    /**
-     * Ask for a quantity and play the method until the quantity is okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @param quantityAvailable
-     * @return
-     */
-    public int enterAQuantity(int quantityAvailable) {
-
-        int quantity = -1;
-
-        System.out.println("Enter the quantity you want :");
-
-        List<String> words = parser.getInput();
-
-        if (!words.isEmpty()) {
-
-            quantity = Integer.parseInt(words.get(0));
-        }
-
-        if (quantity <= 0 || quantity > quantityAvailable) {
-
-            System.out.println("Incorrect. Please enter a correct number.");
-
-            return enterAQuantity(quantityAvailable);
-        }
-
-        return quantity;
-    }
-
-    /**
-     * Propose to the user to do a reservation.
-     * 
-     * @author fabien Pinel & Dorian LIZARRALDE
-     */
-    public boolean reserve() {
+    public boolean borrow() {
 
         int reponse;
 
@@ -302,7 +179,7 @@ public class Terminal {
         boolean dateOk = false;
 
         // Load the materials from the stock
-        List<Equipment> mat = stock.getMaterialStock();
+        List<Equipment> mat = stockController.getStock().getEquipment();
 
         reponse = this.chooseAnObject();
 
@@ -358,5 +235,82 @@ public class Terminal {
                 .println("The manager didn't find enough materials avaible for your reservation.");
 
         return false;
+    }
+
+    public void display() {
+
+    }
+
+    public void giveBack() {
+
+    }
+
+    public void help() {
+
+        System.out
+                .println("Your command words are : add, borrow, display, giveBack, help, leave, remove, validate");
+    }
+
+    public void remove() {
+
+    }
+
+    public void validate() {
+
+    }
+
+    public int chooseAnObject() {
+
+        int i = -1;
+
+        System.out.println("Please write the number of the object you want: ");
+
+        System.out.println(stockController.getStock().toString());
+
+        List<String> words = parser.getInput();
+
+        if (!words.isEmpty()) {
+
+            i = Integer.parseInt(words.get(0));
+        }
+
+        if (i < 0 || i > stockController.getStock().getEquipment().size() - 1) {
+
+            System.out.println("Incorrect. Please enter a correct number.");
+
+            return chooseAnObject();
+        }
+
+        return i;
+    }
+
+    /**
+     * Ask for a quantity and play the method until the quantity is okay.
+     * 
+     * @author Fabien Pinel & Dorian LIZARRALDE
+     * @param quantityAvailable
+     * @return
+     */
+    public int enterAQuantity(int quantityAvailable) {
+
+        int quantity = -1;
+
+        System.out.println("Enter the quantity you want :");
+
+        List<String> words = parser.getInput();
+
+        if (!words.isEmpty()) {
+
+            quantity = Integer.parseInt(words.get(0));
+        }
+
+        if (quantity <= 0 || quantity > quantityAvailable) {
+
+            System.out.println("Incorrect. Please enter a correct number.");
+
+            return enterAQuantity(quantityAvailable);
+        }
+
+        return quantity;
     }
 }

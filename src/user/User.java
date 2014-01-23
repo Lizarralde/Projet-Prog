@@ -1,100 +1,50 @@
 package user;
 
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import equipment.Equipment;
-import management.Loan;
-
 /**
+ * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class User {
 
-    private String name;
+    private String firstName;
 
-    private String forname;
+    private String lastName;
 
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param name
-     *            Name of the user.
-     * @param forname
-     *            Forname of the user.
-     */
-    public User(String name, String forname) {
+    public String getFirstName() {
 
-        this.name = name;
-        this.forname = forname;
+        return firstName;
     }
 
-    /**
-     * Return the name of the user.
-     * 
-     * @author Dorian LIZARRALDE
-     * @return
-     */
-    public String getName() {
+    public void setFirstName(String firstName) {
 
-        return name;
+        this.firstName = firstName;
     }
 
-    /**
-     * Set the name of the user.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param name
-     */
-    public void setName(String name) {
+    public String getLastName() {
 
-        this.name = name;
+        return lastName;
     }
 
-    /**
-     * Return the forname of the user.
-     * 
-     * @author Dorian LIZARRALDE
-     * @return
-     */
-    public String getForname() {
+    public void setLastName(String lastName) {
 
-        return forname;
+        this.lastName = lastName;
     }
 
-    /**
-     * Set the forname of the user.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param forname
-     */
-    public void setForname(String forname) {
+    public User(String firstName, String lastName) {
 
-        this.forname = forname;
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+    }
+
+    public boolean isAllowedToBorrow() {
+
+        return false;
     }
 
     @Override
     public String toString() {
 
-        return getName() + " " + getForname();
-    }
-
-    /**
-     * Create the reservation associate to the user indacations. Some rules can
-     * apply on the validation of a reservation. A user who is not identified
-     * can't do a reservation.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param mat
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public Loan doReserve(List<Equipment> mat, GregorianCalendar startDate,
-            GregorianCalendar endDate) {
-
-        return null;
+        return this.getFirstName() + " " + this.getLastName();
     }
 }

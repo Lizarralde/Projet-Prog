@@ -34,7 +34,7 @@ public class TestData {
 
         // Good data.
         assertEquals("SIMOND", users.get(2).getName());
-        assertEquals("Hugo", users.get(2).getForname());
+        assertEquals("Hugo", users.get(2).getFirstName());
     }
 
     /**

@@ -1,0 +1,20 @@
+<list>
+  <equipment.solid.Camera>
+    <description>Description</description>
+    <name>Camera</name>
+  </equipment.solid.Camera>
+  <equipment.solid.Headphones>
+    <description>Description</description>
+    <name>Headphones</name>
+  </equipment.solid.Headphones>
+  <equipment.solid.Phone>
+    <description>Description</description>
+    <name>Phone</name>
+    <os>ANDROID</os>
+  </equipment.solid.Phone>
+  <equipment.solid.Tablet>
+    <description>Description</description>
+    <name>Tablet</name>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
+</list>

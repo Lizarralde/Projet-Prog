@@ -66,8 +66,8 @@ public class TestTerminal {
 
         GregorianCalendar calendar = new GregorianCalendar();
 
-        assertFalse(CalendarController.checkTheDates(new GregorianCalendar(1992,
-                8, 20), calendar));
+        assertFalse(CalendarController.checkTheDates(new GregorianCalendar(
+                1992, 8, 20), calendar));
         assertFalse(CalendarController.checkTheDates(calendar,
                 new GregorianCalendar(1992, 8, 20)));
         assertTrue(CalendarController.checkTheDates(calendar, calendar));

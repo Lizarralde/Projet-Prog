@@ -9,9 +9,8 @@ import equipment.Equipment;
  */
 public class Headphones extends Equipment {
 
-    public Headphones(String nom, String descriptif) {
+    public Headphones(String description, String name) {
 
-        super(nom, descriptif);
-        this.setDamage(1);
+        super(description, name);
     }
 }

@@ -1,12 +1,7 @@
 package user;
 
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import equipment.Equipment;
-import management.Loan;
-
 /**
+ * 
  * @author Dorian LIZARRALDE
  * 
  */
@@ -14,50 +9,31 @@ public class Teacher extends User {
 
     private String field;
 
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param name
-     *            Name of the teacher.
-     * @param forname
-     *            Forname of the teacher.
-     * @param field
-     *            Field of the teacher.
-     */
-    public Teacher(String name, String forname, String field) {
-
-        super(name, forname);
-
-        this.field = field;
-    }
-
-    /**
-     * Return the field of the teacher.
-     * 
-     * @author Dorian LIZARRALDE
-     * @return
-     */
     public String getField() {
 
         return field;
     }
 
-    /**
-     * Set the field of the teacher.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param field
-     */
     public void setField(String field) {
 
         this.field = field;
     }
 
-    @Override
-    public Loan doReserve(List<Equipment> mat, GregorianCalendar startDate,
-            GregorianCalendar endDate) {
+    public Teacher(String firstName, String lastName, String field) {
 
-        return new Loan(this, mat, startDate, endDate);
+        super(firstName, lastName);
+        this.setField(field);
+    }
+
+    @Override
+    public boolean isAllowedToBorrow() {
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+
+        return super.toString() + "\tField : " + this.getField();
     }
 }

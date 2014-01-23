@@ -1,6 +1,7 @@
 package equipment;
 
 /**
+ * 
  * @author Dorian LIZARRALDE
  * 
  */
@@ -28,6 +29,6 @@ public enum OS {
     @Override
     public String toString() {
 
-        return name;
+        return this.getName();
     }
 }

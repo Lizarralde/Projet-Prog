@@ -7,22 +7,27 @@ package equipment;
  */
 public class ComputingDevice extends Equipment {
 
-    private OS typeOS;
+    private OS os;
 
-    public OS getTypeOS() {
+    public OS getOS() {
 
-        return typeOS;
+        return os;
     }
 
-    public void setTypeOS(OS typeOS) {
+    public void setOS(OS os) {
 
-        this.typeOS = typeOS;
+        this.os = os;
     }
 
-    public ComputingDevice(String name, String description, OS typeOS) {
+    public ComputingDevice(String description, String name, OS os) {
 
-        super(name, description);
-        this.setTypeOS(typeOS);
-        this.setDamage(5);
+        super(description, name);
+        this.setOS(os);
+    }
+
+    @Override
+    public String toString() {
+
+        return super.toString() + "\tOS" + this.getOS().toString();
     }
 }

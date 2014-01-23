@@ -44,7 +44,7 @@ public class StockController {
     public Loan doReserve(User user, List<Equipment> mat,
             GregorianCalendar startDate, GregorianCalendar endDate) {
 
-        return user.doReserve(mat, startDate, endDate);
+        return user.isAllowedToLoan(mat, startDate, endDate);
     }
 
     /**
@@ -91,12 +91,12 @@ public class StockController {
             GregorianCalendar day) {
 
         int quantityAvailable = mat.size();
-        for (Loan reserv : stock.getReservList()) {
-            if (reserv.getMaterialQuantity().get(1).equals(mat.get(1))) {
-                if (day.compareTo(reserv.getStartDate()) >= 0
-                        && day.compareTo(reserv.getEndDate()) <= 0) {
+        for (Loan reserv : stock.getLoans()) {
+            if (reserv.getEquipment().get(1).equals(mat.get(1))) {
+                if (day.compareTo(reserv.getStart()) >= 0
+                        && day.compareTo(reserv.getEnd()) <= 0) {
                     // day is in the emprunt time
-                    quantityAvailable -= reserv.getMaterialQuantity().size();
+                    quantityAvailable -= reserv.getEquipment().size();
                 }
             }
         }

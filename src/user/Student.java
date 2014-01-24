@@ -12,72 +12,72 @@ import material.MaterialQuantity;
  */
 public class Student extends User {
 
-    private String year;
-    private ReservationInspector inspector;
+	private String year;
+	private ReservationInspector inspector;
 
-    /**
-     * Default constructor.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param name
-     *            Name of the student.
-     * @param forname
-     *            Forname of the student.
-     * @param year
-     *            Year of the student.
-     */
-    public Student(String name, String forname, String year) {
+	/**
+	 * Default constructor.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 * @param name
+	 *            Name of the student.
+	 * @param forname
+	 *            Forname of the student.
+	 * @param year
+	 *            Year of the student.
+	 */
+	public Student(String name, String forname, String year) {
 
-        super(name, forname);
+		super(name, forname);
 
-        this.year = year;
-    }
+		this.year = year;
+	}
 
-    /**
-     * Return the year of the student.
-     * 
-     * @author Dorian LIZARRALDE
-     * @return
-     */
-    public String getYear() {
+	/**
+	 * Return the year of the student.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 * @return
+	 */
+	public String getYear() {
 
-        return year;
-    }
+		return year;
+	}
 
-    /**
-     * Set the year of the student.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param year
-     */
-    public void setYear(String year) {
+	/**
+	 * Set the year of the student.
+	 * 
+	 * @author Dorian LIZARRALDE
+	 * @param year
+	 */
+	public void setYear(String year) {
 
-        this.year = year;
-    }
+		this.year = year;
+	}
 
-    @Override
-    public Reservation doReserve(MaterialQuantity mat,
-            GregorianCalendar startDate, GregorianCalendar endDate) {
+	@Override
+	public Reservation doReserve(MaterialQuantity mat,
+			GregorianCalendar startDate, GregorianCalendar endDate) {
 
-    	if(mat.getQuantity()>1){
-    		System.out.println("You are a student, you can't loan more than 1 material");
-    		return null;
-    	}
-    	
-        GregorianCalendar today = new GregorianCalendar();
-        if(inspector.alreadyHaveThisMaterial(this, mat)){
-        	return null;
-        }
-        // A student can't make a reservation 7 days ahead.
-        if (((startDate.getTimeInMillis() - today.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
+		if(mat.getQuantity()>1){
+			System.out.println("You are a student, you can't loan more than 1 material");
+			return null;
+		}
 
-            // A student can't make a reservation of more than 7 days.
-            if (((endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
+		GregorianCalendar today = new GregorianCalendar();
+		if(!inspector.alreadyHaveThisMaterial(this, mat)){
 
-                return new Reservation(this, mat, startDate, endDate);
-            }
-        }
 
-        return null;
-    }
+			// A student can't make a reservation 7 days ahead.
+			if (((startDate.getTimeInMillis() - today.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
+
+				// A student can't make a reservation of more than 7 days.
+				if (((endDate.getTimeInMillis() - startDate.getTimeInMillis()) / (1000 * 60 * 60 * 24)) < 7) {
+
+					return new Reservation(this, mat, startDate, endDate);
+				}
+			}
+		}
+		return null;
+	}
 }

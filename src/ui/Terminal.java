@@ -91,7 +91,7 @@ public class Terminal {
 	 * 
 	 * @author fabien Pinel
 	 */
-	public void theApplication() {
+	public void theApplication(){
 
 		System.out
 		.println("Type your command. If you need help, you can use the command 'help'");
@@ -304,7 +304,7 @@ public class Terminal {
 
 				Reservation res = inspector.doReserve(user, monObjetAReserver,
 						startDate, endDate);
-				System.out.println(res);
+				//System.out.println(res);
 				if (res != null) {
 
 					stock.getReservList().add(res);
@@ -319,41 +319,32 @@ public class Terminal {
 					return true;
 				}
 			}
-			//Dans le cas ou le delai d emprunt est trop long
-			else if(inspector.isAvailable(mat.get(reponse),quantity, startDate, endDate) && 
-					CalendarInspector.differenceDate(startDate, endDate)>
-					inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse), quantity)){
-				System.out
-				.println("The difference between the date is too long. You can loan "
-						+ inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse), quantity)
-						+ " days");
-			}
 			else{
 
 				int numberOfMaterialAvailable =
-						inspector.numberOfMaterialAvailable(mat.get(reponse), quantity, startDate, endDate);
+						inspector.numberOfMaterialAvailable(mat.get(reponse), startDate, endDate);
 				System.out
-				.println("Between your start date and end date, you can loan " + numberOfMaterialAvailable);
+				.print("Between your start date and end date, you can loan " + numberOfMaterialAvailable);
 
 				int numberOfDay = inspector.numberOfDayMaterialCanBeLoaned(mat.get(reponse),numberOfMaterialAvailable);
 				System.out
-				.println(" during " + numberOfDay);
+				.print(" during " + numberOfDay + " days \n");
+				
 				GregorianCalendar dayWhenMaterialIsAvailable = 
 						inspector.dayWhenMaterialIsAvailable(mat.get(reponse), quantity, startDate, endDate);
-
 				if(inspector.dayWhenMaterialIsAvailable(mat.get(reponse), quantity, startDate, endDate) != null){
 
 					System.out
-					.println("The quantity is available on " + dayWhenMaterialIsAvailable);
+					.println("\nThe quantity is available on " + CalendarInspector.calendarToString(dayWhenMaterialIsAvailable));
 
 					GregorianCalendar dayMaxToLoan = inspector.dayWhenMaterialIsNotAvailable(
 							mat.get(reponse), quantity, dayWhenMaterialIsAvailable, endDate);
 					System.out
-					.print(" to " + dayMaxToLoan);
+					.print(" to " + CalendarInspector.calendarToString(dayMaxToLoan) + " \n");
 				}
 				else{
 					System.out
-					.println("The quantity you request is not available between your date");
+					.println("The quantity you request is not available between your date \n");
 					return false;
 				}
 			}

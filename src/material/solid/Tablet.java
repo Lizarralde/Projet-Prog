@@ -14,6 +14,6 @@ public class Tablet extends MatOS {
 
         super(name, description, typeOS);
         super.damage = 7;
-        super.setObjectValue(1);
+        super.setObjectValue(7);
     }
 }

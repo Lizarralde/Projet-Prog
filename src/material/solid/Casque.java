@@ -13,6 +13,6 @@ public class Casque extends Material {
 
         super(nom, descriptif);
         super.damage = 1;
-        super.setObjectValue(4);
+        super.setObjectValue(15);
     }
 }

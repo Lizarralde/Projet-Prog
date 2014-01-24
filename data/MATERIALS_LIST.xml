@@ -6,7 +6,7 @@
       <description>Description of the HTC One</description>
       <quality>100</quality>
       <damage>4</damage>
-      <objectValue>1</objectValue>
+      <objectValue>7</objectValue>
       <typeOS>ANDROID</typeOS>
     </mat>
   </material.MaterialQuantity>
@@ -17,7 +17,7 @@
       <description>Description of the Dr Dre</description>
       <quality>100</quality>
       <damage>1</damage>
-      <objectValue>4</objectValue>
+      <objectValue>15</objectValue>
     </mat>
   </material.MaterialQuantity>
   <material.MaterialQuantity>
@@ -27,7 +27,7 @@
       <description>Description of the Nokia 850</description>
       <quality>100</quality>
       <damage>2</damage>
-      <objectValue>2</objectValue>
+      <objectValue>10</objectValue>
     </mat>
   </material.MaterialQuantity>
   <material.MaterialQuantity>
@@ -37,7 +37,7 @@
       <description>Description of the HTC One</description>
       <quality>100</quality>
       <damage>7</damage>
-      <objectValue>1</objectValue>
+      <objectValue>7</objectValue>
       <typeOS>IOS</typeOS>
     </mat>
   </material.MaterialQuantity>

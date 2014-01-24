@@ -110,12 +110,12 @@ public class ReservationInspector {
 			day.setTimeInMillis(startDate.getTimeInMillis());
 			while (day.compareTo(endDate) <= 0) {
 				if (!isAvailableForThisDay(mat, quantity, day)) {
-					day.add(Calendar.DAY_OF_YEAR, -1);
+					//day.add(Calendar.DAY_OF_YEAR, -1);
 					return day;
 				}
 				day.add(Calendar.DAY_OF_YEAR, 1);
 			}
-			return null;
+			return endDate;
 	}
 	
 	
@@ -139,12 +139,12 @@ public class ReservationInspector {
 				}
 				day.add(Calendar.DAY_OF_YEAR, 1);
 			}
-			return null;
+			return endDate;
 	}
 	
 	/**
 	 * This method looks if the number of materiel specified is available for a given
-	 * period. If the materiel is avaible, return -1. Else, return the number of material available
+	 * period.
 	 * @author Jean-Philippe Kha
 	 * @param mat
 	 * @param quantity
@@ -152,13 +152,13 @@ public class ReservationInspector {
 	 * @param endDate
 	 * @return
 	 */
-	public int numberOfMaterialAvailable( MaterialQuantity mat, int quantity,
+	public int numberOfMaterialAvailable( MaterialQuantity mat,
 		GregorianCalendar startDate, GregorianCalendar endDate){
-		int minQuantity = -1;
+		int minQuantity = theNumberOfMaterialIsAvailableForThisDay(mat,startDate);
 		GregorianCalendar day = new GregorianCalendar();
 		day.setTimeInMillis(startDate.getTimeInMillis());
 		while (day.compareTo(endDate) <= 0) {
-			if (theNumberOfMaterialIsAvailableForThisDay(mat,day)< quantity) {
+			if (theNumberOfMaterialIsAvailableForThisDay(mat,day)< minQuantity) {
 				minQuantity = theNumberOfMaterialIsAvailableForThisDay(mat,day);
 			}
 			day.add(Calendar.DAY_OF_YEAR, 1);
@@ -201,10 +201,13 @@ public class ReservationInspector {
 		int quantityAvailable = mat.getQuantity();
 		int value = mat.getMat().getObjectValue();
 		if( quantityAvailable - quantity >= MATERIAL_QUANTITY){
-			return MATERIAL_QUANTITY*value;
+			return value;
 		}
 		//la fonction sera appele si la quantite est inferieur a la quantite de materiel disponible
-		return quantity*value;
+		if(value/quantity<=1){
+			return 1;
+		}
+		return value/quantity;
 	}
 	
 	/**
@@ -215,10 +218,10 @@ public class ReservationInspector {
 	 * @param quantity
 	 * @return
 	 */
-	public boolean alreadyHaveThisMaterial(Student student,MaterialQuantity mat){
+	public boolean alreadyHaveThisMaterial(User user,MaterialQuantity mat){
 		for (Reservation reserv : stock.getReservList()) {
 			if (reserv.getMaterialQuantity().getMat().equals(mat.getMat())) {
-				if(reserv.getUser().equals(student)){
+				if(reserv.getUser().equals(user)){
 					return true;
 				}
 			}

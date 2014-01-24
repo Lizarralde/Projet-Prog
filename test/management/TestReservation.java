@@ -32,7 +32,6 @@ public class TestReservation {
                 "Description of the iPad", TypeOS.IOS), 3);
         GregorianCalendar start = new GregorianCalendar(2013, 11, 1);
         GregorianCalendar end = new GregorianCalendar(2013, 11, 5);
-
         Reservation reservation = new Reservation(user, material, start, end);
 
         // Not null.

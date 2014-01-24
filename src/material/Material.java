@@ -18,7 +18,7 @@ public class Material {
         this.description = description;
         this.setQuality(100);
         this.damage = 2;
-        this.objectValue = 2;
+        this.objectValue = 15;
     }
 
     public String getName() {

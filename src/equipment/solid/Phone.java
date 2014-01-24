@@ -10,8 +10,8 @@ import equipment.OS;
  */
 public class Phone extends ComputingDevice {
 
-    public Phone(String description, String name, OS os) {
+    public Phone(String name, String description, OS os) {
 
-        super(description, name, os);
+        super(name, description, os);
     }
 }

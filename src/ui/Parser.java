@@ -5,8 +5,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
-import user.User;
-
 /**
  * Read user input.
  * 
@@ -32,7 +30,7 @@ public class Parser {
         this.setScanner(scanner);
     }
 
-    public GregorianCalendar getADate() {
+    public GregorianCalendar getCalendar() {
 
         List<String> words = getInput();
 
@@ -40,7 +38,7 @@ public class Parser {
 
             String str[] = words.get(0).split("/");
 
-            if (str.length >= 3) {
+            if (str.length > 2) {
 
                 int year = Integer.parseInt(str[2]);
 
@@ -51,6 +49,7 @@ public class Parser {
                 return new GregorianCalendar(year, month - 1, day);
             }
         }
+
         return null;
     }
 
@@ -60,7 +59,7 @@ public class Parser {
 
         System.out.print("> ");
 
-        String inputLine = scanner.nextLine();
+        String inputLine = this.getScanner().nextLine();
 
         Scanner tokenizer = new Scanner(inputLine);
 

@@ -29,7 +29,7 @@ public class Equipment {
         this.name = name;
     }
 
-    public Equipment(String description, String name) {
+    public Equipment(String name, String description) {
 
         this.setDescription(description);
         this.setName(name);

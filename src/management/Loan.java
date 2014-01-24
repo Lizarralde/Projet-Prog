@@ -1,9 +1,6 @@
 package management;
 
 import java.util.GregorianCalendar;
-import java.util.List;
-
-import equipment.Equipment;
 import user.User;
 
 /**
@@ -15,9 +12,11 @@ public class Loan {
 
     private GregorianCalendar end, start;
 
-    private List<Equipment> equipment;
+    private String name;
 
     private User user;
+
+    private int quantity;
 
     public GregorianCalendar getEnd() {
 
@@ -39,14 +38,14 @@ public class Loan {
         this.start = start;
     }
 
-    public List<Equipment> getEquipment() {
+    public String getName() {
 
-        return equipment;
+        return name;
     }
 
-    public void setEquipment(List<Equipment> equipment) {
+    public void setName(String name) {
 
-        this.equipment = equipment;
+        this.name = name;
     }
 
     public User getUser() {
@@ -59,22 +58,34 @@ public class Loan {
         this.user = user;
     }
 
-    public Loan(GregorianCalendar end, GregorianCalendar start,
-            List<Equipment> equipment, User user) {
+    public int getQuantity() {
+
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+
+        this.quantity = quantity;
+    }
+
+    public Loan(User user, String name, int quantity, GregorianCalendar start,
+            GregorianCalendar end) {
 
         this.setEnd(end);
         this.setStart(start);
-        this.setEquipment(equipment);
+        this.setName(name);
         this.setUser(user);
+        this.setQuantity(quantity);
     }
 
     @Override
     public String toString() {
 
-        return "User : " + user.toString() + "\tEquipment : "
-                + equipment.get(0).toString() + "\tQuantity : "
-                + equipment.size() + "\tStart : "
-                + CalendarController.calendarToString(start) + "\tEnd : "
-                + CalendarController.calendarToString(end);
+        return "User : " + this.getUser().toString() + "\tEquipment : "
+                + this.getName() + "\tQuantity : " + this.getQuantity()
+                + "\tStart : "
+                + CalendarController.calendarToString(this.getStart())
+                + "\tEnd : "
+                + CalendarController.calendarToString(this.getEnd());
     }
 }

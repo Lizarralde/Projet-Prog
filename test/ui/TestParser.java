@@ -60,17 +60,17 @@ public class TestParser {
     @Test
     public void testGetADate() {
 
-        GregorianCalendar calendar = parser.getADate();
+        GregorianCalendar calendar = parser.getCalendar();
 
         // Not null.
         assertNull(calendar);
 
-        calendar = parser.getADate();
+        calendar = parser.getCalendar();
 
         // Not null.
         assertNull(calendar);
 
-        calendar = parser.getADate();
+        calendar = parser.getCalendar();
 
         // Good data.
         assertEquals(1992, calendar.get(GregorianCalendar.YEAR));

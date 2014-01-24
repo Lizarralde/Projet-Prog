@@ -101,48 +101,58 @@ public class Data {
     }
 
     /**
-     * Store the list of equipment in the location parameter.
+     * Store the list of equipment.
      * 
      * @author Dorian LIZARRALDE
-     * @param location
-     *            The location of the xml file.
+     * 
      */
-    public static void storeEquipment(String location) {
+    public static void storeEquipment() {
 
         // Create an empty list of equipment.
         List<Equipment> equipment = new ArrayList<Equipment>();
 
         // Add equipment.
-        equipment.add(new Camera("Description", "Camera"));
-        equipment.add(new Headphones("Description", "Headphones"));
-        equipment.add(new Phone("Description", "Phone", OS.ANDROID));
-        equipment.add(new Tablet("Description", "Tablet", OS.IOS));
+        equipment.add(new Camera("Camera", "Description"));
+        equipment.add(new Headphones("Headphones", "Description"));
+        equipment.add(new Phone("Phone", "Description", OS.ANDROID));
+        equipment.add(new Tablet("Tablet", "Description", OS.IOS));
 
-        store(equipment, location);
+        store(equipment, "./data/EQUIPMENT_LIST.xml");
     }
 
     /**
-     * Store the list of loans in the location parameter.
+     * Store the list of loans.
      * 
      * @author Dorian LIZARRALDE
-     * @param location
-     *            The location of the xml file.
+     * 
      */
-    public static void storeLoans(String location) {
+    public static void storeLoans() {
 
         List<Loan> loans = new ArrayList<Loan>();
 
-        store(loans, location);
+        store(loans, "./data/LOANS_LIST.xml");
     }
 
     /**
-     * Store the list of users in the location parameter.
+     * Store the list of loans on hold.
      * 
      * @author Dorian LIZARRALDE
-     * @param location
-     *            The location of the xml file.
+     * 
      */
-    public static void storeUsers(String location) {
+    public static void storeOnHold() {
+
+        List<Loan> onHold = new ArrayList<Loan>();
+
+        store(onHold, "./data/ON_HOLD_LIST.xml");
+    }
+
+    /**
+     * Store the list of users.
+     * 
+     * @author Dorian LIZARRALDE
+     * 
+     */
+    public static void storeUsers() {
 
         // Create an empty list of users.
         List<User> users = new ArrayList<User>();
@@ -152,7 +162,7 @@ public class Data {
         users.add(new Student("Dorian", "LIZARRALDE", "SI3 - 2013"));
         users.add(new Teacher("Mamadou Falou", "SECK", "IPA"));
 
-        store(users, location);
+        store(users, "./data/USERS_LIST.xml");
     }
 
     /**
@@ -163,8 +173,9 @@ public class Data {
      */
     public static void main(String[] args) {
 
-        storeEquipment("./data/EQUIPMENT_LIST.xml");
-        storeLoans("./data/LOANS_LIST.xml");
-        storeUsers("./data/USERS_LIST.xml");
+        storeEquipment();
+        storeLoans();
+        storeOnHold();
+        storeUsers();
     }
 }

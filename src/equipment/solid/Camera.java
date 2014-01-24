@@ -9,8 +9,8 @@ import equipment.Equipment;
  */
 public class Camera extends Equipment {
 
-    public Camera(String description, String name) {
+    public Camera(String name, String description) {
 
-        super(description, name);
+        super(name, description);
     }
 }

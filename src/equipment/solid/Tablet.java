@@ -10,8 +10,8 @@ import equipment.OS;
  */
 public class Tablet extends ComputingDevice {
 
-    public Tablet(String description, String name, OS os) {
+    public Tablet(String name, String description, OS os) {
 
-        super(description, name, os);
+        super(name, description, os);
     }
 }

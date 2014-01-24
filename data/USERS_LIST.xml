@@ -1,16 +1,16 @@
 <list>
   <user.Administrator>
     <firstName>Jean-Philippe</firstName>
-    <name>KHA</name>
+    <lastName>KHA</lastName>
   </user.Administrator>
   <user.Student>
     <firstName>Dorian</firstName>
-    <name>LIZARRALDE</name>
+    <lastName>LIZARRALDE</lastName>
     <year>SI3 - 2013</year>
   </user.Student>
   <user.Teacher>
     <firstName>Mamadou Falou</firstName>
-    <name>SECK</name>
+    <lastName>SECK</lastName>
     <field>IPA</field>
   </user.Teacher>
 </list>

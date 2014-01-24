@@ -1,10 +1,11 @@
 package ui;
 
-import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
+import config.Config;
+import data.Data;
 import equipment.Equipment;
 import ldapbeans.util.scanner.PackageHelper;
 import management.StockController;
@@ -56,15 +57,15 @@ public class Terminal {
     }
 
     public Terminal(List<Equipment> equipment, List<Loan> loans,
-            List<User> users) {
+            List<Loan> onHold, List<User> users) {
 
         this.setParser(new Parser(new Scanner(System.in)));
-        this.setStockController(new StockController(new Stock(equipment, loans)));
+        this.setStockController(new StockController(new Stock(equipment, loans,
+                onHold)));
 
-        System.out.println("Connection. Format : 'First Name' 'Last Name'"
-                + System.getProperty("line.separator"));
+        System.out.println("Connection. Format : 'First Name' 'Last Name'");
 
-        this.setUser(connect(users));
+        this.setUser(this.connect(users));
     }
 
     public User connect(List<User> users) {
@@ -75,8 +76,8 @@ public class Terminal {
 
             for (User u : users) {
 
-                if (u.getLastName().equalsIgnoreCase(words.get(0))
-                        && u.getFirstName().equalsIgnoreCase(words.get(1))) {
+                if (u.getFirstName().equalsIgnoreCase(words.get(0))
+                        && u.getLastName().equalsIgnoreCase(words.get(1))) {
 
                     return u;
                 }
@@ -88,7 +89,7 @@ public class Terminal {
 
     public void start() {
 
-        if (user == null) {
+        if (this.getUser() == null) {
 
             System.out
                     .println("Connection failed. We were unable to find you.");
@@ -116,35 +117,36 @@ public class Terminal {
             switch (words.get(0)) {
 
             case "add":
-                add();
+                this.add();
                 break;
 
             case "borrow":
-                borrow();
+                this.borrow();
                 break;
 
             case "display":
-                display();
+                this.display();
                 break;
 
             case "giveBack":
-                giveBack();
+                this.giveBack();
                 break;
 
             case "help":
-                help();
+                this.help();
                 break;
 
             case "leave":
+                store();
                 leave = true;
                 break;
 
             case "remove":
-                remove();
+                this.remove();
                 break;
 
             case "validate":
-                validate();
+                this.validate();
                 break;
             }
         }
@@ -152,93 +154,147 @@ public class Terminal {
         return leave;
     }
 
+    private void store() {
+
+        Data.store(this.getStockController().getStock().getEquipment(),
+                "./data/EQUIMENT_LIST.xml");
+
+        Data.store(this.getStockController().getStock().getLoans(),
+                "./data/LOANS_LIST.xml");
+
+        Data.store(this.getStockController().getStock().getOnHold(),
+                "./data/ON_HOLD_LIST.xml");
+    }
+
     public void add() {
 
-        Collection<Class<?>> classes;
+        Object[] classes;
+
+        int index = -1;
+
+        System.out.println("Select your new equipment.");
 
         try {
 
-            classes = PackageHelper.getInstance().getClasses("equipment.solid",
-                    false, null);
+            classes = PackageHelper.getInstance()
+                    .getClasses("equipment.solid", false, null).toArray();
+
         } catch (ClassNotFoundException e) {
 
-            e.printStackTrace();
+            System.out.println("No equipment found.");
+
+            return;
+        }
+
+        for (int i = 0; i < classes.length; i++) {
+
+            System.out.println("Index : " + i + "\tName : "
+                    + ((Class<?>) classes[i]).getSimpleName());
+        }
+
+        index = this.getInt(index, classes.length);
+
+        this.getStockController().getStock().getEquipment()
+                .add(this.newEquipment((Class<?>) classes[index]));
+
+        System.out.println("Equipment added");
+    }
+
+    public Equipment newEquipment(Class<?> c) {
+
+        return null;
+    }
+
+    public int getInt(int index, int length) {
+
+        List<String> words = parser.getInput();
+
+        if (!words.isEmpty()) {
+
+            try {
+
+                index = Integer.parseInt(words.get(0));
+
+                if (index >= 0 || index < length) {
+
+                    return index;
+                }
+            } catch (NumberFormatException e) {
+
+            }
+        }
+
+        System.out.println("Incorrect number.");
+
+        return this.getInt(index, length);
+    }
+
+    public void borrow() {
+
+        GregorianCalendar end, start;
+
+        Loan loan;
+
+        String name;
+
+        int index = -1;
+
+        int quantity = -1;
+
+        System.out.println("Select your equipment.");
+
+        System.out.println(this.getStockController().getStock().toString());
+
+        index = this.getInt(index, this.getStockController().getStock()
+                .getEquipment().size());
+
+        name = this.getStockController().getStock().getNames().get(index);
+
+        System.out.println("Quantity : ");
+
+        quantity = this.getInt(quantity, this.getStockController().getStock()
+                .getQuantity(name));
+
+        System.out.println("Start : ");
+
+        start = this.getParser().getCalendar();
+
+        System.out.println("End : ");
+
+        end = this.getParser().getCalendar();
+
+        loan = new Loan(user, name, quantity, start, end);
+
+        if (Config.property.getProperty("Mode").equals("Manual")) {
+
+            this.getStockController().getStock().getOnHold().add(loan);
+
+            System.out.println("Your loan has been put on hold.");
+        } else {
+
+            modeAuto(loan);
         }
     }
 
-    public boolean borrow() {
+    public void modeAuto(Loan loan) {
 
-        int reponse;
-
-        GregorianCalendar startDate = null;
-
-        GregorianCalendar endDate = null;
-
-        int quantity;
-
-        boolean dateOk = false;
-
-        // Load the materials from the stock
-        List<Equipment> mat = stockController.getStock().getEquipment();
-
-        reponse = this.chooseAnObject();
-
-        /*
-         * quantity = this.enterAQuantity(mat.get(reponse).getQuantity());
-         * 
-         * while (!dateOk) {
-         * 
-         * System.out
-         * .println("Enter your start date. The format is dd/MM/yyyy.");
-         * 
-         * startDate = parser.getADate();
-         * 
-         * System.out
-         * .println("Enter your end date. The format is dd/MM/yyyy.");
-         * 
-         * endDate = parser.getADate();
-         * 
-         * dateOk = CalendarController.checkTheDates(startDate, endDate); }
-         * 
-         * if (inspector.isAvailable(mat.get(reponse), startDate, endDate)) {
-         * 
-         * System.out .println(
-         * "The manager said that there are enough materials avaible for your reservation."
-         * );
-         * 
-         * List<Equipment> monObjetAReserver = new ArrayList<Equipment>();
-         * 
-         * //
-         * 
-         * Loan res = inspector.doReserve(user, monObjetAReserver, startDate,
-         * endDate);
-         * 
-         * if (res != null) {
-         * 
-         * stock.getReservList().add(res);
-         * 
-         * System.out .println("Reservation effectuée." +
-         * System.getProperty("line.separator") +
-         * "Affichage de la reservation :" +
-         * System.getProperty("line.separator") + res.toString());
-         * 
-         * return true; } else {
-         * 
-         * System.out
-         * .println("The manager said you are not able to do this reservation."
-         * );
-         * 
-         * return false; } }
-         */
-
-        System.out
-                .println("The manager didn't find enough materials avaible for your reservation.");
-
-        return false;
     }
 
     public void display() {
 
+        System.out.println("Initial stock : ");
+
+        System.out.println(this.getStockController().getStock().toString());
+
+        System.out.println("Loans : ");
+
+        System.out.println(this.getStockController().getStock().getLoans()
+                .toString());
+
+        System.out.println("On hold : ");
+
+        System.out.println(this.getStockController().getStock().getOnHold()
+                .toString());
     }
 
     public void giveBack() {
@@ -257,60 +313,5 @@ public class Terminal {
 
     public void validate() {
 
-    }
-
-    public int chooseAnObject() {
-
-        int i = -1;
-
-        System.out.println("Please write the number of the object you want: ");
-
-        System.out.println(stockController.getStock().toString());
-
-        List<String> words = parser.getInput();
-
-        if (!words.isEmpty()) {
-
-            i = Integer.parseInt(words.get(0));
-        }
-
-        if (i < 0 || i > stockController.getStock().getEquipment().size() - 1) {
-
-            System.out.println("Incorrect. Please enter a correct number.");
-
-            return chooseAnObject();
-        }
-
-        return i;
-    }
-
-    /**
-     * Ask for a quantity and play the method until the quantity is okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @param quantityAvailable
-     * @return
-     */
-    public int enterAQuantity(int quantityAvailable) {
-
-        int quantity = -1;
-
-        System.out.println("Enter the quantity you want :");
-
-        List<String> words = parser.getInput();
-
-        if (!words.isEmpty()) {
-
-            quantity = Integer.parseInt(words.get(0));
-        }
-
-        if (quantity <= 0 || quantity > quantityAvailable) {
-
-            System.out.println("Incorrect. Please enter a correct number.");
-
-            return enterAQuantity(quantityAvailable);
-        }
-
-        return quantity;
     }
 }

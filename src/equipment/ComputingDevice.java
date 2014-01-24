@@ -19,15 +19,15 @@ public class ComputingDevice extends Equipment {
         this.os = os;
     }
 
-    public ComputingDevice(String description, String name, OS os) {
+    public ComputingDevice(String name, String description, OS os) {
 
-        super(description, name);
+        super(name, description);
         this.setOS(os);
     }
 
     @Override
     public String toString() {
 
-        return super.toString() + "\tOS" + this.getOS().toString();
+        return super.toString() + "\tOS : " + this.getOS().toString();
     }
 }

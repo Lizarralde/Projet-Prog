@@ -3,18 +3,15 @@ package management;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
+/**
+ * 
+ * @author Dorian LIZARRALDE
+ * 
+ */
 public class CalendarController {
 
-    /**
-     * Check if the dates given are okay.
-     * 
-     * @author Fabien Pinel & Dorian LIZARRALDE
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public static boolean checkTheDates(GregorianCalendar startDate,
-            GregorianCalendar endDate) {
+    public static boolean checkTheDates(GregorianCalendar start,
+            GregorianCalendar end) {
 
         GregorianCalendar today = new GregorianCalendar();
         today.set(GregorianCalendar.HOUR_OF_DAY, 0);
@@ -22,8 +19,8 @@ public class CalendarController {
         today.set(GregorianCalendar.SECOND, 0);
         today.set(GregorianCalendar.MILLISECOND, 0);
 
-        if (startDate.compareTo(today) < 0 || endDate.compareTo(today) < 0
-                || startDate.compareTo(endDate) > 0) {
+        if (start.compareTo(today) < 0 || end.compareTo(today) < 0
+                || start.compareTo(end) > 0) {
 
             System.out.println("One or both of your parameters is/are invalid");
 
@@ -33,14 +30,6 @@ public class CalendarController {
         return true;
     }
 
-    /**
-     * Return a String which represents the calendar on the format dd/MM/yyyy.
-     * 
-     * @author Dorian LIZARRALDE
-     * @param calendar
-     *            A gregorian calendar.
-     * @return
-     */
     public static String calendarToString(GregorianCalendar calendar) {
 
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");

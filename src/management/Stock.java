@@ -14,7 +14,7 @@ public class Stock {
 
     private List<Equipment> equipment;
 
-    private List<Loan> loans;
+    private List<Loan> loans, onHold;
 
     public List<Equipment> getEquipment() {
 
@@ -36,17 +36,28 @@ public class Stock {
         this.loans = loans;
     }
 
-    public Stock(List<Equipment> equipment, List<Loan> loans) {
+    public List<Loan> getOnHold() {
+
+        return onHold;
+    }
+
+    public void setOnHold(List<Loan> onHold) {
+
+        this.onHold = onHold;
+    }
+
+    public Stock(List<Equipment> equipment, List<Loan> loans, List<Loan> onHold) {
 
         this.setEquipment(equipment);
         this.setLoans(loans);
+        this.setOnHold(onHold);
     }
 
     public List<String> getNames() {
 
         List<String> names = new ArrayList<String>();
 
-        for (Equipment e : equipment) {
+        for (Equipment e : this.getEquipment()) {
 
             if (!names.contains(e.getName())) {
 
@@ -61,7 +72,7 @@ public class Stock {
 
         int counter = 0;
 
-        for (Equipment e : equipment) {
+        for (Equipment e : this.getEquipment()) {
 
             if (name.equals(e.getName())) {
 

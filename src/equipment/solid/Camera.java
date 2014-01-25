@@ -5,7 +5,7 @@ import equipment.Equipment;
 /**
  * Model of a camera.
  * 
- * @author Dorian LIZARRALDE
+ * @author Falou SECK
  * 
  */
 public class Camera extends Equipment {

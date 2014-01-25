@@ -6,7 +6,7 @@ import equipment.OS;
 /**
  * Model of a phone.
  * 
- * @author Dorian LIZARRALDE
+ * @author Falou SECK
  * 
  */
 public class Phone extends ComputingDevice {

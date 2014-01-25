@@ -3,7 +3,7 @@ package equipment;
 /**
  * Model of an equipment using an operating system.
  * 
- * @author Dorian LIZARRALDE
+ * @author Falou SECK
  * 
  */
 public class ComputingDevice extends Equipment {

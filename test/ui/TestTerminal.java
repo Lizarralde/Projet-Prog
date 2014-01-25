@@ -4,17 +4,13 @@ import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import management.Loan;
 
 import org.junit.Test;
 
 import config.Config;
-import user.User;
-import data.Data;
-import equipment.Equipment;
 
 /**
  * Test the Terminal Class
@@ -24,20 +20,22 @@ import equipment.Equipment;
  */
 public class TestTerminal {
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testBorrow() throws FileNotFoundException {
 
         System.out.close();
 
-        Config.load("./config/CONFIG.txt");
+        List<String> locations = new ArrayList<String>();
+
+        Config.load("./config/TEST_CONFIG.txt");
+
+        locations.add("./data/TEST_EQUIPMENT_LIST.xml");
+        locations.add("./data/TEST_LOANS_LIST.xml");
+        locations.add("./data/TEST_ON_HOLD_LIST.xml");
+        locations.add("./data/TEST_USERS_LIST.xml");
 
         Terminal terminal = new Terminal(new Parser(new Scanner(
-                new FileInputStream("./TEST_TERMINAL.txt"))),
-                (List<Equipment>) Data.load("./data/TEST_EQUIPMENT_LIST.xml"),
-                (List<Loan>) Data.load("./data/TEST_LOANS_LIST.xml"),
-                (List<Loan>) Data.load("./data/TEST_ON_HOLD_LIST.xml"),
-                (List<User>) Data.load("./data/TEST_USERS_LIST.xml"));
+                new FileInputStream("./TEST_TERMINAL.txt"))), locations);
 
         terminal.start();
 

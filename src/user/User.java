@@ -1,5 +1,9 @@
 package user;
 
+import java.util.List;
+
+import ui.Terminal;
+
 /**
  * Model of a user.
  * 
@@ -13,6 +17,8 @@ public class User {
 
     // Last name.
     private String lastName;
+
+    private int numberOfLoans;
 
     // Getters and setters.
     public String getFirstName() {
@@ -35,6 +41,16 @@ public class User {
         this.lastName = lastName;
     }
 
+    public int getNumberOfLoans() {
+
+        return numberOfLoans;
+    }
+
+    public void setNumberOfLoans(int numberOfLoans) {
+
+        this.numberOfLoans = numberOfLoans;
+    }
+
     /**
      * Default constructor.
      * 
@@ -45,6 +61,38 @@ public class User {
 
         this.setFirstName(firstName);
         this.setLastName(lastName);
+        this.setNumberOfLoans(0);
+    }
+
+    public boolean processCommand(Terminal terminal, List<String> words) {
+
+        boolean leave = false;
+
+        if (!words.isEmpty()) {
+
+            switch (words.get(0)) {
+
+            case "borrow":
+                terminal.borrow();
+                break;
+
+            case "help":
+                terminal.help();
+                break;
+
+            case "leave":
+                terminal.store();
+                leave = true;
+                break;
+            }
+        }
+
+        return leave;
+    }
+
+    public String help() {
+
+        return "Your command words are : borrow, help, leave";
     }
 
     /**

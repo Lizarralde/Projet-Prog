@@ -1,14 +1,14 @@
 package equipment;
 
 /**
- * Enumeration of operating system.
+ * Enumeration of state.
  * 
  * @author Falou SECK
  * 
  */
-public enum OS {
+public enum State {
 
-    IOS("iOS"), ANDROID("Android");
+    FUNCTIONAL("Functional"), BROKEN("Broken");
 
     // Name.
     private String name;
@@ -29,7 +29,7 @@ public enum OS {
      * 
      * @param name
      */
-    OS(String name) {
+    State(String name) {
 
         this.setName(name);
     }

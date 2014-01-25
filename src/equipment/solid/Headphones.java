@@ -5,7 +5,7 @@ import equipment.Equipment;
 /**
  * Model of headphones.
  * 
- * @author Dorian LIZARRALDE
+ * @author Falou SECK
  * 
  */
 public class Headphones extends Equipment {

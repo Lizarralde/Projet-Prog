@@ -6,7 +6,7 @@ import equipment.OS;
 /**
  * Model of a tablet.
  * 
- * @author Dorian LIZARRALDE
+ * @author Falou SECK
  * 
  */
 public class Tablet extends ComputingDevice {

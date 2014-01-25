@@ -3,10 +3,12 @@ package ui;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import config.Config;
 import data.Data;
 import equipment.Equipment;
 import ldapbeans.util.scanner.PackageHelper;
+import management.StatsController;
 import management.StockController;
 import management.Loan;
 import management.Stock;
@@ -20,6 +22,8 @@ import user.User;
  */
 public class Terminal {
 
+    private List<String> locations;
+
     // Parser.
     private Parser parser;
 
@@ -30,6 +34,16 @@ public class Terminal {
     private User user;
 
     // Getters and setters.
+    public List<String> getLocations() {
+
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+
+        this.locations = locations;
+    }
+
     public Parser getParser() {
 
         return parser;
@@ -68,16 +82,20 @@ public class Terminal {
      * @param onHold
      * @param users
      */
-    public Terminal(Parser parser, List<Equipment> equipment, List<Loan> loans,
-            List<Loan> onHold, List<User> users) {
+    @SuppressWarnings("unchecked")
+    public Terminal(Parser parser, List<String> locations) {
 
+        this.setLocations(locations);
         this.setParser(parser);
-        this.setStockController(new StockController(new Stock(equipment, loans,
-                onHold)));
+        this.setStockController(new StockController(new Stock(
+                (List<Equipment>) Data.load(this.getLocations().get(0)),
+                (List<Loan>) Data.load(this.getLocations().get(1)),
+                (List<Loan>) Data.load(this.getLocations().get(2)))));
 
         System.out.println("Connection. Format : 'First Name' 'Last Name'");
 
-        this.setUser(this.connect(users));
+        this.setUser(this.connect((List<User>) Data.load(this.getLocations()
+                .get(3))));
     }
 
     /**
@@ -142,51 +160,7 @@ public class Terminal {
      */
     public boolean processCommand(List<String> words) {
 
-        boolean leave = false;
-
-        if (!words.isEmpty()) {
-
-            switch (words.get(0)) {
-
-            case "add":
-                this.add();
-                break;
-
-            case "borrow":
-                this.borrow();
-                break;
-
-            case "display":
-                this.display();
-                break;
-
-            case "giveBack":
-                this.giveBack();
-                break;
-
-            case "help":
-                this.help();
-                break;
-
-            case "leave":
-                leave = true;
-                break;
-
-            case "remove":
-                this.remove();
-                break;
-
-            case "store":
-                this.store();
-                break;
-
-            case "validate":
-                this.validate();
-                break;
-            }
-        }
-
-        return leave;
+        return this.getUser().processCommand(this, words);
     }
 
     /**
@@ -357,34 +331,29 @@ public class Terminal {
         System.out.print(this.getStockController().getStock().toString());
     }
 
-    public void giveBack() {
-
-    }
-
     /**
      * Help.
      * 
      */
     public void help() {
 
-        System.out
-                .println("Your command words are : add, borrow, display, giveBack, help, leave, remove, store, validate");
+        System.out.println(this.getUser().help());
     }
 
     /**
      * Store all Intel related to the stock.
      * 
      */
-    private void store() {
+    public void store() {
 
-        Data.store(this.getStockController().getStock().getEquipment(),
-                "./data/EQUIPMENT_LIST.xml");
+        Data.store(this.getStockController().getStock().getEquipment(), this
+                .getLocations().get(0));
 
-        Data.store(this.getStockController().getStock().getLoans(),
-                "./data/LOANS_LIST.xml");
+        Data.store(this.getStockController().getStock().getLoans(), this
+                .getLocations().get(1));
 
-        Data.store(this.getStockController().getStock().getOnHold(),
-                "./data/ON_HOLD_LIST.xml");
+        Data.store(this.getStockController().getStock().getOnHold(), this
+                .getLocations().get(2));
     }
 
     public void remove() {
@@ -392,7 +361,7 @@ public class Terminal {
         int index = -1;
 
         System.out
-                .println("Select the equipment to remove. If you want to leave, type '0'.");
+                .println("Select the equipment to remove. If you don't want to, type '0'.");
 
         for (int i = 0; i < this.getStockController().getStock().getEquipment()
                 .size(); i++) {
@@ -417,10 +386,51 @@ public class Terminal {
                 .getEquipment()
                 .remove(this.getStockController().getStock().getEquipment()
                         .get(index));
+
+        System.out.println("Equipment removed.");
     }
 
     /**
-     * Ask the user to validate the lost of loans on hold.
+     * Return all the Intel related to the equipment.
+     * 
+     * @author Falou SECK
+     */
+    @SuppressWarnings("unchecked")
+    public void stats() {
+
+        System.out.println("Greatest borrower : ");
+
+        if (StatsController.greatestBorrower((List<User>) Data.load(this
+                .getLocations().get(3))) != null) {
+
+            System.out.println(StatsController.greatestBorrower(
+                    (List<User>) Data.load(this.getLocations().get(3)))
+                    .toString());
+        }
+
+        System.out.println("Most damaged equipment : ");
+
+        if (StatsController.mostDamagedEquipment(this.getStockController()
+                .getStock().getEquipment()) != null) {
+
+            System.out.println(StatsController.mostDamagedEquipment(
+                    this.getStockController().getStock().getEquipment())
+                    .toString());
+        }
+
+        System.out.println("Most loaned equipment : ");
+
+        if (StatsController.mostLoanedEquipment(this.getStockController()
+                .getStock().getEquipment()) != null) {
+
+            System.out.println(StatsController.mostLoanedEquipment(
+                    this.getStockController().getStock().getEquipment())
+                    .toString());
+        }
+    }
+
+    /**
+     * Ask the user to validate the list of loans on hold.
      * 
      */
     public void validate() {

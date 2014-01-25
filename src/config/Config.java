@@ -12,14 +12,22 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * Store and load configuration files.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Config {
 
+    // Default property.
     public static Properties property;
 
+    /**
+     * Load the property in the location parameter.
+     * 
+     * @param location
+     *            The location of the configuration file.
+     */
     public static void load(String location) {
 
         InputStream in;
@@ -28,10 +36,13 @@ public class Config {
 
         try {
 
+            // Open a buffer.
             in = new FileInputStream(location);
 
+            // Load.
             property.load(in);
 
+            // Close the buffer.
             in.close();
         } catch (FileNotFoundException e) {
 
@@ -42,6 +53,14 @@ public class Config {
         }
     }
 
+    /**
+     * Store the property in the location parameter.
+     * 
+     * @param map
+     *            The map to store.
+     * @param location
+     *            The location of the configuration file.
+     */
     public static void store(Map<String, String> map, String location) {
 
         OutputStream out;
@@ -52,10 +71,12 @@ public class Config {
 
         try {
 
+            // Open a buffer.
             out = new FileOutputStream(location);
 
             Iterator<String> iterator = map.keySet().iterator();
 
+            // Add properties.
             while (iterator.hasNext()) {
 
                 key = iterator.next();
@@ -63,8 +84,10 @@ public class Config {
                 property.setProperty(key, map.get(key));
             }
 
+            // Store.
             property.store(out, null);
 
+            // Close the buffer.
             out.close();
         } catch (FileNotFoundException e) {
 
@@ -84,6 +107,11 @@ public class Config {
         store(map, "./config/CONFIG.txt");
     }
 
+    /**
+     * Store the program's configuration.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
 
         storeConfig();

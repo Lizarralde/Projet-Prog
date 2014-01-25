@@ -1,14 +1,17 @@
 package user;
 
 /**
+ * Model of a student.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Student extends User {
 
+    // Year of activity.
     private String year;
 
+    // Getters and setters.
     public String getYear() {
 
         return year;
@@ -19,6 +22,13 @@ public class Student extends User {
         this.year = year;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param firstName
+     * @param lastName
+     * @param year
+     */
     public Student(String firstName, String lastName, String year) {
 
         super(firstName, lastName);

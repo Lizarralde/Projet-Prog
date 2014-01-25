@@ -6,16 +6,20 @@ import java.util.List;
 import equipment.Equipment;
 
 /**
+ * Model of a stock.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Stock {
 
+    // Initial stock.
     private List<Equipment> equipment;
 
+    // Loans and loans on hold.
     private List<Loan> loans, onHold;
 
+    // Getters and setters.
     public List<Equipment> getEquipment() {
 
         return equipment;
@@ -46,6 +50,13 @@ public class Stock {
         this.onHold = onHold;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param equipment
+     * @param loans
+     * @param onHold
+     */
     public Stock(List<Equipment> equipment, List<Loan> loans, List<Loan> onHold) {
 
         this.setEquipment(equipment);
@@ -53,6 +64,11 @@ public class Stock {
         this.setOnHold(onHold);
     }
 
+    /**
+     * Return the list of all different names in the initial stock.
+     * 
+     * @return
+     */
     public List<String> getNames() {
 
         List<String> names = new ArrayList<String>();
@@ -68,6 +84,12 @@ public class Stock {
         return names;
     }
 
+    /**
+     * Return the quantity of equipment using the name parameter.
+     * 
+     * @param name
+     * @return
+     */
     public int getQuantity(String name) {
 
         int counter = 0;

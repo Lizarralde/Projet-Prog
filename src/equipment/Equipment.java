@@ -1,14 +1,17 @@
 package equipment;
 
 /**
+ * Model of an equipment.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Equipment {
 
+    // Description and name.
     private String description, name;
 
+    // Getters and setters.
     public String getDescription() {
 
         return description;
@@ -29,6 +32,12 @@ public class Equipment {
         this.name = name;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param name
+     * @param description
+     */
     public Equipment(String name, String description) {
 
         this.setDescription(description);

@@ -4,20 +4,26 @@ import java.util.GregorianCalendar;
 import user.User;
 
 /**
+ * Model of a loan.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Loan {
 
+    // Calendars.
     private GregorianCalendar end, start;
 
+    // Name of the equipment.
     private String name;
 
+    // User.
     private User user;
 
+    // Quantity.
     private int quantity;
 
+    // Getters and setters.
     public GregorianCalendar getEnd() {
 
         return end;
@@ -68,6 +74,15 @@ public class Loan {
         this.quantity = quantity;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param user
+     * @param name
+     * @param quantity
+     * @param start
+     * @param end
+     */
     public Loan(User user, String name, int quantity, GregorianCalendar start,
             GregorianCalendar end) {
 

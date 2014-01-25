@@ -37,7 +37,6 @@ public class Data {
      * @author Dorian LIZARRALDE
      * @param location
      *            The location of the xml file.
-     * @return
      */
     public static Object load(String location) {
 

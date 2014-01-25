@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
@@ -14,18 +15,23 @@ import management.Stock;
 import user.User;
 
 /**
+ * Interface with the user.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class Terminal {
 
+    // Parser.
     private Parser parser;
 
+    // Stock controller.
     private StockController stockController;
 
+    // User.
     private User user;
 
+    // Getters and setters.
     public Parser getParser() {
 
         return parser;
@@ -56,6 +62,14 @@ public class Terminal {
         this.user = user;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param equipment
+     * @param loans
+     * @param onHold
+     * @param users
+     */
     public Terminal(List<Equipment> equipment, List<Loan> loans,
             List<Loan> onHold, List<User> users) {
 
@@ -68,14 +82,22 @@ public class Terminal {
         this.setUser(this.connect(users));
     }
 
+    /**
+     * Connect the user using the list parameter.
+     * 
+     * @param users
+     * @return
+     */
     public User connect(List<User> users) {
 
+        // User input.
         List<String> words = this.getParser().getInput();
 
         if (words.size() > 1) {
 
             for (User u : users) {
 
+                // If the user is in the list, the connection succeed.
                 if (u.getFirstName().equalsIgnoreCase(words.get(0))
                         && u.getLastName().equalsIgnoreCase(words.get(1))) {
 
@@ -154,18 +176,6 @@ public class Terminal {
         return leave;
     }
 
-    private void store() {
-
-        Data.store(this.getStockController().getStock().getEquipment(),
-                "./data/EQUIMENT_LIST.xml");
-
-        Data.store(this.getStockController().getStock().getLoans(),
-                "./data/LOANS_LIST.xml");
-
-        Data.store(this.getStockController().getStock().getOnHold(),
-                "./data/ON_HOLD_LIST.xml");
-    }
-
     public void add() {
 
         Object[] classes;
@@ -200,14 +210,9 @@ public class Terminal {
         System.out.println("Equipment added");
     }
 
-    public Equipment newEquipment(Class<?> c) {
-
-        return null;
-    }
-
     public int getInt(int index, int length) {
 
-        List<String> words = parser.getInput();
+        List<String> words = this.getParser().getInput();
 
         if (!words.isEmpty()) {
 
@@ -229,6 +234,11 @@ public class Terminal {
         return this.getInt(index, length);
     }
 
+    public Equipment newEquipment(Class<?> c) {
+
+        return null;
+    }
+
     public void borrow() {
 
         GregorianCalendar end, start;
@@ -243,7 +253,7 @@ public class Terminal {
 
         System.out.println("Select your equipment.");
 
-        System.out.println(this.getStockController().getStock().toString());
+        System.out.print(this.getStockController().getStock().toString());
 
         index = this.getInt(index, this.getStockController().getStock()
                 .getEquipment().size());
@@ -263,7 +273,7 @@ public class Terminal {
 
         end = this.getParser().getCalendar();
 
-        loan = new Loan(user, name, quantity, start, end);
+        loan = new Loan(this.getUser(), name, quantity, start, end);
 
         if (Config.property.getProperty("Mode").equals("Manual")) {
 
@@ -284,17 +294,25 @@ public class Terminal {
 
         System.out.println("Initial stock : ");
 
-        System.out.println(this.getStockController().getStock().toString());
+        for (String s : this.getStockController().getStock().getNames()) {
+
+            System.out.println(s + "\tQuantity : "
+                    + this.getStockController().getStock().getQuantity(s));
+        }
 
         System.out.println("Loans : ");
 
-        System.out.println(this.getStockController().getStock().getLoans()
-                .toString());
+        for (Loan l : this.getStockController().getStock().getLoans()) {
+
+            System.out.println(l.toString());
+        }
 
         System.out.println("On hold : ");
 
-        System.out.println(this.getStockController().getStock().getOnHold()
-                .toString());
+        for (Loan l : this.getStockController().getStock().getOnHold()) {
+
+            System.out.println(l.toString());
+        }
     }
 
     public void giveBack() {
@@ -307,11 +325,57 @@ public class Terminal {
                 .println("Your command words are : add, borrow, display, giveBack, help, leave, remove, validate");
     }
 
+    private void store() {
+
+        Data.store(this.getStockController().getStock().getEquipment(),
+                "./data/EQUIPMENT_LIST.xml");
+
+        Data.store(this.getStockController().getStock().getLoans(),
+                "./data/LOANS_LIST.xml");
+
+        Data.store(this.getStockController().getStock().getOnHold(),
+                "./data/ON_HOLD_LIST.xml");
+    }
+
     public void remove() {
 
     }
 
     public void validate() {
 
+        List<Loan> loans = new ArrayList<Loan>();
+
+        List<String> words;
+
+        System.out.println("Validate. Format 'yes' 'no'");
+
+        for (Loan l : this.getStockController().getStock().getOnHold()) {
+
+            System.out.println(l.toString());
+
+            words = this.getParser().getInput();
+
+            if (!words.isEmpty()) {
+
+                switch (words.get(0)) {
+
+                case "yes":
+                    this.getStockController().getStock().getLoans().add(l);
+                    loans.add(l);
+                    System.out.println("Loan added.");
+                    break;
+
+                case "no":
+                    loans.add(l);
+                    System.out.println("Loan deleted");
+                    break;
+                }
+            }
+        }
+
+        for (Loan l : loans) {
+
+            this.getStockController().getStock().getOnHold().remove(l);
+        }
     }
 }

@@ -1,16 +1,20 @@
 package user;
 
 /**
+ * Model of an user.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class User {
 
+    // First name.
     private String firstName;
 
+    // Last name.
     private String lastName;
 
+    // Getters and setters.
     public String getFirstName() {
 
         return firstName;
@@ -31,12 +35,23 @@ public class User {
         this.lastName = lastName;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param firstName
+     * @param lastName
+     */
     public User(String firstName, String lastName) {
 
         this.setFirstName(firstName);
         this.setLastName(lastName);
     }
 
+    /**
+     * Return if a user is allowed to borrow using the loan parameter.
+     * 
+     * @return
+     */
     public boolean isAllowedToBorrow() {
 
         return false;

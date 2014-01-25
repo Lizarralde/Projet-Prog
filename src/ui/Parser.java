@@ -13,8 +13,10 @@ import java.util.Scanner;
  */
 public class Parser {
 
+    // Scanner.
     private Scanner scanner;
 
+    // Getter and setters.
     public Scanner getScanner() {
 
         return scanner;
@@ -25,13 +27,24 @@ public class Parser {
         this.scanner = scanner;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param scanner
+     */
     public Parser(Scanner scanner) {
 
         this.setScanner(scanner);
     }
 
+    /**
+     * Return the calendar using the user input.
+     * 
+     * @return
+     */
     public GregorianCalendar getCalendar() {
 
+        // User input.
         List<String> words = getInput();
 
         if (!words.isEmpty()) {
@@ -53,6 +66,11 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Return the user input.
+     * 
+     * @return
+     */
     public List<String> getInput() {
 
         List<String> words = new ArrayList<String>();

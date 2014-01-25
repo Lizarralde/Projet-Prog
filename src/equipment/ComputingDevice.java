@@ -1,14 +1,17 @@
 package equipment;
 
 /**
+ * Model of an equipment using an operating system.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class ComputingDevice extends Equipment {
 
+    // Operating system.
     private OS os;
 
+    // Getters and setters.
     public OS getOS() {
 
         return os;
@@ -19,6 +22,13 @@ public class ComputingDevice extends Equipment {
         this.os = os;
     }
 
+    /**
+     * Default constructor.
+     * 
+     * @param name
+     * @param description
+     * @param os
+     */
     public ComputingDevice(String name, String description, OS os) {
 
         super(name, description);

@@ -26,7 +26,7 @@ public class TestTerminal {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void theTest() throws FileNotFoundException {
+    public void testBorrow() throws FileNotFoundException {
 
         System.out.close();
 

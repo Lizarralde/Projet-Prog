@@ -6,75 +6,68 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * Test the Parser class.
+ * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class TestParser {
 
-    static Parser parser = new Parser();
+    static Parser parser;
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @BeforeClass
-    public static void setReader() {
+    public static void newParser() {
+
+        System.out.close();
 
         try {
 
-            parser.setReader(new FileInputStream("./data/TEST_PARSER.txt"));
+            parser = new Parser(new Scanner(new FileInputStream(
+                    "./TEST_PARSER.txt")));
         } catch (FileNotFoundException e) {
 
             e.printStackTrace();
         }
-
-        System.out.close();
     }
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
+    @Test
+    public void testGetCalendar() {
+
+        GregorianCalendar calendar;
+
+        calendar = parser.getCalendar();
+
+        assertNull(calendar);
+
+        calendar = parser.getCalendar();
+
+        assertEquals(20, calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        assertEquals(8, calendar.get(GregorianCalendar.MONTH));
+        assertEquals(1992, calendar.get(GregorianCalendar.YEAR));
+    }
+
     @Test
     public void testGetInput() {
 
-        List<String> words = parser.getInput();
+        List<String> words;
+
+        words = parser.getInput();
 
         assertNotNull(words);
+
         assertTrue(words.isEmpty());
 
         words = parser.getInput();
 
         assertTrue(words.size() == 2);
 
-        assertEquals("LIZARRALDE", words.get(0));
-        assertEquals("Dorian", words.get(1));
-    }
-
-    /**
-     * @author Dorian LIZARRALDE
-     */
-    @Test
-    public void testGetADate() {
-
-        GregorianCalendar calendar = parser.getCalendar();
-
-        // Not null.
-        assertNull(calendar);
-
-        calendar = parser.getCalendar();
-
-        // Not null.
-        assertNull(calendar);
-
-        calendar = parser.getCalendar();
-
-        // Good data.
-        assertEquals(1992, calendar.get(GregorianCalendar.YEAR));
-        assertEquals(8, calendar.get(GregorianCalendar.MONTH));
-        assertEquals(20, calendar.get(GregorianCalendar.DAY_OF_MONTH));
+        assertEquals("Dorian", words.get(0));
+        assertEquals("LIZARRALDE", words.get(1));
     }
 }

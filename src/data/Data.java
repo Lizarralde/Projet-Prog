@@ -40,10 +40,10 @@ public class Data {
      */
     public static Object load(String location) {
 
+        Object obj = null;
+
         // Create a default Xstream.
         XStream xstream = new XStream(new DomDriver());
-
-        Object obj = null;
 
         try {
 

@@ -3,8 +3,6 @@ package ui;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Scanner;
-
 import config.Config;
 import data.Data;
 import equipment.Equipment;
@@ -70,10 +68,10 @@ public class Terminal {
      * @param onHold
      * @param users
      */
-    public Terminal(List<Equipment> equipment, List<Loan> loans,
+    public Terminal(Parser parser, List<Equipment> equipment, List<Loan> loans,
             List<Loan> onHold, List<User> users) {
 
-        this.setParser(new Parser(new Scanner(System.in)));
+        this.setParser(parser);
         this.setStockController(new StockController(new Stock(equipment, loans,
                 onHold)));
 
@@ -123,10 +121,12 @@ public class Terminal {
             return;
         }
 
+        // Greetings.
         System.out.println("Welcome " + this.getUser().toString());
 
         System.out.println("Type your command. If you need help, type 'help'");
 
+        // Loop.
         while (!processCommand(this.getParser().getInput())) {
 
         }
@@ -134,6 +134,12 @@ public class Terminal {
         System.out.println("Thank you for using our application. Good bye.");
     }
 
+    /**
+     * Process using the user input.
+     * 
+     * @param words
+     * @return
+     */
     public boolean processCommand(List<String> words) {
 
         boolean leave = false;
@@ -163,12 +169,15 @@ public class Terminal {
                 break;
 
             case "leave":
-                store();
                 leave = true;
                 break;
 
             case "remove":
                 this.remove();
+                break;
+
+            case "store":
+                this.store();
                 break;
 
             case "validate":
@@ -180,6 +189,10 @@ public class Terminal {
         return leave;
     }
 
+    /**
+     * Add an equipment.
+     * 
+     */
     public void add() {
 
         Object[] classes;
@@ -190,6 +203,7 @@ public class Terminal {
 
         try {
 
+            // Retrieve all classes in the package 'equipment.solid'.
             classes = PackageHelper.getInstance()
                     .getClasses("equipment.solid", false, null).toArray();
 
@@ -200,6 +214,7 @@ public class Terminal {
             return;
         }
 
+        // Display.
         for (int i = 0; i < classes.length; i++) {
 
             System.out.println("Index : " + i + "\tName : "
@@ -208,14 +223,23 @@ public class Terminal {
 
         index = this.getInt(index, classes.length);
 
+        // Add the equipment.
         this.getStockController().getStock().getEquipment()
                 .add(this.newEquipment((Class<?>) classes[index]));
 
         System.out.println("Equipment added");
     }
 
+    /**
+     * Return the index using the size of a list.
+     * 
+     * @param index
+     * @param length
+     * @return
+     */
     public int getInt(int index, int length) {
 
+        // User input.
         List<String> words = this.getParser().getInput();
 
         if (!words.isEmpty()) {
@@ -224,6 +248,7 @@ public class Terminal {
 
                 index = Integer.parseInt(words.get(0));
 
+                // Index out of bounds.
                 if (index >= 0 || index < length) {
 
                     return index;
@@ -238,11 +263,21 @@ public class Terminal {
         return this.getInt(index, length);
     }
 
+    /**
+     * Create a new equipment using the class parameter.
+     * 
+     * @param c
+     * @return
+     */
     public Equipment newEquipment(Class<?> c) {
 
         return null;
     }
 
+    /**
+     * Borrow an equipment from the stock.
+     * 
+     */
     public void borrow() {
 
         GregorianCalendar end, start;
@@ -257,6 +292,7 @@ public class Terminal {
 
         System.out.println("Select your equipment.");
 
+        // Display the initial stock.
         List<String> names = this.getStockController().getStock().getNames();
 
         for (int i = 0; i < names.size(); i++) {
@@ -277,6 +313,7 @@ public class Terminal {
 
         System.out.println("Quantity : ");
 
+        // Get the quantity.
         quantity = this.getInt(quantity, this.getStockController().getStock()
                 .getQuantity(name));
 
@@ -288,6 +325,7 @@ public class Terminal {
 
         end = this.getParser().getCalendar();
 
+        // Create the associate loan.
         loan = new Loan(this.getUser(), name, quantity, start, end);
 
         if (Config.property.getProperty("Mode").equals("Manual")) {
@@ -301,10 +339,19 @@ public class Terminal {
         }
     }
 
+    /**
+     * Process automatically using the loan parameter.
+     * 
+     * @param loan
+     */
     public void modeAuto(Loan loan) {
 
     }
 
+    /**
+     * Display all Intel related to the stock.
+     * 
+     */
     public void display() {
 
         System.out.print(this.getStockController().getStock().toString());
@@ -314,12 +361,20 @@ public class Terminal {
 
     }
 
+    /**
+     * Help.
+     * 
+     */
     public void help() {
 
         System.out
-                .println("Your command words are : add, borrow, display, giveBack, help, leave, remove, validate");
+                .println("Your command words are : add, borrow, display, giveBack, help, leave, remove, store, validate");
     }
 
+    /**
+     * Store all Intel related to the stock.
+     * 
+     */
     private void store() {
 
         Data.store(this.getStockController().getStock().getEquipment(),
@@ -334,11 +389,44 @@ public class Terminal {
 
     public void remove() {
 
+        int index = -1;
+
+        System.out
+                .println("Select the equipment to remove. If you want to leave, type '0'.");
+
+        for (int i = 0; i < this.getStockController().getStock().getEquipment()
+                .size(); i++) {
+
+            System.out.println("Index : "
+                    + (i + 1)
+                    + "\t"
+                    + this.getStockController().getStock().getEquipment()
+                            .get(i));
+        }
+
+        index = this.getInt(index, this.getStockController().getStock()
+                .getEquipment().size() + 1) - 1;
+
+        if (index == -1) {
+
+            return;
+        }
+
+        this.getStockController()
+                .getStock()
+                .getEquipment()
+                .remove(this.getStockController().getStock().getEquipment()
+                        .get(index));
     }
 
+    /**
+     * Ask the user to validate the lost of loans on hold.
+     * 
+     */
     public void validate() {
 
-        List<Loan> loans = new ArrayList<Loan>();
+        // Temporary list of deletion.
+        List<Loan> deletion = new ArrayList<Loan>();
 
         List<String> words;
 
@@ -348,6 +436,7 @@ public class Terminal {
 
             System.out.println(l.toString());
 
+            // User input.
             words = this.getParser().getInput();
 
             if (!words.isEmpty()) {
@@ -356,19 +445,20 @@ public class Terminal {
 
                 case "yes":
                     this.getStockController().getStock().getLoans().add(l);
-                    loans.add(l);
+                    deletion.add(l);
                     System.out.println("Loan added.");
                     break;
 
                 case "no":
-                    loans.add(l);
+                    deletion.add(l);
                     System.out.println("Loan deleted");
                     break;
                 }
             }
         }
 
-        for (Loan l : loans) {
+        // Delete all loans on hold of the list of deletion.
+        for (Loan l : deletion) {
 
             this.getStockController().getStock().getOnHold().remove(l);
         }

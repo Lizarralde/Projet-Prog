@@ -102,7 +102,7 @@ public class Config {
 
         Map<String, String> map = new HashMap<String, String>();
 
-        map.put("Mode", "Auto");
+        map.put("Mode", "Manual");
 
         store(map, "./config/CONFIG.txt");
     }

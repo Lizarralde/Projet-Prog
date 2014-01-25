@@ -6,55 +6,58 @@ import java.util.List;
 
 import org.junit.Test;
 
-import equipment.EquipmentSet;
+import equipment.Equipment;
 import user.User;
 
 /**
- * Test the Data Class.
+ * Test the Data class.
  * 
  * @author Dorian LIZARRALDE
  * 
  */
 public class TestData {
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @SuppressWarnings("unchecked")
     @Test
-    public void testLoadUsersList() {
+    public void testLoadEquipment() {
+
+        List<Equipment> equipment = (List<Equipment>) Data
+                .load("./data/TEST_EQUIPMENT_LIST.xml");
+
+        assertNotNull(equipment);
+
+        assertEquals(4, equipment.size());
+
+        assertEquals("Camera", equipment.get(0).getName());
+        assertEquals("Description", equipment.get(0).getDescription());
+
+        assertEquals("Headphones", equipment.get(1).getName());
+        assertEquals("Description", equipment.get(1).getDescription());
+
+        assertEquals("Phone", equipment.get(2).getName());
+        assertEquals("Description", equipment.get(2).getDescription());
+
+        assertEquals("Tablet", equipment.get(3).getName());
+        assertEquals("Description", equipment.get(3).getDescription());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testLoadUsers() {
 
         List<User> users = (List<User>) Data.load("./data/TEST_USERS_LIST.xml");
 
-        // Not a null object.
         assertNotNull(users);
 
-        // Good size.
-        assertEquals(7, users.size());
+        assertEquals(3, users.size());
 
-        // Good data.
-        assertEquals("SIMOND", users.get(2).getName());
-        assertEquals("Hugo", users.get(2).getFirstName());
-    }
+        assertEquals("Jean-Philippe", users.get(0).getFirstName());
+        assertEquals("KHA", users.get(0).getLastName());
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void testLoadMaterialList() {
+        assertEquals("Dorian", users.get(1).getFirstName());
+        assertEquals("LIZARRALDE", users.get(1).getLastName());
 
-        List<EquipmentSet> materials = (List<EquipmentSet>) Data
-                .load("./data/TEST_MATERIALS_LIST.xml");
-
-        // Not a null object.
-        assertNotNull(materials);
-
-        // Good size.
-        assertEquals(4, materials.size());
-
-        // Good data.
-        assertEquals("Nokia 850", materials.get(2).getMat().getName());
-        assertEquals(2, materials.get(2).getQuantity());
+        assertEquals("Mamadou Falou", users.get(2).getFirstName());
+        assertEquals("SECK", users.get(2).getLastName());
     }
 }

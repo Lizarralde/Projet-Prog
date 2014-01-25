@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import data.Data;
-import equipment.EquipmentSet;
+import equipment.Equipment;
 
 /**
  * Test the Stock class.
@@ -17,25 +17,26 @@ import equipment.EquipmentSet;
  */
 public class TestStock {
 
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @SuppressWarnings("unchecked")
     @Test
     public void testToString() {
 
         Stock stock = new Stock(
-                (List<EquipmentSet>) Data
-                        .load("./data/TEST_MATERIALS_LIST.xml"));
+                (List<Equipment>) Data.load("./data/TEST_EQUIPMENT_LIST.xml"),
+                (List<Loan>) Data.load("./data/TEST_LOANS_LIST.xml"),
+                (List<Loan>) Data.load("./data/TEST_ON_HOLD_LIST.xml"));
 
         assertEquals(
-                "0. HTC One (Description of the HTC One) - 5"
+                "Initial stock : " + System.getProperty("line.separator")
+                        + "Name : Camera\tQuantity : 1"
                         + System.getProperty("line.separator")
-                        + "1. Dr Dre (Description of the Dr Dre) - 24"
+                        + "Name : Headphones\tQuantity : 1"
                         + System.getProperty("line.separator")
-                        + "2. Nokia 850 (Description of the Nokia 850) - 2"
+                        + "Name : Phone\tQuantity : 1"
                         + System.getProperty("line.separator")
-                        + "3. iPad (Description of the HTC One) - 5"
+                        + "Name : Tablet\tQuantity : 1"
+                        + System.getProperty("line.separator") + "Loans : "
+                        + System.getProperty("line.separator") + "On hold : "
                         + System.getProperty("line.separator"),
                 stock.toString());
     }

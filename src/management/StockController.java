@@ -1,6 +1,7 @@
 package management;
 
 /**
+ * Deliver services related to the stock.
  * 
  * @author Dorian LIZARRALDE
  * 

@@ -4,17 +4,17 @@ import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
 
-import management.CalendarController;
+import management.Loan;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import config.Config;
 import user.User;
 import data.Data;
-import equipment.EquipmentSet;
+import equipment.Equipment;
 
 /**
  * Test the Terminal Class
@@ -24,52 +24,26 @@ import equipment.EquipmentSet;
  */
 public class TestTerminal {
 
-    static Terminal terminal;
-
-    @BeforeClass
-    public static void setReader() {
-
-        terminal = new Terminal();
-
-        try {
-
-            terminal.getParser().setReader(
-                    new FileInputStream("./data/TEST_TERMINAL.txt"));
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * @author Dorian LIZARRALDE
-     */
     @SuppressWarnings("unchecked")
     @Test
-    public void theTest() {
+    public void theTest() throws FileNotFoundException {
 
         System.out.close();
 
-        List<User> users = (List<User>) Data.load("./data/TEST_USERS_LIST.xml");
+        Config.load("./config/CONFIG.txt");
 
-        List<EquipmentSet> materials = (List<EquipmentSet>) Data
-                .load("./data/TEST_MATERIALS_LIST.xml");
+        Terminal terminal = new Terminal(new Parser(new Scanner(
+                new FileInputStream("./TEST_TERMINAL.txt"))),
+                (List<Equipment>) Data.load("./data/TEST_EQUIPMENT_LIST.xml"),
+                (List<Loan>) Data.load("./data/TEST_LOANS_LIST.xml"),
+                (List<Loan>) Data.load("./data/TEST_ON_HOLD_LIST.xml"),
+                (List<User>) Data.load("./data/TEST_USERS_LIST.xml"));
 
-        terminal.start(users, materials);
+        terminal.start();
 
-        assertNotNull(terminal.getUser());
-        assertEquals("LIZARRALDE Dorian", terminal.getUser().toString());
-
-        assertEquals(3, terminal.chooseAnObject());
-
-        assertEquals(1, terminal.enterAQuantity(3));
-
-        GregorianCalendar calendar = new GregorianCalendar();
-
-        assertFalse(CalendarController.checkTheDates(new GregorianCalendar(
-                1992, 8, 20), calendar));
-        assertFalse(CalendarController.checkTheDates(calendar,
-                new GregorianCalendar(1992, 8, 20)));
-        assertTrue(CalendarController.checkTheDates(calendar, calendar));
+        assertEquals(
+                terminal.getStockController().getStock().getOnHold().get(0)
+                        .toString(),
+                "User : Dorian LIZARRALDE\tYear : SI3 - 2013\tEquipment : Camera\tQuantity : 1\tStart : 26/01/2014\tEnd : 02/02/2014");
     }
 }

@@ -1,2 +1,2 @@
 #Sat Jan 25 13:49:05 CET 2014
-Mode=Auto
+Mode=Manual

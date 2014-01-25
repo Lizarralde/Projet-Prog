@@ -1,7 +1,7 @@
 package user;
 
 /**
- * Model of an user.
+ * Model of a user.
  * 
  * @author Dorian LIZARRALDE
  * 

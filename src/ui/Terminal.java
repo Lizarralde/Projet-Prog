@@ -109,6 +109,10 @@ public class Terminal {
         return null;
     }
 
+    /**
+     * Launch the application.
+     * 
+     */
     public void start() {
 
         if (this.getUser() == null) {
@@ -253,7 +257,18 @@ public class Terminal {
 
         System.out.println("Select your equipment.");
 
-        System.out.print(this.getStockController().getStock().toString());
+        List<String> names = this.getStockController().getStock().getNames();
+
+        for (int i = 0; i < names.size(); i++) {
+
+            System.out.println("Index : "
+                    + i
+                    + "\tName : "
+                    + names.get(i)
+                    + "\tQuantity : "
+                    + this.getStockController().getStock()
+                            .getQuantity(names.get(i)));
+        }
 
         index = this.getInt(index, this.getStockController().getStock()
                 .getEquipment().size());
@@ -292,27 +307,7 @@ public class Terminal {
 
     public void display() {
 
-        System.out.println("Initial stock : ");
-
-        for (String s : this.getStockController().getStock().getNames()) {
-
-            System.out.println(s + "\tQuantity : "
-                    + this.getStockController().getStock().getQuantity(s));
-        }
-
-        System.out.println("Loans : ");
-
-        for (Loan l : this.getStockController().getStock().getLoans()) {
-
-            System.out.println(l.toString());
-        }
-
-        System.out.println("On hold : ");
-
-        for (Loan l : this.getStockController().getStock().getOnHold()) {
-
-            System.out.println(l.toString());
-        }
+        System.out.print(this.getStockController().getStock().toString());
     }
 
     public void giveBack() {

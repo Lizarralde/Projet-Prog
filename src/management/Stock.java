@@ -112,11 +112,26 @@ public class Stock {
 
         String stock = new String();
 
-        for (int i = 0; i < names.size(); i++) {
+        stock += "Initial stock : " + System.getProperty("line.separator");
 
-            stock += "Index : " + i + "\tName : " + names.get(i)
-                    + "\tQuantity : " + this.getQuantity(names.get(i))
+        for (String s : names) {
+
+            stock += "Name : " + s + "\tQuantity : " + this.getQuantity(s)
                     + System.getProperty("line.separator");
+        }
+
+        stock += "Loans : " + System.getProperty("line.separator");
+
+        for (Loan l : this.getLoans()) {
+
+            stock += l.toString() + System.getProperty("line.separator");
+        }
+
+        stock += "On hold : " + System.getProperty("line.separator");
+
+        for (Loan l : this.getOnHold()) {
+
+            stock += l.toString() + System.getProperty("line.separator");
         }
 
         return stock;

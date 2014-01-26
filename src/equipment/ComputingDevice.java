@@ -25,6 +25,7 @@ public class ComputingDevice extends Equipment {
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      * @param description
      * @param os

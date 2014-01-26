@@ -13,11 +13,13 @@ public class Headphones extends Equipment {
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      * @param description
      */
     public Headphones(String name, String description) {
 
         super(name, description);
+        this.setValue(15);
     }
 }

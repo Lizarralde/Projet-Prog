@@ -30,6 +30,7 @@ public class Parser {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param scanner
      */
     public Parser(Scanner scanner) {
@@ -40,6 +41,7 @@ public class Parser {
     /**
      * Return the calendar using the user input.
      * 
+     * @author Dorian LIZARRALDE
      * @return
      */
     public GregorianCalendar getCalendar() {
@@ -69,15 +71,14 @@ public class Parser {
     /**
      * Return the user input.
      * 
+     * @author Dorian LIZARRALDE
      * @return
      */
     public List<String> getInput() {
 
         List<String> words = new ArrayList<String>();
 
-        System.out.print("> ");
-
-        String inputLine = this.getScanner().nextLine();
+        String inputLine = this.getInputLine();
 
         Scanner tokenizer = new Scanner(inputLine);
 
@@ -89,5 +90,18 @@ public class Parser {
         tokenizer.close();
 
         return words;
+    }
+
+    /**
+     * Return the user input.
+     * 
+     * @author Dorian LIZARRALDE
+     * @return
+     */
+    public String getInputLine() {
+
+        System.out.print("> ");
+
+        return this.getScanner().nextLine();
     }
 }

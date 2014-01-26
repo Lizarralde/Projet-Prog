@@ -27,6 +27,7 @@ public enum OS {
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      */
     OS(String name) {

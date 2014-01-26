@@ -1,7 +1,11 @@
 package user;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import management.CalendarController;
+import management.Loan;
+import management.StockController;
 import ui.Terminal;
 
 /**
@@ -15,6 +19,7 @@ public class Administrator extends User {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param firstName
      * @param lastName
      */
@@ -69,8 +74,30 @@ public class Administrator extends User {
     }
 
     @Override
-    public boolean isAllowedToBorrow() {
+    public boolean isAllowedToBorrow(Loan loan, StockController stockController) {
 
-        return true;
+        if (stockController.numberOfLoans(this) < 7) {
+
+            if (loan.getQuantity() < 25) {
+
+                if (CalendarController.differenceDate(loan.getStart(),
+                        loan.getEnd()) < 15) {
+
+                    if (CalendarController.differenceDate(
+                            new GregorianCalendar(), loan.getStart()) < 15) {
+
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+
+        return super.toString() + "\tAdministrator";
     }
 }

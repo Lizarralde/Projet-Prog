@@ -1,5 +1,6 @@
 package ui;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Random;
 import config.Config;
 import data.Data;
 import equipment.Equipment;
+import equipment.OS;
 import equipment.State;
 import ldapbeans.util.scanner.PackageHelper;
 import management.CalendarController;
@@ -80,10 +82,9 @@ public class Terminal {
     /**
      * Default constructor.
      * 
-     * @param equipment
-     * @param loans
-     * @param onHold
-     * @param users
+     * @author Dorian LIZARRALDE
+     * @param parser
+     * @param loactions
      */
     @SuppressWarnings("unchecked")
     public Terminal(Parser parser, List<String> locations) {
@@ -104,6 +105,7 @@ public class Terminal {
     /**
      * Connect the user using the list parameter.
      * 
+     * @author Dorian LIZARRALDE
      * @param users
      * @return
      */
@@ -130,6 +132,8 @@ public class Terminal {
 
     /**
      * Launch the application.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void start() {
@@ -223,11 +227,11 @@ public class Terminal {
 
                     if (0 < quantity && l.getName().equals(e.getName())
                             && e.getState().equals(State.FUNCTIONAL)
-                            && (e.getLoanID() == null)) {
-
-                        quantity -= 1;
+                            && e.getLoanID() == null) {
 
                         e.setLoanID(l.getID());
+
+                        quantity--;
                     }
                 }
 
@@ -252,6 +256,8 @@ public class Terminal {
 
     /**
      * Add an equipment.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void add() {
@@ -294,6 +300,7 @@ public class Terminal {
     /**
      * Return the index using the size of a list.
      * 
+     * @author Dorian LIZARRALDE
      * @param index
      * @param length
      * @return
@@ -327,16 +334,91 @@ public class Terminal {
     /**
      * Create a new equipment using the class parameter.
      * 
+     * @author Dorian LIZARRALDE
      * @param c
      * @return
      */
     public Equipment newEquipment(Class<?> c) {
 
-        return null;
+        Equipment equipment = null;
+
+        String description = new String();
+
+        String name = new String();
+
+        System.out.println("Name : ");
+
+        name = this.getParser().getInputLine();
+
+        System.out.println("Description : ");
+
+        description = this.getParser().getInputLine();
+
+        if (c.getConstructors()[0].getParameterTypes().length < 3) {
+
+            try {
+
+                equipment = (Equipment) c.getConstructors()[0].newInstance(
+                        name, description);
+            } catch (InstantiationException e) {
+
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+
+                e.printStackTrace();
+            } catch (SecurityException e) {
+
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("OS : ");
+
+        OS[] os = OS.values();
+
+        int index = -1;
+
+        for (int i = 0; i < os.length; i++) {
+
+            System.out.println("Index : " + i + "\t" + os[i].toString());
+        }
+
+        index = this.getInt(index, os.length);
+
+        try {
+
+            equipment = (Equipment) c.getConstructors()[0].newInstance(name,
+                    description, os[index]);
+        } catch (InstantiationException e) {
+
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+
+            e.printStackTrace();
+        } catch (SecurityException e) {
+
+            e.printStackTrace();
+        }
+
+        return equipment;
     }
 
     /**
      * Borrow an equipment from the stock.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void borrow() {
@@ -403,14 +485,74 @@ public class Terminal {
     /**
      * Process automatically using the loan parameter.
      * 
+     * @author Jean-Philippe KHA
      * @param loan
      */
     public void modeAuto(Loan loan) {
 
+        if (user.isAllowedToBorrow(loan, this.getStockController())) {
+
+            if (CalendarController.checkCalendars(loan.getStart(),
+                    loan.getEnd())) {
+
+                if (this.getStockController().isAvailable(loan)
+                        && CalendarController.differenceDate(loan.getStart(),
+                                loan.getEnd()) < this.getStockController()
+                                .numberOfDayMaterialCanBeLoaned(loan)) {
+
+                    System.out
+                            .println("Your loan has been automatically validated.");
+
+                    this.getStockController().getStock().getLoans().add(loan);
+
+                    System.out.println("Loan added : ");
+
+                    System.out.println(loan.toString());
+                } else {
+
+                    System.out
+                            .println("Your loan is not valid. You claim to much equipment.");
+
+                    int quantity = this.getStockController()
+                            .numberOfMaterialAvailable(loan);
+
+                    System.out.print("You could have claimed " + quantity
+                            + loan.getName() + ".");
+
+                    int period = this.getStockController()
+                            .numberOfDayMaterialCanBeLoaned(loan);
+
+                    System.out.println("For a period of " + period + " days");
+
+                    GregorianCalendar start = this.getStockController()
+                            .dayWhenMaterialIsAvailable(loan);
+
+                    if (start != null) {
+
+                        System.out.println("Or wait until "
+                                + CalendarController.calendarToString(start));
+
+                        GregorianCalendar end = this.getStockController()
+                                .dayWhenMaterialIsNotAvailable(loan);
+
+                        System.out.print(" to "
+                                + CalendarController.calendarToString(end));
+                    }
+                }
+            } else {
+
+                System.out.println("Wrong parameters : \tCalendars.");
+            }
+        } else {
+
+            System.out.println("You are not allowed to make this loan.");
+        }
     }
 
     /**
      * Display all Intel related to the stock.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void display() {
@@ -421,6 +563,8 @@ public class Terminal {
     /**
      * Help.
      * 
+     * @author Dorian LIZARRALDE
+     * 
      */
     public void help() {
 
@@ -429,6 +573,8 @@ public class Terminal {
 
     /**
      * Store all Intel related to the stock.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void store() {
@@ -443,6 +589,12 @@ public class Terminal {
                 .getLocations().get(2));
     }
 
+    /**
+     * Remove an equipment.
+     * 
+     * @author Dorian LIZARRALDE
+     * 
+     */
     public void remove() {
 
         int index = -1;
@@ -457,7 +609,7 @@ public class Terminal {
                     + (i + 1)
                     + "\t"
                     + this.getStockController().getStock().getEquipment()
-                            .get(i));
+                            .get(i).toString());
         }
 
         index = this.getInt(index, this.getStockController().getStock()
@@ -499,9 +651,10 @@ public class Terminal {
     }
 
     /**
-     * Return all the Intel related to the equipment.
+     * Return all the Stats related to the equipment.
      * 
      * @author Falou SECK
+     * 
      */
     @SuppressWarnings("unchecked")
     public void stats() {
@@ -539,6 +692,8 @@ public class Terminal {
 
     /**
      * Ask the user to validate the list of loans on hold.
+     * 
+     * @author Dorian LIZARRALDE
      * 
      */
     public void validate() {

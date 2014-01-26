@@ -53,6 +53,7 @@ public class Stock {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param equipment
      * @param loans
      * @param onHold
@@ -67,6 +68,7 @@ public class Stock {
     /**
      * Return the list of all different names in the initial stock.
      * 
+     * @author Dorian LIZARRALDE
      * @return
      */
     public List<String> getNames() {
@@ -85,8 +87,29 @@ public class Stock {
     }
 
     /**
+     * Return the value of the related equipment.
+     * 
+     * @author Dorian LIZARRALDE
+     * @param name
+     * @return
+     */
+    public int getValue(String name) {
+
+        for (Equipment e : this.getEquipment()) {
+
+            if (e.getName().equals(name)) {
+
+                return e.getValue();
+            }
+        }
+
+        return 0;
+    }
+
+    /**
      * Return the quantity of equipment using the name parameter.
      * 
+     * @author Dorian LIZARRALDE
      * @param name
      * @return
      */

@@ -16,6 +16,7 @@ public class StatsController {
     /**
      * Return the user with the highest number of loans.
      * 
+     * @author Falou SECK
      * @param users
      *            A list of users.
      * @return The greatest borrower.
@@ -43,6 +44,7 @@ public class StatsController {
     /**
      * Return the equipment with the highest number of repair.
      * 
+     * @author Falou SECK
      * @param equipment
      *            A list of equipment.
      * @return The most damaged equipment.
@@ -70,6 +72,7 @@ public class StatsController {
     /**
      * Return the equipment with the highest number of loans.
      * 
+     * @author Falou SECK
      * @param equipment
      *            A list of equipment.
      * @return The most loaned equipment.

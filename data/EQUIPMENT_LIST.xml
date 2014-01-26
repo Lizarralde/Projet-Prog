@@ -5,6 +5,7 @@
     <name>Camera</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
+    <value>10</value>
   </equipment.solid.Camera>
   <equipment.solid.Headphones>
     <state>FUNCTIONAL</state>
@@ -12,6 +13,7 @@
     <name>Headphones</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
   </equipment.solid.Headphones>
   <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
@@ -19,14 +21,61 @@
     <name>Phone</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
     <os>ANDROID</os>
   </equipment.solid.Phone>
   <equipment.solid.Tablet>
     <state>FUNCTIONAL</state>
-    <description>Description</description>
-    <name>Tablet</name>
+    <description>Forc�ment �a fait Envy</description>
+    <name>HP Envy</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Forc�ment �a fait Envy</description>
+    <name>HP Envy</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Forc�ment �a fait Envy</description>
+    <name>HP Envy</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l�ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l�ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l�ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
     <os>IOS</os>
   </equipment.solid.Tablet>
 </list>

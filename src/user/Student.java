@@ -1,5 +1,11 @@
 package user;
 
+import java.util.GregorianCalendar;
+
+import management.CalendarController;
+import management.Loan;
+import management.StockController;
+
 /**
  * Model of a student.
  * 
@@ -25,6 +31,7 @@ public class Student extends User {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param firstName
      * @param lastName
      * @param year
@@ -36,9 +43,25 @@ public class Student extends User {
     }
 
     @Override
-    public boolean isAllowedToBorrow() {
+    public boolean isAllowedToBorrow(Loan loan, StockController stockController) {
 
-        return true;
+        if (stockController.numberOfLoans(this) < 1) {
+
+            if (loan.getQuantity() < 2) {
+
+                if (CalendarController.differenceDate(loan.getStart(),
+                        loan.getEnd()) < 8) {
+
+                    if (CalendarController.differenceDate(
+                            new GregorianCalendar(), loan.getStart()) < 8) {
+
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override

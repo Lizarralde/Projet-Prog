@@ -27,6 +27,7 @@ public enum State {
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      */
     State(String name) {

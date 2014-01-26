@@ -1,1 +1,21 @@
-<list/>
+<list>
+  <management.Loan>
+    <end>
+      <time>1391295600000</time>
+      <timezone>Europe/Paris</timezone>
+    </end>
+    <start>
+      <time>1390690800000</time>
+      <timezone>Europe/Paris</timezone>
+    </start>
+    <id>552efc1e-5497-44ad-8350-98e5fc0ff3da</id>
+    <name>Camera</name>
+    <user class="user.Student">
+      <firstName>Dorian</firstName>
+      <lastName>LIZARRALDE</lastName>
+      <numberOfLoans>0</numberOfLoans>
+      <year>SI3 - 2013</year>
+    </user>
+    <quantity>1</quantity>
+  </management.Loan>
+</list>

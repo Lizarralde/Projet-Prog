@@ -2,6 +2,8 @@ package user;
 
 import java.util.List;
 
+import management.Loan;
+import management.StockController;
 import ui.Terminal;
 
 /**
@@ -54,6 +56,7 @@ public class User {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param firstName
      * @param lastName
      */
@@ -64,6 +67,13 @@ public class User {
         this.setNumberOfLoans(0);
     }
 
+    /**
+     * Process using the user input.
+     * 
+     * @author Dorian LIZARRALDE
+     * @param words
+     * @return
+     */
     public boolean processCommand(Terminal terminal, List<String> words) {
 
         boolean leave = false;
@@ -90,6 +100,12 @@ public class User {
         return leave;
     }
 
+    /**
+     * Help.
+     * 
+     * @author Dorian LIZARRALDE
+     * 
+     */
     public String help() {
 
         return "Your command words are : borrow, help, leave";
@@ -98,9 +114,11 @@ public class User {
     /**
      * Return if a user is allowed to borrow using the loan parameter.
      * 
+     * @author Dorian LIZARRALDE
+     * @param stockController
      * @return
      */
-    public boolean isAllowedToBorrow() {
+    public boolean isAllowedToBorrow(Loan loan, StockController stockController) {
 
         return false;
     }

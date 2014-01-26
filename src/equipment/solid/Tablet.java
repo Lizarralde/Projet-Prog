@@ -14,6 +14,7 @@ public class Tablet extends ComputingDevice {
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      * @param description
      * @param os
@@ -21,5 +22,6 @@ public class Tablet extends ComputingDevice {
     public Tablet(String name, String description, OS os) {
 
         super(name, description, os);
+        this.setValue(7);
     }
 }

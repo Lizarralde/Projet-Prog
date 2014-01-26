@@ -25,6 +25,7 @@ public class Config {
     /**
      * Load the property in the location parameter.
      * 
+     * @author Dorian LIZARRALDE
      * @param location
      *            The location of the configuration file.
      */
@@ -56,6 +57,7 @@ public class Config {
     /**
      * Store the property in the location parameter.
      * 
+     * @author Dorian LIZARRALDE
      * @param map
      *            The map to store.
      * @param location
@@ -98,6 +100,12 @@ public class Config {
         }
     }
 
+    /**
+     * Store the program's configuration.
+     * 
+     * @author Dorian LIZARRALDE
+     * 
+     */
     public static void storeConfig() {
 
         Map<String, String> map = new HashMap<String, String>();
@@ -111,6 +119,7 @@ public class Config {
     /**
      * Store the program's configuration.
      * 
+     * @author Dorian LIZARRALDE
      * @param args
      */
     public static void main(String[] args) {

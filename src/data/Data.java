@@ -69,7 +69,7 @@ public class Data {
     /**
      * Store the object in the location parameter.
      * 
-     * @author Dorian Lizarralde
+     * @author Dorian LIZARRALDE
      * @param obj
      *            The object to store.
      * @param location

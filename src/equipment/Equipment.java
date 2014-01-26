@@ -13,7 +13,7 @@ public class Equipment {
     // Description and name.
     private String description, loanID, name;
 
-    private int numberOfLoans, numberOfRepair;
+    private int numberOfLoans, numberOfRepair, value;
 
     // Getters and setters.
     public State getState() {
@@ -76,9 +76,20 @@ public class Equipment {
         this.numberOfRepair = numberOfRepair;
     }
 
+    public int getValue() {
+
+        return value;
+    }
+
+    public void setValue(int value) {
+
+        this.value = value;
+    }
+
     /**
      * Default constructor.
      * 
+     * @author Falou SECK
      * @param name
      * @param description
      */
@@ -90,6 +101,7 @@ public class Equipment {
         this.setName(name);
         this.setNumberOfLoans(0);
         this.setNumberOfRepair(0);
+        this.setValue(15);
     }
 
     @Override

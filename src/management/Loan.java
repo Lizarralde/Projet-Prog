@@ -91,6 +91,7 @@ public class Loan {
     /**
      * Default constructor.
      * 
+     * @author Dorian LIZARRALDE
      * @param user
      * @param name
      * @param quantity

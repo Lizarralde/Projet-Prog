@@ -11,7 +11,7 @@ public class Equipment {
     private State state;
 
     // Description and name.
-    private String description, name;
+    private String description, loanID, name;
 
     private int numberOfLoans, numberOfRepair;
 
@@ -34,6 +34,16 @@ public class Equipment {
     public void setDescription(String description) {
 
         this.description = description;
+    }
+
+    public String getLoanID() {
+
+        return loanID;
+    }
+
+    public void setLoanID(String loan) {
+
+        this.loanID = loan;
     }
 
     public String getName() {
@@ -76,6 +86,7 @@ public class Equipment {
 
         this.setState(State.FUNCTIONAL);
         this.setDescription(description);
+        this.setLoanID(null);
         this.setName(name);
         this.setNumberOfLoans(0);
         this.setNumberOfRepair(0);

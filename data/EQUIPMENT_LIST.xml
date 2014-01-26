@@ -1,16 +1,32 @@
 <list>
+  <equipment.solid.Camera>
+    <state>FUNCTIONAL</state>
+    <description>Description</description>
+    <name>Camera</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+  </equipment.solid.Camera>
   <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
     <description>Description</description>
     <name>Headphones</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
   </equipment.solid.Headphones>
   <equipment.solid.Phone>
+    <state>FUNCTIONAL</state>
     <description>Description</description>
     <name>Phone</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
     <os>ANDROID</os>
   </equipment.solid.Phone>
   <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
     <description>Description</description>
     <name>Tablet</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
     <os>IOS</os>
   </equipment.solid.Tablet>
 </list>

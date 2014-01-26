@@ -3,11 +3,14 @@ package ui;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 import config.Config;
 import data.Data;
 import equipment.Equipment;
+import equipment.State;
 import ldapbeans.util.scanner.PackageHelper;
+import management.CalendarController;
 import management.StatsController;
 import management.StockController;
 import management.Loan;
@@ -142,6 +145,9 @@ public class Terminal {
         // Greetings.
         System.out.println("Welcome " + this.getUser().toString());
 
+        this.giveBack();
+        this.give();
+
         System.out.println("Type your command. If you need help, type 'help'");
 
         // Loop.
@@ -150,6 +156,87 @@ public class Terminal {
         }
 
         System.out.println("Thank you for using our application. Good bye.");
+    }
+
+    /**
+     * 
+     * @author Falou SECK
+     * 
+     */
+    public void giveBack() {
+
+        Random random = new Random();
+
+        for (Loan l : this.getStockController().getStock().getLoans()) {
+
+            if (CalendarController.calendarToString(l.getEnd()).equals(
+                    CalendarController
+                            .calendarToString(new GregorianCalendar()))) {
+
+                for (Equipment e : this.getStockController().getStock()
+                        .getEquipment()) {
+
+                    if (l.getName().equals(e.getName())
+                            && l.getID().equals(e.getLoanID())) {
+
+                        if (random.nextDouble() < Double
+                                .parseDouble(Config.property
+                                        .getProperty("Durability"))) {
+
+                            e.setState(State.BROKEN);
+                        }
+
+                        e.setLoanID(null);
+
+                        e.setNumberOfLoans(e.getNumberOfLoans() + 1);
+                    }
+                }
+
+                l.getUser()
+                        .setNumberOfLoans(l.getUser().getNumberOfLoans() + 1);
+
+                System.out.println("The user " + l.getUser().toString()
+                        + " give back the equiment " + l.getName() + ".");
+            }
+        }
+    }
+
+    /**
+     * 
+     * @author Falou SECK
+     * 
+     */
+    public void give() {
+
+        int quantity;
+
+        for (Loan l : this.getStockController().getStock().getLoans()) {
+
+            if (CalendarController.calendarToString(l.getStart()).equals(
+                    CalendarController
+                            .calendarToString(new GregorianCalendar()))) {
+
+                quantity = l.getQuantity();
+
+                for (Equipment e : this.getStockController().getStock()
+                        .getEquipment()) {
+
+                    if (0 < quantity && l.getName().equals(e.getName())
+                            && e.getState().equals(State.FUNCTIONAL)
+                            && (e.getLoanID() == null)) {
+
+                        quantity -= 1;
+
+                        e.setLoanID(l.getID());
+                    }
+                }
+
+                System.out.println("The user " + l.getUser().toString()
+                        + " get the equiment " + l.getName() + ".");
+
+                System.out.println(quantity + " equipment missing.");
+            }
+        }
     }
 
     /**
@@ -388,6 +475,27 @@ public class Terminal {
                         .get(index));
 
         System.out.println("Equipment removed.");
+    }
+
+    /**
+     * Repair all broken equipment.
+     * 
+     * @author Falou SECK
+     * 
+     */
+    public void repair() {
+
+        for (Equipment e : this.getStockController().getStock().getEquipment()) {
+
+            if (e.getState().equals(State.BROKEN)) {
+
+                e.setState(State.FUNCTIONAL);
+
+                e.setNumberOfRepair(e.getNumberOfRepair() + 1);
+            }
+        }
+
+        System.out.println("Your stock has been repaired.");
     }
 
     /**

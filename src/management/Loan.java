@@ -1,6 +1,8 @@
 package management;
 
 import java.util.GregorianCalendar;
+import java.util.UUID;
+
 import user.User;
 
 /**
@@ -13,6 +15,8 @@ public class Loan {
 
     // Calendars.
     private GregorianCalendar end, start;
+
+    private String id;
 
     // Name of the equipment.
     private String name;
@@ -42,6 +46,16 @@ public class Loan {
     public void setStart(GregorianCalendar start) {
 
         this.start = start;
+    }
+
+    public String getID() {
+
+        return id;
+    }
+
+    public void setID(String id) {
+
+        this.id = id;
     }
 
     public String getName() {
@@ -88,6 +102,7 @@ public class Loan {
 
         this.setEnd(end);
         this.setStart(start);
+        this.setID(UUID.randomUUID().toString());
         this.setName(name);
         this.setUser(user);
         this.setQuantity(quantity);

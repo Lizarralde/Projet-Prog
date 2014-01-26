@@ -1,1 +1,20 @@
-<list/>
+<list>
+  <management.Loan>
+    <end>
+      <time>1390777200000</time>
+      <timezone>Europe/Paris</timezone>
+    </end>
+    <start>
+      <time>1390690800000</time>
+      <timezone>Europe/Paris</timezone>
+    </start>
+    <id>4eef54dd-a52d-427d-a0bc-58af54bd545e</id>
+    <name>Camera</name>
+    <user class="user.Administrator">
+      <firstName>Jean-Philippe</firstName>
+      <lastName>KHA</lastName>
+      <numberOfLoans>0</numberOfLoans>
+    </user>
+    <quantity>1</quantity>
+  </management.Loan>
+</list>

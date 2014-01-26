@@ -2,15 +2,18 @@
   <user.Administrator>
     <firstName>Jean-Philippe</firstName>
     <lastName>KHA</lastName>
+    <numberOfLoans>0</numberOfLoans>
   </user.Administrator>
   <user.Student>
     <firstName>Dorian</firstName>
     <lastName>LIZARRALDE</lastName>
+    <numberOfLoans>0</numberOfLoans>
     <year>SI3 - 2013</year>
   </user.Student>
   <user.Teacher>
-    <firstName>Falou</firstName>
+    <firstName>Mamadou Falou</firstName>
     <lastName>SECK</lastName>
+    <numberOfLoans>0</numberOfLoans>
     <field>IPA</field>
   </user.Teacher>
 </list>

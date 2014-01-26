@@ -45,6 +45,10 @@ public class Administrator extends User {
                 terminal.remove();
                 break;
 
+            case "repair":
+                terminal.repair();
+                break;
+
             case "stats":
                 terminal.stats();
                 break;
@@ -61,7 +65,7 @@ public class Administrator extends User {
     @Override
     public String help() {
 
-        return "Your command words are : add, borrow, display, help, leave, remove, stats, validate";
+        return "Your command words are : add, borrow, display, help, leave, remove, repair, stats, validate";
     }
 
     @Override

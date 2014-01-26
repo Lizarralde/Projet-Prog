@@ -1,81 +1,255 @@
 <list>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Forc?ment ?a fait Envy</description>
+    <name>HP Envy</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Forc?ment ?a fait Envy</description>
+    <name>HP Envy</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Forc?ment ?a fait Envy</description>
+    <name>HP Envy</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>ANDROID</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l?ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l?ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
+  <equipment.solid.Tablet>
+    <state>FUNCTIONAL</state>
+    <description>Plus l?ger mais c&apos;est du lourd !</description>
+    <name>iPad 2</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>7</value>
+    <os>IOS</os>
+  </equipment.solid.Tablet>
   <equipment.solid.Camera>
     <state>FUNCTIONAL</state>
-    <description>Description</description>
-    <name>Camera</name>
+    <description>Votre premier pas dans le monde du reflex pro !</description>
+    <name>Canon EOS</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>10</value>
   </equipment.solid.Camera>
-  <equipment.solid.Headphones>
+  <equipment.solid.Camera>
     <state>FUNCTIONAL</state>
-    <description>Description</description>
-    <name>Headphones</name>
+    <description>Votre premier pas dans le monde du reflex pro !</description>
+    <name>Canon EOS</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
-    <value>15</value>
-  </equipment.solid.Headphones>
+    <value>10</value>
+  </equipment.solid.Camera>
+  <equipment.solid.Camera>
+    <state>FUNCTIONAL</state>
+    <description>Votre premier pas dans le monde du reflex pro !</description>
+    <name>Canon EOS</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>10</value>
+  </equipment.solid.Camera>
+  <equipment.solid.Camera>
+    <state>FUNCTIONAL</state>
+    <description>Votre premier pas dans le monde du reflex pro !</description>
+    <name>Canon EOS</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>10</value>
+  </equipment.solid.Camera>
+  <equipment.solid.Camera>
+    <state>FUNCTIONAL</state>
+    <description>Votre premier pas dans le monde du reflex pro !</description>
+    <name>Canon EOS</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>10</value>
+  </equipment.solid.Camera>
   <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Description</description>
-    <name>Phone</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
     <os>ANDROID</os>
   </equipment.solid.Phone>
-  <equipment.solid.Tablet>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Forc�ment �a fait Envy</description>
-    <name>HP Envy</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
     <os>ANDROID</os>
-  </equipment.solid.Tablet>
-  <equipment.solid.Tablet>
+  </equipment.solid.Phone>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Forc�ment �a fait Envy</description>
-    <name>HP Envy</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
     <os>ANDROID</os>
-  </equipment.solid.Tablet>
-  <equipment.solid.Tablet>
+  </equipment.solid.Phone>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Forc�ment �a fait Envy</description>
-    <name>HP Envy</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
     <os>ANDROID</os>
-  </equipment.solid.Tablet>
-  <equipment.solid.Tablet>
+  </equipment.solid.Phone>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Plus l�ger mais c&apos;est du lourd !</description>
-    <name>iPad 2</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
-    <os>IOS</os>
-  </equipment.solid.Tablet>
-  <equipment.solid.Tablet>
+    <os>ANDROID</os>
+  </equipment.solid.Phone>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Plus l�ger mais c&apos;est du lourd !</description>
-    <name>iPad 2</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
-    <os>IOS</os>
-  </equipment.solid.Tablet>
-  <equipment.solid.Tablet>
+    <os>ANDROID</os>
+  </equipment.solid.Phone>
+  <equipment.solid.Phone>
     <state>FUNCTIONAL</state>
-    <description>Plus l�ger mais c&apos;est du lourd !</description>
-    <name>iPad 2</name>
+    <description>Un smartphone au grand coeur !</description>
+    <name>Wiko Cink Peax 2</name>
     <numberOfLoans>0</numberOfLoans>
     <numberOfRepair>0</numberOfRepair>
     <value>7</value>
-    <os>IOS</os>
-  </equipment.solid.Tablet>
+    <os>ANDROID</os>
+  </equipment.solid.Phone>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
+  <equipment.solid.Headphones>
+    <state>FUNCTIONAL</state>
+    <description>L&apos;exp?rience de la perfection : AKG</description>
+    <name>AKG</name>
+    <numberOfLoans>0</numberOfLoans>
+    <numberOfRepair>0</numberOfRepair>
+    <value>15</value>
+  </equipment.solid.Headphones>
 </list>

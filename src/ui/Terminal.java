@@ -376,40 +376,41 @@ public class Terminal {
 
                 e.printStackTrace();
             }
-        }
+        } else {
 
-        System.out.println("OS : ");
+            System.out.println("OS : ");
 
-        OS[] os = OS.values();
+            OS[] os = OS.values();
 
-        int index = -1;
+            int index = -1;
 
-        for (int i = 0; i < os.length; i++) {
+            for (int i = 0; i < os.length; i++) {
 
-            System.out.println("Index : " + i + "\t" + os[i].toString());
-        }
+                System.out.println("Index : " + i + "\t" + os[i].toString());
+            }
 
-        index = this.getInt(index, os.length);
+            index = this.getInt(index, os.length);
 
-        try {
+            try {
 
-            equipment = (Equipment) c.getConstructors()[0].newInstance(name,
-                    description, os[index]);
-        } catch (InstantiationException e) {
+                equipment = (Equipment) c.getConstructors()[0].newInstance(
+                        name, description, os[index]);
+            } catch (InstantiationException e) {
 
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
 
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
 
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
 
-            e.printStackTrace();
-        } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
 
-            e.printStackTrace();
+                e.printStackTrace();
+            }
         }
 
         return equipment;

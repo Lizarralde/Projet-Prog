@@ -317,7 +317,7 @@ public class Terminal {
                 index = Integer.parseInt(words.get(0));
 
                 // Index out of bounds.
-                if (index >= 0 || index < length) {
+                if (index >= 0 && index < length) {
 
                     return index;
                 }
@@ -450,8 +450,7 @@ public class Terminal {
                             .getQuantity(names.get(i)));
         }
 
-        index = this.getInt(index, this.getStockController().getStock()
-                .getEquipment().size());
+        index = this.getInt(index, names.size());
 
         name = this.getStockController().getStock().getNames().get(index);
 
@@ -459,7 +458,7 @@ public class Terminal {
 
         // Get the quantity.
         quantity = this.getInt(quantity, this.getStockController().getStock()
-                .getQuantity(name));
+                .getQuantity(name) + 1);
 
         System.out.println("Start : ");
 
